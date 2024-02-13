@@ -23,7 +23,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
                         size={16}
                         style={{
                             position: 'absolute',
-                            rotate: '90deg',
+                            rotate: '-90deg',
                             bottom: '-36px',
                             right: '11px',
                             fontSize: '24px',
@@ -34,7 +34,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
                         size={16}
                         style={{
                             position: 'absolute',
-                            rotate: '90deg',
+                            rotate: '-90deg',
                             bottom: '-36px',
                             right: '11px',
                             fontSize: '24px',

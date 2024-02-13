@@ -54,7 +54,7 @@ export const ExitButton = styled.div`
 
 export const ButtonMobileMenu = styled.div`
     position: fixed;
-    rotate: -90deg;
+    rotate: 90deg;
     z-index: 10;
     background-color: transparent;
     top: 61px;
