@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Card, Layout } from 'antd';
@@ -9,11 +9,17 @@ import { StyledLink } from '@components/styledLink';
 import { Header } from '../../components/header';
 import { CardText } from '../../components/cardText';
 import { Footer } from '@components/footer';
+import { MenuMobile } from '@components/mobileMeny';
+import { Menu } from '@components/meny';
+import { ButtonMenu } from '@components/meny/menyButton';
 
 export const MainPage: React.FC = () => {
+    const [collapsed, setCollapsed] = useState(false);
     return (
         <>
+            <MenuMobile collapsed={collapsed} onClick={() => setCollapsed(!collapsed)} />
             <Layout style={{ maxWidth: '1440px', margin: '0 auto' }}>
+                <Menu collapsed={collapsed} setCollapsed={setCollapsed} />
                 <Layout
                     style={{
                         backgroundColor: '#fff',
@@ -99,6 +105,10 @@ export const MainPage: React.FC = () => {
                                 </StyledLink>
                             </Card>
                         </CardButtonWrapper>
+                        <ButtonMenu
+                            collapsed={collapsed}
+                            onClick={() => setCollapsed(!collapsed)}
+                        />
                         <Footer />
                     </Layout>
                 </Layout>
