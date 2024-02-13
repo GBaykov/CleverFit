@@ -1,13 +1,13 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import './main-page.css';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Card, Layout } from 'antd';
-import { CardButtonWrapper } from './styled';
+import { CardButtonWrapper, Text } from './styled';
 import calendarIco from '../../assets/icons/Calendar.svg';
 import backgroundIMG from '../../assets/img/MainPageLight.png';
 import { StyledLink } from '@components/styledLink';
 import { Header } from '../../components/header';
+import { CardText } from '../../components/cardText';
 
 export const MainPage: React.FC = () => {
     return (
@@ -28,6 +28,35 @@ export const MainPage: React.FC = () => {
                             padding: 24,
                         }}
                     >
+                        <CardText>
+                            <Text
+                                fontSize='16px'
+                                color='rgba(6, 17, 120, 1)'
+                                lineheight='20.8px'
+                                fontWeight='400'
+                            >
+                                С CleverFit ты сможешь: <br />— планировать свои тренировки на
+                                календаре, выбирая тип и уровень нагрузки;
+                                <br />— отслеживать свои достижения в разделе статистики, сравнивая
+                                свои результаты с нормами и рекордами;
+                                <br />— создавать свой профиль, где ты можешь загружать свои фото,
+                                видео и отзывы о тренировках;
+                                <br />— выполнять расписанные тренировки для разных частей тела,
+                                следуя подробным инструкциям и советам профессиональных тренеров.
+                            </Text>
+                        </CardText>
+
+                        <CardText>
+                            <Text
+                                fontSize='20px'
+                                lineheight='26px'
+                                fontWeight='500'
+                                maxWidth='650px'
+                            >
+                                CleverFit — это не просто приложение, а твой личный помощник в мире
+                                фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!
+                            </Text>
+                        </CardText>
                         <CardButtonWrapper>
                             <Card
                                 title='Расписать тренировки'
