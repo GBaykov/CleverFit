@@ -8,6 +8,7 @@ import backgroundIMG from '../../assets/img/MainPageLight.png';
 import { StyledLink } from '@components/styledLink';
 import { Header } from '../../components/header';
 import { CardText } from '../../components/cardText';
+import { Footer } from '@components/footer';
 
 export const MainPage: React.FC = () => {
     return (
@@ -98,6 +99,7 @@ export const MainPage: React.FC = () => {
                                 </StyledLink>
                             </Card>
                         </CardButtonWrapper>
+                        <Footer />
                     </Layout>
                 </Layout>
             </Layout>
