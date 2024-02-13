@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import { Layout } from 'antd';
-const { Header } = Layout;
 import { Link } from '@components/styledLink/styled';
 import { StyledLinkProps } from '@components/styledLink/types';
 
-export const HeaderStyle = styled(Header)``;
+export const Styledheader = styled(Layout)`
+    padding: 16px 24px 16px 24px;
+    height: auto;
+    background: rgba(240, 245, 255, 1);
+    zindex: 0;
+`;
 
 export const LinkMain = styled(Link)<StyledLinkProps>`
     display: inline;

@@ -1,11 +1,7 @@
 import { FC } from 'react';
 import { StyledButton } from './styled';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-
-export interface ButtonMenuProps {
-    collapsed: boolean;
-    onClick: () => void;
-}
+import { ButtonMenuProps } from './types';
 
 export const ButtonMenu: FC<ButtonMenuProps> = ({ collapsed, onClick }) => {
     return (

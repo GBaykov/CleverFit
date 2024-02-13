@@ -2,7 +2,7 @@ import React from 'react';
 import {
     H1,
     H1Wrapper,
-    HeaderStyle,
+    Styledheader,
     LinkMain,
     SettingsMobileWrapper,
     SettingsWrapper,
@@ -12,8 +12,7 @@ import { SettingOutlined } from '@ant-design/icons';
 
 export const Header: React.FC = () => {
     return (
-        <HeaderStyle
-            className='site-layout-background'
+        <Styledheader
             style={{
                 padding: `16px 24px 16px 24px`,
                 height: 'auto',
@@ -39,6 +38,6 @@ export const Header: React.FC = () => {
                     </StyledLink>
                 </SettingsMobileWrapper>
             </H1Wrapper>
-        </HeaderStyle>
+        </Styledheader>
     );
 };
