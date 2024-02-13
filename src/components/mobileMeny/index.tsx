@@ -18,7 +18,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
                 onClick={onClick}
                 style={{ zIndex: '999' }}
             >
-                {collapsed ? (
+                {!collapsed ? (
                     <MenuUnfoldOutlined
                         size={16}
                         style={{
