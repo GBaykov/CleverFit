@@ -11,9 +11,12 @@ export const StyledButton = styled('button')`
     border-left: 19px solid transparent;
     border-right: 19px solid transparent;
     background-color: transparent;
+    border-top: transparent;
     padding: 0;
     border-radius: 0;
     rotate: 90deg;
+
+    outline: 0;
 
     svg {
         path {
@@ -22,7 +25,10 @@ export const StyledButton = styled('button')`
     }
 
     &:hover {
-        color: none;
+        border-bottom: 20px solid white;
+        border-left: 19px solid transparent;
+        border-right: 19px solid transparent;
+        border-top: transparent;
     }
 
     &:focus {

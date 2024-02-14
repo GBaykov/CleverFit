@@ -12,6 +12,7 @@ import { Footer } from '@components/footer';
 import { MenuMobile } from '@components/mobileMeny';
 import { Menu } from '@components/meny';
 import { ButtonMenu } from '@components/meny/menyButton';
+import './styles.css';
 
 export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
@@ -68,7 +69,11 @@ export const MainPage: React.FC = () => {
                             <Card
                                 title='Расписать тренировки'
                                 bordered={false}
-                                style={{ width: '100%', marginRight: '25px' }}
+                                style={{
+                                    width: '100%',
+                                    marginRight: '25px',
+                                    wordWrap: 'break-word',
+                                }}
                             >
                                 <StyledLink to='/' text='Тренировки' color='rgba(47, 84, 235, 1)'>
                                     <HeartFilled
@@ -83,7 +88,11 @@ export const MainPage: React.FC = () => {
                             <Card
                                 title='Назначить календарь'
                                 bordered={false}
-                                style={{ width: '100%', marginRight: '25px' }}
+                                style={{
+                                    width: '100%',
+                                    marginRight: '25px',
+                                    wordWrap: 'break-word',
+                                }}
                             >
                                 <StyledLink to='/' text='Календарь' color='rgba(47, 84, 235, 1)'>
                                     <img src={calendarIco} style={{ marginRight: '8px' }} />
@@ -93,7 +102,7 @@ export const MainPage: React.FC = () => {
                             <Card
                                 title='Заполнить профиль'
                                 bordered={false}
-                                style={{ width: '100%' }}
+                                style={{ width: '100%', wordWrap: 'break-word' }}
                             >
                                 <StyledLink to='/' text='Профиль' color='rgba(47, 84, 235, 1)'>
                                     <IdcardOutlined
