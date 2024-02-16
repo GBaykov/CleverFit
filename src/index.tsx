@@ -8,6 +8,7 @@ import { MainPage } from './pages';
 
 import 'normalize.css';
 import './index.css';
+import { FormPage } from '@pages/formPage';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -17,7 +18,8 @@ root.render(
         <Provider store={store}>
             <HashRouter>
                 <Routes>
-                    <Route path='/' element={<MainPage />} />
+                    {/* <Route path='/' element={<MainPage />} /> */}
+                    <Route path='/' element={<FormPage />} />
                 </Routes>
             </HashRouter>
         </Provider>
