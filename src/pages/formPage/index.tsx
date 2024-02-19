@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from 'react';
 import { Layout, Card, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { AuthForm } from '@components/forms/auth';
+import { FormLogoWrapper, StyledformCard } from './styled';
+import './styles.css';
+import FormpageLight from '../../assets/img/FormPageLight.png';
 
 const tabList = [
     {
@@ -32,23 +35,23 @@ export const FormPage: FC = () => {
     return (
         <Layout
             style={{
+                boxSizing: 'border-box',
                 width: '100%',
                 maxWidth: '1440px',
                 margin: '0 auto',
+                padding: '90px 16x',
                 height: '100vh',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                backgroundColor: '#fff',
+                background: `no-repeat center/cover url(${FormpageLight})`,
+                position: 'relative',
             }}
         >
-            <Card
-                style={{
-                    width: '100%',
-                    maxWidth: '539px',
-                    margin: '0 auto',
-                }}
+            <StyledformCard
                 defaultActiveTabKey={activeTab}
-                title='CleverFIT'
+                title={<FormLogoWrapper>{/* <img src={logoIco} /> */}</FormLogoWrapper>}
                 tabList={tabList}
                 // activeTabKey={activeTab}
                 onTabChange={(key) => {
@@ -57,7 +60,7 @@ export const FormPage: FC = () => {
             >
                 <AuthForm />
                 {contentList[activeTab]}
-            </Card>
+            </StyledformCard>
         </Layout>
     );
 };

@@ -5,3 +5,9 @@ export const StyledFormBlock = styled('div')`
     flex-wrap: wrap;
     justify-content: space-between;
 `;
+
+export const ButtonServiceIco = styled('span')`
+    @media (max-width: 540px) {
+        display: none !important;
+    }
+`;

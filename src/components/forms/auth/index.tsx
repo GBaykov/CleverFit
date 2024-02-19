@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Layout, Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
-import { StyledFormBlock } from './styled';
+import { ButtonServiceIco, StyledFormBlock } from './styled';
 
 export const AuthForm: FC = () => {
     const onFinish = (values: any) => {
@@ -15,8 +15,6 @@ export const AuthForm: FC = () => {
     return (
         <Form
             name='basic'
-            // labelCol={{ span: 8 }}
-            // wrapperCol={{ span: 16 }}
             initialValues={{ remember: false }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -25,6 +23,7 @@ export const AuthForm: FC = () => {
             <Form.Item
                 name='email'
                 rules={[{ required: true, message: 'Please input your username!' }]}
+                style={{ marginBottom: '32px' }}
             >
                 <Input addonBefore='e-mail:' />
             </Form.Item>
@@ -32,29 +31,28 @@ export const AuthForm: FC = () => {
             <Form.Item
                 name='password'
                 rules={[{ required: true, message: 'Please input your password!' }]}
+                style={{ marginBottom: '54px' }}
             >
                 <Input.Password placeholder='Пароль' />
             </Form.Item>
 
             <StyledFormBlock>
-                <Form.Item
-                    name='remember'
-                    valuePropName='checked'
-
-                    // style={{ justifyContent: 'space-between' }}
-                >
-                    <Checkbox>Запомнит меня</Checkbox>
+                <Form.Item name='remember' valuePropName='checked' style={{ marginBottom: '24px' }}>
+                    <Checkbox>Запомнить меня</Checkbox>
                 </Form.Item>
                 <Button type='link'>Забыли пароль?</Button>
             </StyledFormBlock>
 
-            <Form.Item>
+            <Form.Item style={{ marginBottom: '16px' }}>
                 <Button type='primary' htmlType='submit' block>
                     Вход
                 </Button>
             </Form.Item>
             <Button block>
-                <b>G+</b> Войти через Google
+                <ButtonServiceIco className='buttonServiceico'>
+                    <b>G+ </b>{' '}
+                </ButtonServiceIco>
+                Войти через Google
             </Button>
         </Form>
     );
