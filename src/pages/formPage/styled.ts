@@ -3,7 +3,9 @@ import { Card } from 'antd';
 import logoIco from '../../assets/icons/logo.svg';
 
 export const StyledformCard = styled(Card)`
+    width: 100%;
     max-width: 539px;
+    width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
     height: 742px;

@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
-import { ButtonServiceIco, StyledFormBlock } from './styled';
-import { emailRegex, passwordRegex } from '../../../regexp';
+import { ButtonServiceIco } from '../auth/styled';
+// import { ButtonServiceIco, StyledFormBlock } from './styled';
 
-export const AuthForm: FC = () => {
+export const RegistrForm: FC = () => {
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -12,7 +12,7 @@ export const AuthForm: FC = () => {
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
-    console.log('reload');
+
     return (
         <Form
             name='auth'
@@ -20,11 +20,10 @@ export const AuthForm: FC = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete='off'
-            validateTrigger={['onSubmit', 'onСhange']}
         >
             <Form.Item
                 name='email'
-                rules={[{ required: true, pattern: emailRegex, message: `` }]}
+                rules={[{ required: true, message: 'Please input your username!' }]}
                 style={{ marginBottom: '32px' }}
             >
                 <Input addonBefore='e-mail:' />
@@ -32,24 +31,19 @@ export const AuthForm: FC = () => {
 
             <Form.Item
                 name='password'
-                rules={[
-                    {
-                        message: `Пароль не менее 8 символов, с заглавной буквой и цифрой`,
-                        pattern: passwordRegex,
-                    },
-                    { required: true, min: 8, message: `${''}` },
-                ]}
+                rules={[{ required: true, message: 'Please input your password!' }]}
                 style={{ marginBottom: '54px' }}
             >
                 <Input.Password placeholder='Пароль' />
             </Form.Item>
 
-            <StyledFormBlock>
-                <Form.Item name='remember' valuePropName='checked' style={{ marginBottom: '24px' }}>
-                    <Checkbox>Запомнить меня</Checkbox>
-                </Form.Item>
-                <Button type='link'>Забыли пароль?</Button>
-            </StyledFormBlock>
+            <Form.Item
+                name='repeat-password'
+                rules={[{ required: true, message: 'Please input your password!' }]}
+                style={{ marginBottom: '54px' }}
+            >
+                <Input.Password placeholder='Повторите пароль' />
+            </Form.Item>
 
             <Form.Item style={{ marginBottom: '16px' }}>
                 <Button type='primary' htmlType='submit' block>

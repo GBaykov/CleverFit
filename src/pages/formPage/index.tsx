@@ -5,6 +5,7 @@ import { AuthForm } from '@components/forms/auth';
 import { FormLogoWrapper, StyledformCard } from './styled';
 import './styles.css';
 import FormpageLight from '../../assets/img/FormPageLight.png';
+import { RegistrForm } from '@components/forms/registration';
 
 const tabList = [
     {
@@ -18,19 +19,19 @@ const tabList = [
 ];
 
 const contentList: Record<string, React.ReactNode> = {
-    tab1: <p>content1</p>,
-    tab2: <p>content2</p>,
+    auth: <AuthForm />,
+    registraation: <RegistrForm />,
 };
 
 export const FormPage: FC = () => {
-    const [activeTab, setActiveTab] = useState<string>('Вход');
+    const [activeTab, setActiveTab] = useState<string>('auth');
 
     const onTab1Change = (key: string) => {
         setActiveTab(key);
     };
 
     useEffect(() => {
-        setActiveTab('Вход');
+        setActiveTab('auth');
     }, []);
     return (
         <Layout
@@ -39,7 +40,7 @@ export const FormPage: FC = () => {
                 width: '100%',
                 maxWidth: '1440px',
                 margin: '0 auto',
-                padding: '90px 16x',
+                padding: '90px 16px',
                 height: '100vh',
                 display: 'flex',
                 justifyContent: 'center',
@@ -58,7 +59,8 @@ export const FormPage: FC = () => {
                     onTab1Change(key);
                 }}
             >
-                <AuthForm />
+                {/* <AuthForm />
+                <RegistrForm /> */}
                 {contentList[activeTab]}
             </StyledformCard>
         </Layout>
