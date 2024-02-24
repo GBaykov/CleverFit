@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { Button, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { ButtonServiceIco } from '../auth/styled';
+import { passwordRegex } from '../../../regexp';
 // import { ButtonServiceIco, StyledFormBlock } from './styled';
 
 export const RegistrForm: FC = () => {
@@ -23,7 +24,7 @@ export const RegistrForm: FC = () => {
         >
             <Form.Item
                 name='email'
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, type: 'email', message: '' }]}
                 style={{ marginBottom: '32px' }}
             >
                 <Input addonBefore='e-mail:' />
@@ -31,15 +32,34 @@ export const RegistrForm: FC = () => {
 
             <Form.Item
                 name='password'
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                rules={[
+                    {
+                        required: true,
+                        min: 8,
+                        pattern: passwordRegex,
+                        message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                    },
+                ]}
                 style={{ marginBottom: '54px' }}
             >
                 <Input.Password placeholder='Пароль' />
             </Form.Item>
 
             <Form.Item
-                name='repeat-password'
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                name='confirm'
+                dependencies={['password']}
+                rules={[
+                    { required: true, message: '' },
+                    ({ getFieldValue }) => ({
+                        validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                                return Promise.resolve();
+                            }
+                            return Promise.reject(new Error('Пароли не совпадают'));
+                        },
+                    }),
+                ]}
                 style={{ marginBottom: '54px' }}
             >
                 <Input.Password placeholder='Повторите пароль' />

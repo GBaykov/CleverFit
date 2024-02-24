@@ -39,30 +39,40 @@ export const FormPage: FC = () => {
                 boxSizing: 'border-box',
                 width: '100%',
                 maxWidth: '1440px',
+                height: '100%',
                 margin: '0 auto',
-                padding: '90px 16px',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: '#fff',
                 background: `no-repeat center/cover url(${FormpageLight})`,
                 position: 'relative',
             }}
         >
-            <StyledformCard
-                defaultActiveTabKey={activeTab}
-                title={<FormLogoWrapper>{/* <img src={logoIco} /> */}</FormLogoWrapper>}
-                tabList={tabList}
-                // activeTabKey={activeTab}
-                onTabChange={(key) => {
-                    onTab1Change(key);
+            <Layout
+                style={{
+                    boxSizing: 'border-box',
+                    width: '100%',
+                    height: '100%',
+                    margin: '0 auto',
+                    padding: '90px 16px',
+                    backgroundColor: 'rgba(121, 156, 212, 0.5)',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    position: 'relative',
                 }}
             >
-                {/* <AuthForm />
+                <StyledformCard
+                    defaultActiveTabKey={activeTab}
+                    title={<FormLogoWrapper>{/* <img src={logoIco} /> */}</FormLogoWrapper>}
+                    tabList={tabList}
+                    // activeTabKey={activeTab}
+                    onTabChange={(key) => {
+                        onTab1Change(key);
+                    }}
+                >
+                    {/* <AuthForm />
                 <RegistrForm /> */}
-                {contentList[activeTab]}
-            </StyledformCard>
+                    {contentList[activeTab]}
+                </StyledformCard>
+            </Layout>
         </Layout>
     );
 };

@@ -18,8 +18,23 @@ root.render(
         <Provider store={store}>
             <HashRouter>
                 <Routes>
-                    {/* <Route path='/' element={<MainPage />} /> */}
-                    <Route path='/' element={<FormPage />} />
+                    <Route path='/main' element={<MainPage />} />
+                    <Route path='/auth' element={<FormPage />}>
+                        <Route path='/auth/registration' />
+                        <Route path='/auth/confirm-email' />
+                        <Route path='/auth/change-password' />
+                    </Route>
+                    <Route path='/result' element={<FormPage />}>
+                        <Route path='/result/success' />
+                        <Route path='/result/error' />
+                        <Route path='/result/error-login' />
+                        <Route path='/result/error-user-exist' />
+                        <Route path='/result/error-check-email-no-exist' />
+                        <Route path='/result/error-check-email' />
+                        <Route path='/result/error-change-password' />
+                        <Route path='/result/success-change-password' />
+                    </Route>
+                    {/* <Route path='/' element={<FormPage />} /> */}
                 </Routes>
             </HashRouter>
         </Provider>

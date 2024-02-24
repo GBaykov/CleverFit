@@ -24,7 +24,7 @@ export const AuthForm: FC = () => {
         >
             <Form.Item
                 name='email'
-                rules={[{ required: true, pattern: emailRegex, message: `` }]}
+                rules={[{ required: true, type: 'email', message: `` }]}
                 style={{ marginBottom: '32px' }}
             >
                 <Input addonBefore='e-mail:' />
@@ -32,12 +32,15 @@ export const AuthForm: FC = () => {
 
             <Form.Item
                 name='password'
+                // help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                 rules={[
                     {
-                        message: `Пароль не менее 8 символов, с заглавной буквой и цифрой`,
+                        required: true,
+                        min: 8,
                         pattern: passwordRegex,
+                        message: ``,
+                        // message: `Пароль не менее 8 символов, с заглавной буквой и цифрой`,
                     },
-                    { required: true, min: 8, message: `${''}` },
                 ]}
                 style={{ marginBottom: '54px' }}
             >
@@ -48,7 +51,9 @@ export const AuthForm: FC = () => {
                 <Form.Item name='remember' valuePropName='checked' style={{ marginBottom: '24px' }}>
                     <Checkbox>Запомнить меня</Checkbox>
                 </Form.Item>
-                <Button type='link'>Забыли пароль?</Button>
+                <Button type='link' style={{ padding: '0', border: '0' }}>
+                    Забыли пароль?
+                </Button>
             </StyledFormBlock>
 
             <Form.Item style={{ marginBottom: '16px' }}>

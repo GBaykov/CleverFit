@@ -12,7 +12,6 @@ export const StyledformCard = styled(Card)`
     padding: 64px 85.5px;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
     font-size: 16px;
-
     span {
         font-size: 16px;
     }
