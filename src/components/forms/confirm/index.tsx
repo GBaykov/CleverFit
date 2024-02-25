@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { Button, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { passwordRegex } from '../../../regexp';
-import { StyledformCard } from '@pages/formPage/styled';
+// import { StyledformCard } from '@pages/formPage/styled';
 import './styles.css';
+import { StyledCard } from '@components/styledCard/styled';
 
 export const ConfirmPasswordForm: FC = () => {
     const onFinish = (values: any) => {
@@ -15,7 +16,7 @@ export const ConfirmPasswordForm: FC = () => {
     };
 
     return (
-        <StyledformCard title={'Восстановление аккаунта'} style={{ height: 'auto' }}>
+        <StyledCard title={'Восстановление аккаунта'} style={{ height: 'auto' }}>
             <Form
                 name='auth'
                 initialValues={{ remember: false }}
@@ -64,6 +65,6 @@ export const ConfirmPasswordForm: FC = () => {
                     </Button>
                 </Form.Item>
             </Form>
-        </StyledformCard>
+        </StyledCard>
     );
 };

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Button, Checkbox, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { ButtonServiceIco, StyledFormBlock } from './styled';
-import { emailRegex, passwordRegex } from '../../../regexp';
+import { passwordRegex } from '../../../regexp';
 
 export const AuthForm: FC = () => {
     const onFinish = (values: any) => {
@@ -36,7 +36,8 @@ export const AuthForm: FC = () => {
                 rules={[
                     {
                         required: true,
-                        min: 8,
+                        // min: 8,
+                        // max: 20,
                         pattern: passwordRegex,
                         message: ``,
                         // message: `Пароль не менее 8 символов, с заглавной буквой и цифрой`,

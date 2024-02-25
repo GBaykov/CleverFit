@@ -74,7 +74,7 @@ export const RegistrForm: FC = () => {
                 <ButtonServiceIco className='buttonServiceico'>
                     <b>G+ </b>{' '}
                 </ButtonServiceIco>
-                Войти через Google
+                Регистрация через Google
             </Button>
         </Form>
     );

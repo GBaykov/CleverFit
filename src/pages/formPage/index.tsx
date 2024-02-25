@@ -1,12 +1,14 @@
 import { FC, useEffect, useState } from 'react';
-import { Layout, Card, Button } from 'antd';
+// import { Layout, Card, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { AuthForm } from '@components/forms/auth';
-import { FormLogoWrapper, StyledformCard } from './styled';
+import { FormLogoWrapper } from './styled';
 import './styles.css';
-import FormpageLight from '../../assets/img/FormPageLight.png';
+// import FormpageLight from '../../assets/img/FormPageLight.png';
 import { RegistrForm } from '@components/forms/registration';
 import { ConfirmPasswordForm } from '@components/forms/confirm';
+import { CommonCardWrap } from '@pages/comonCardWrap';
+import { StyledCard } from '@components/styledCard/styled';
 
 const tabList = [
     {
@@ -35,43 +37,18 @@ export const FormPage: FC = () => {
         setActiveTab('auth');
     }, []);
     return (
-        <Layout
-            style={{
-                boxSizing: 'border-box',
-                width: '100%',
-                maxWidth: '1440px',
-                height: '100vh',
-                margin: '0 auto',
-                background: `no-repeat center/cover url(${FormpageLight})`,
-                position: 'relative',
-            }}
-        >
-            <Layout
-                style={{
-                    boxSizing: 'border-box',
-                    width: '100%',
-                    height: '100%',
-                    margin: '0 auto',
-                    padding: '90px 16px',
-                    backgroundColor: 'rgba(121, 156, 212, 0.5)',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    position: 'relative',
+        <CommonCardWrap>
+            {/* <ConfirmPasswordForm /> */}
+            <StyledCard
+                defaultActiveTabKey={activeTab}
+                title={<FormLogoWrapper></FormLogoWrapper>}
+                tabList={tabList}
+                onTabChange={(key) => {
+                    onTab1Change(key);
                 }}
             >
-                <ConfirmPasswordForm />
-                {/* <StyledformCard
-                    defaultActiveTabKey={activeTab}
-                    title={<FormLogoWrapper></FormLogoWrapper>}
-                    tabList={tabList}
-                    onTabChange={(key) => {
-                        onTab1Change(key);
-                    }}
-                >
-                    {contentList[activeTab]}
-                </StyledformCard> */}
-            </Layout>
-        </Layout>
+                {contentList[activeTab]}
+            </StyledCard>
+        </CommonCardWrap>
     );
 };
