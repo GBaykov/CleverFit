@@ -6,6 +6,7 @@ import { FormLogoWrapper, StyledformCard } from './styled';
 import './styles.css';
 import FormpageLight from '../../assets/img/FormPageLight.png';
 import { RegistrForm } from '@components/forms/registration';
+import { ConfirmPasswordForm } from '@components/forms/confirm';
 
 const tabList = [
     {
@@ -39,7 +40,7 @@ export const FormPage: FC = () => {
                 boxSizing: 'border-box',
                 width: '100%',
                 maxWidth: '1440px',
-                height: '100%',
+                height: '100vh',
                 margin: '0 auto',
                 background: `no-repeat center/cover url(${FormpageLight})`,
                 position: 'relative',
@@ -59,19 +60,17 @@ export const FormPage: FC = () => {
                     position: 'relative',
                 }}
             >
-                <StyledformCard
+                <ConfirmPasswordForm />
+                {/* <StyledformCard
                     defaultActiveTabKey={activeTab}
-                    title={<FormLogoWrapper>{/* <img src={logoIco} /> */}</FormLogoWrapper>}
+                    title={<FormLogoWrapper></FormLogoWrapper>}
                     tabList={tabList}
-                    // activeTabKey={activeTab}
                     onTabChange={(key) => {
                         onTab1Change(key);
                     }}
                 >
-                    {/* <AuthForm />
-                <RegistrForm /> */}
                     {contentList[activeTab]}
-                </StyledformCard>
+                </StyledformCard> */}
             </Layout>
         </Layout>
     );
