@@ -1,10 +1,14 @@
 import { FC } from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Checkbox, Form, Input, Grid } from 'antd';
 import 'antd/dist/antd.css';
-import { ButtonServiceIco, StyledFormBlock } from './styled';
+import { StyledFormBlock } from './styled';
 import { passwordRegex } from '../../../regexp';
+import { GooglePlusOutlined } from '@ant-design/icons';
+
+const { useBreakpoint } = Grid;
 
 export const AuthForm: FC = () => {
+    const { xs } = useBreakpoint();
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -63,9 +67,7 @@ export const AuthForm: FC = () => {
                 </Button>
             </Form.Item>
             <Button block>
-                <ButtonServiceIco className='buttonServiceico'>
-                    <b>G+ </b>{' '}
-                </ButtonServiceIco>
+                {!xs && <GooglePlusOutlined />}
                 Войти через Google
             </Button>
         </Form>

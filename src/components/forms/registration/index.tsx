@@ -1,11 +1,14 @@
 import { FC } from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Grid, Input } from 'antd';
 import 'antd/dist/antd.css';
-import { ButtonServiceIco } from '../auth/styled';
+
 import { passwordRegex } from '../../../regexp';
-// import { ButtonServiceIco, StyledFormBlock } from './styled';
+import { GooglePlusOutlined } from '@ant-design/icons';
+
+const { useBreakpoint } = Grid;
 
 export const RegistrForm: FC = () => {
+    const { xs } = useBreakpoint();
     const onFinish = (values: any) => {
         console.log('Success:', values);
     };
@@ -71,9 +74,7 @@ export const RegistrForm: FC = () => {
                 </Button>
             </Form.Item>
             <Button block>
-                <ButtonServiceIco className='buttonServiceico'>
-                    <b>G+ </b>{' '}
-                </ButtonServiceIco>
+                {!xs && <GooglePlusOutlined />}
                 Регистрация через Google
             </Button>
         </Form>
