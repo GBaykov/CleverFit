@@ -6,7 +6,7 @@ import { FormLogoWrapper } from './styled';
 import './styles.css';
 // import FormpageLight from '../../assets/img/FormPageLight.png';
 import { RegistrForm } from '@components/forms/registration';
-import { ConfirmPasswordForm } from '@components/forms/confirm';
+
 import { CommonCardWrap } from '@pages/comonCardWrap';
 import { StyledCard } from '@components/styledCard/styled';
 
@@ -26,16 +26,21 @@ const contentList: Record<string, React.ReactNode> = {
     registraation: <RegistrForm />,
 };
 
-export const FormPage: FC = () => {
-    const [activeTab, setActiveTab] = useState<string>('auth');
+export interface FormPageProps {
+    activePage: 'auth' | 'registraation';
+}
+
+export const FormPage: FC<FormPageProps> = ({ activePage }) => {
+    const [activeTab, setActiveTab] = useState<string>(activePage);
 
     const onTab1Change = (key: string) => {
         setActiveTab(key);
     };
 
     useEffect(() => {
-        setActiveTab('auth');
+        setActiveTab(activePage);
     }, []);
+
     return (
         <CommonCardWrap>
             {/* <ConfirmPasswordForm /> */}

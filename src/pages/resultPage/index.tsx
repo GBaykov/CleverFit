@@ -1,29 +1,37 @@
 import { FC } from 'react';
 import 'antd/dist/antd.css';
-import './styles.css';
 
 import { StyledCard } from '@components/styledCard/styled';
 import { CommonCardWrap } from '@pages/comonCardWrap';
 import { Button, Result } from 'antd';
-import { ResultStatusType } from 'antd/lib/result';
+
+import { IResultDataItem } from '@constants/resultData';
+import { useNavigate } from 'react-router-dom';
 
 export interface ResultPageProps {
-    status: ResultStatusType;
-    title: string;
-    subTitle?: string;
-    btnText: string;
+    resultData: IResultDataItem;
 }
 
-export const ResultPage: FC<ResultPageProps> = ({ status, title, subTitle, btnText }) => {
+export const ResultPage: FC<ResultPageProps> = ({ resultData }) => {
+    const { status, title, text, btnText, dataAtribute, btnPath } = resultData;
+    const navigate = useNavigate();
     return (
         <CommonCardWrap>
             <StyledCard>
                 <Result
                     status={status}
                     title={title}
-                    subTitle={subTitle}
+                    subTitle={text}
                     extra={[
-                        <Button type='primary' key='console'>
+                        <Button
+                            type='primary'
+                            key='dataAtribute'
+                            data-test-id={dataAtribute}
+                            onClick={() => {
+                                navigate('.', { replace: true }),
+                                    navigate(btnPath, { state: location.pathname });
+                            }}
+                        >
                             {btnText}
                         </Button>,
                     ]}
