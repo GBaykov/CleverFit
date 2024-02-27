@@ -9,6 +9,8 @@ import { RegistrForm } from '@components/forms/registration';
 
 import { CommonCardWrap } from '@pages/comonCardWrap';
 import { StyledCard } from '@components/styledCard/styled';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { PATHS } from '@constants/constants';
 
 const tabList = [
     {
@@ -16,30 +18,38 @@ const tabList = [
         tab: 'Вход',
     },
     {
-        key: 'registraation',
+        key: 'registration',
         tab: 'Регистрация',
     },
 ];
 
 const contentList: Record<string, React.ReactNode> = {
     auth: <AuthForm />,
-    registraation: <RegistrForm />,
+    registration: <RegistrForm />,
 };
 
 export interface FormPageProps {
-    activePage: 'auth' | 'registraation';
+    activePage: 'auth' | 'registration';
 }
 
 export const FormPage: FC<FormPageProps> = ({ activePage }) => {
     const [activeTab, setActiveTab] = useState<string>(activePage);
 
-    const onTab1Change = (key: string) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const onTabChange = (key: string) => {
         setActiveTab(key);
     };
 
     useEffect(() => {
         setActiveTab(activePage);
     }, []);
+
+    useEffect(() => {
+        const link = activeTab === 'auth' ? PATHS.AUTH : PATHS.REGISTRATION;
+        navigate(link);
+    }, [activeTab]);
 
     return (
         <CommonCardWrap>
@@ -49,7 +59,7 @@ export const FormPage: FC<FormPageProps> = ({ activePage }) => {
                 title={<FormLogoWrapper></FormLogoWrapper>}
                 tabList={tabList}
                 onTabChange={(key) => {
-                    onTab1Change(key);
+                    onTabChange(key);
                 }}
             >
                 {contentList[activeTab]}
