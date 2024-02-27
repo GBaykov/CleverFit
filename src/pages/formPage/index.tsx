@@ -1,16 +1,15 @@
 import { FC, useEffect, useState } from 'react';
-// import { Layout, Card, Button } from 'antd';
 import 'antd/dist/antd.css';
 import { AuthForm } from '@components/forms/auth';
 import { FormLogoWrapper } from './styled';
 import './styles.css';
-// import FormpageLight from '../../assets/img/FormPageLight.png';
 import { RegistrForm } from '@components/forms/registration';
-
 import { CommonCardWrap } from '@pages/comonCardWrap';
 import { StyledCard } from '@components/styledCard/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
+import { useLoginMutation, useSignupMutation } from '../../services/auth';
+import { Loader } from '@components/loader/Loader';
 
 const tabList = [
     {
@@ -34,6 +33,8 @@ export interface FormPageProps {
 
 export const FormPage: FC<FormPageProps> = ({ activePage }) => {
     const [activeTab, setActiveTab] = useState<string>(activePage);
+    const [signup, { isLoading: isSignuLoading }] = useSignupMutation();
+    const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ export const FormPage: FC<FormPageProps> = ({ activePage }) => {
 
     return (
         <CommonCardWrap>
-            {/* <ConfirmPasswordForm /> */}
+            {(isSignuLoading || isLoginLoading) && <Loader />}
             <StyledCard
                 defaultActiveTabKey={activeTab}
                 title={<FormLogoWrapper></FormLogoWrapper>}

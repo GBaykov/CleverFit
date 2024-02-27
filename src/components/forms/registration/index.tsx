@@ -1,24 +1,62 @@
-import { FC } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Form, Grid, Input } from 'antd';
 import 'antd/dist/antd.css';
 
 import { passwordRegex } from '../../../regexp';
 import { GooglePlusOutlined } from '@ant-design/icons';
+import { useSignupMutation } from '../../../services/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { ValuesSignupForm } from '@redux/reducers/userSlice';
+import { PATHS } from '@constants/constants';
+import { setUser } from '@redux/reducers/userSlice';
 
 const { useBreakpoint } = Grid;
 
 export const RegistrForm: FC = () => {
     const { xs } = useBreakpoint();
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
-    };
+    const [form] = Form.useForm();
+    const [, forceUpdate] = useState({});
+    const [signup] = useSignupMutation();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const dispatch = useAppDispatch();
+    const { user } = useAppSelector((state) => state.userReducer);
+
+    const onFinish = useCallback(
+        (values: ValuesSignupForm) => {
+            signup({ email: values.email, password: values.password })
+                .unwrap()
+                .then(() => {
+                    navigate(PATHS.RESULT.SUCCESS, { state: PATHS.REGISTRATION });
+                })
+                .catch((error) => {
+                    if (error.status === 409) {
+                        navigate(PATHS.RESULT.ERROR_USER_EXIST, {
+                            state: PATHS.REGISTRATION,
+                        });
+                    } else {
+                        navigate(PATHS.RESULT.ERROR, { state: PATHS.REGISTRATION });
+                        dispatch(setUser(values));
+                    }
+                });
+        },
+        [dispatch, navigate, signup],
+    );
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
+    useEffect(() => {
+        forceUpdate({});
+        if (location.state === PATHS.RESULT.ERROR) {
+            onFinish(user);
+        }
+    }, [location.state, onFinish, user]);
 
     return (
         <Form
+            form={form}
             name='auth'
             initialValues={{ remember: false }}
             onFinish={onFinish}

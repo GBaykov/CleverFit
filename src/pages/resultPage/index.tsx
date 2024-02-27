@@ -17,7 +17,7 @@ export const ResultPage: FC<ResultPageProps> = ({ resultData }) => {
     const navigate = useNavigate();
     return (
         <CommonCardWrap>
-            <StyledCard>
+            <StyledCard style={{ height: 'auto' }}>
                 <Result
                     status={status}
                     title={title}

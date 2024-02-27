@@ -1,21 +1,12 @@
 import { ChangePasswordForm } from '@components/forms/changePassword';
+import { ConfirmEmail } from '@components/forms/confirmEmail';
 import { PATHS } from '@constants/constants';
 import { resultData } from '@constants/resultData';
 import { FormPage } from '@pages/formPage';
 import { MainPage } from '@pages/mainPage';
 import { ResultPage } from '@pages/resultPage';
 
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-
-export const CustomLayout: React.FC = () => {
-    return (
-        <>
-            <div>
-                <Outlet />
-            </div>
-        </>
-    );
-};
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 export const routes = (
     <Routes>
@@ -23,9 +14,8 @@ export const routes = (
         <Route path={PATHS.MAIN} element={<MainPage />} />
         <Route path={PATHS.AUTH} element={<FormPage activePage='auth' />} />
         <Route path={PATHS.REGISTRATION} element={<FormPage activePage='registration' />} />
-        {/* <Route path={PATHS.CONFIRM_EMAIL} element={<ConfirmEmail />} /> */}
+        <Route path={PATHS.CONFIRM_EMAIL} element={<ConfirmEmail />} />
         <Route path={PATHS.CHANGE_PASSWORD} element={<ChangePasswordForm />} />
-
         <Route
             path={PATHS.RESULT.ERROR_LOGIN}
             element={<ResultPage resultData={resultData.error_login} />}
