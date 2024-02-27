@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Checkbox, Form, Input, Grid } from 'antd';
 import 'antd/dist/antd.css';
 import { StyledFormBlock } from './styled';
-import { passwordRegex } from '../../../regexp';
+import { emailRegex, passwordRegex } from '../../../regexp';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useCheckEmailMutation, useLoginMutation } from '../../../services/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ValuesLoginForm } from './types';
 import { setUser } from '@redux/reducers/userSlice';
 import { PATHS } from '@constants/constants';
+import { Loader } from '@components/loader/Loader';
 
 const { useBreakpoint } = Grid;
 
@@ -62,57 +63,90 @@ export const AuthForm: FC = () => {
         }
     }, [check, location.state, navigate, user.email]);
     return (
-        <Form
-            name='auth'
-            initialValues={{ remember: false }}
-            onFinish={onFinish}
-            autoComplete='off'
-            validateTrigger={['onSubmit', 'onСhange']}
-        >
-            <Form.Item
-                name='email'
-                rules={[{ required: true, type: 'email', message: `` }]}
-                style={{ marginBottom: '32px' }}
+        <>
+            {(isLoadingLogin || isLoadingEmail) && <Loader />}
+            <Form
+                name='auth'
+                initialValues={{ remember: false }}
+                onFinish={onFinish}
+                autoComplete='off'
+                validateTrigger={['onSubmit', 'onСhange']}
             >
-                <Input addonBefore='e-mail:' />
-            </Form.Item>
-
-            <Form.Item
-                name='password'
-                // help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
-                rules={[
-                    {
-                        required: true,
-                        // min: 8,
-                        // max: 20,
-                        pattern: passwordRegex,
-                        message: ``,
-                        // message: `Пароль не менее 8 символов, с заглавной буквой и цифрой`,
-                    },
-                ]}
-                style={{ marginBottom: '54px' }}
-            >
-                <Input.Password placeholder='Пароль' />
-            </Form.Item>
-
-            <StyledFormBlock>
-                <Form.Item name='remember' valuePropName='checked' style={{ marginBottom: '24px' }}>
-                    <Checkbox>Запомнить меня</Checkbox>
+                <Form.Item
+                    name='email'
+                    rules={[
+                        { required: true, type: 'email', message: `` },
+                        {
+                            validator: (_, value) => {
+                                if (emailRegex.test(value)) {
+                                    dispatch(setUser({ email: value, password: '' }));
+                                    return Promise.resolve(setForgotDisabled(false));
+                                } else {
+                                    return Promise.reject(setForgotDisabled(true));
+                                }
+                            },
+                        },
+                    ]}
+                    style={{ marginBottom: '32px' }}
+                >
+                    <Input addonBefore='e-mail:' />
                 </Form.Item>
-                <Button type='link' style={{ padding: '0', border: '0' }}>
-                    Забыли пароль?
-                </Button>
-            </StyledFormBlock>
 
-            <Form.Item style={{ marginBottom: '16px' }}>
-                <Button type='primary' htmlType='submit' block>
-                    Вход
+                <Form.Item
+                    name='password'
+                    // help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                    rules={[
+                        {
+                            validator: (_, value) => {
+                                if (passwordRegex.test(value)) {
+                                    return Promise.resolve();
+                                } else {
+                                    return Promise.reject(
+                                        new Error(
+                                            'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                        ),
+                                    );
+                                }
+                            },
+                        },
+                    ]}
+                    style={{ marginBottom: '54px' }}
+                >
+                    <Input.Password placeholder='Пароль' />
+                </Form.Item>
+
+                <StyledFormBlock>
+                    <Form.Item
+                        name='remember'
+                        valuePropName='checked'
+                        style={{ marginBottom: '24px' }}
+                    >
+                        <Checkbox>Запомнить меня</Checkbox>
+                    </Form.Item>
+                    <Button
+                        onClick={() => !forgotDisabled && check(user.email)}
+                        type='link'
+                        style={{ padding: '0', border: '0' }}
+                    >
+                        Забыли пароль?
+                    </Button>
+                </StyledFormBlock>
+
+                <Form.Item style={{ marginBottom: '16px' }}>
+                    <Button
+                        onSubmit={(e) => e.preventDefault()}
+                        type='primary'
+                        htmlType='submit'
+                        block
+                    >
+                        Вход
+                    </Button>
+                </Form.Item>
+                <Button block>
+                    {!xs && <GooglePlusOutlined />}
+                    Войти через Google
                 </Button>
-            </Form.Item>
-            <Button block>
-                {!xs && <GooglePlusOutlined />}
-                Войти через Google
-            </Button>
-        </Form>
+            </Form>
+        </>
     );
 };

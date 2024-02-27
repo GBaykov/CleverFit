@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Card, Layout } from 'antd';
@@ -13,9 +13,22 @@ import { MenuMobile } from '@components/mobileMeny';
 import { Menu } from '@components/meny';
 import { ButtonMenu } from '@components/meny/menyButton';
 import './styles.css';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '@constants/constants';
 
 export const MainPage: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false);
+
+    const { user } = useAppSelector((state) => state.userReducer);
+    const navigate = useNavigate();
+
+    console.log(user);
+
+    useEffect(() => {
+        user.email === '' && !localStorage.getItem('token') ? navigate(PATHS.AUTH) : '';
+    }, [navigate, user.email]);
+
     return (
         <>
             <MenuMobile collapsed={collapsed} onClick={() => setCollapsed(!collapsed)} />

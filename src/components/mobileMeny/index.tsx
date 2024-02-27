@@ -1,16 +1,28 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { ButtonMobileMenu, ExitButton, LogoWrapper, Menu, MenuList } from './styled';
 import { StyledLink } from '@components/styledLink';
+import { setUser } from '@redux/reducers/userSlice';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
 import logoMobIco from '../../assets/icons/logoMobile.svg';
 
-export interface MenuMobileProps {
+export type MenuMobileProps = {
     collapsed: boolean;
     onClick: () => void;
-}
+};
 
 export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
+    const dispatch = useAppDispatch();
+
+    const logOut = () => {
+        localStorage.removeItem('token');
+        dispatch(setUser({ email: '', password: '' }));
+    };
+
+    function onExitClick() {
+        logOut();
+    }
     return (
         <Menu collapsed={collapsed}>
             <ButtonMobileMenu
@@ -60,7 +72,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
                     <StyledLink to='/' text='Профиль' fontSize='14px' />
                 </div>
             </MenuList>
-            <ExitButton>
+            <ExitButton onClick={() => onExitClick()}>
                 <StyledLink to='/' text='Выход' fontSize='14px' />
             </ExitButton>
         </Menu>

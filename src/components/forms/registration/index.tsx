@@ -76,10 +76,17 @@ export const RegistrForm: FC = () => {
                 help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                 rules={[
                     {
-                        required: true,
-                        min: 8,
-                        pattern: passwordRegex,
-                        message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                        validator: (_, value) => {
+                            if (passwordRegex.test(value)) {
+                                return Promise.resolve();
+                            } else {
+                                return Promise.reject(
+                                    new Error(
+                                        'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                    ),
+                                );
+                            }
+                        },
                     },
                 ]}
                 style={{ marginBottom: '54px' }}
@@ -106,10 +113,21 @@ export const RegistrForm: FC = () => {
                 <Input.Password placeholder='Повторите пароль' />
             </Form.Item>
 
-            <Form.Item style={{ marginBottom: '16px' }}>
-                <Button type='primary' htmlType='submit' block>
-                    Вход
-                </Button>
+            <Form.Item shouldUpdate style={{ marginBottom: '16px' }}>
+                {() => (
+                    <Button
+                        type='primary'
+                        htmlType='submit'
+                        block
+                        disabled={
+                            !form.isFieldsTouched(true) ||
+                            !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                        }
+                        data-test-id='registration-submit-button'
+                    >
+                        Войти
+                    </Button>
+                )}
             </Form.Item>
             <Button block>
                 {!xs && <GooglePlusOutlined />}

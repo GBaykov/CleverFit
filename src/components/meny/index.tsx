@@ -7,6 +7,8 @@ import logoCollapsedIco from '../../assets/icons/logo_collapse.svg';
 import calendarIco from '../../assets/icons/calendar_icon.svg';
 import exit from '../../assets/icons/Exit.svg';
 import { ButtonMenu } from './menyButton/index';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setUser } from '@redux/reducers/userSlice';
 
 export interface MenuProps {
     collapsed: boolean;
@@ -14,6 +16,24 @@ export interface MenuProps {
 }
 
 export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
+    const dispatch = useAppDispatch();
+
+    type key = {
+        key: string;
+    };
+
+    const logOut = () => {
+        localStorage.removeItem('token');
+        dispatch(setUser({ email: '', password: '' }));
+    };
+
+    function onExitClick({ key }: key) {
+        switch (key) {
+            case 'exit':
+                logOut();
+        }
+    }
+
     return (
         <StyledSider trigger={null} collapsible collapsed={collapsed} width={'208px'}>
             <LogoWrapper>
@@ -21,6 +41,7 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
             </LogoWrapper>
 
             <StyledMeny
+                onClick={onExitClick}
                 theme='light'
                 mode='inline'
                 defaultSelectedKeys={['1']}
@@ -46,7 +67,7 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
                         label: 'Профиль',
                     },
                     {
-                        key: '5',
+                        key: 'exit',
                         icon: <img src={exit} />,
                         style: {
                             position: 'absolute',
