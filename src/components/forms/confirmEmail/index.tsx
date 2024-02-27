@@ -1,10 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { CloseCircleFilled, ExclamationCircleFilled } from '@ant-design/icons';
 import 'antd/dist/antd.css';
-
 import { StyledCard } from '@components/styledCard/styled';
 import { CommonCardWrap } from '@pages/comonCardWrap';
-
 import { Typography } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useConfirmEmailMutation } from '../../../services/auth';

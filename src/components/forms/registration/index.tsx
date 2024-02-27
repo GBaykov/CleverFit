@@ -1,7 +1,6 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { Button, Form, Grid, Input } from 'antd';
 import 'antd/dist/antd.css';
-
 import { passwordRegex } from '../../../regexp';
 import { GooglePlusOutlined } from '@ant-design/icons';
 import { useSignupMutation } from '../../../services/auth';
@@ -68,7 +67,7 @@ export const RegistrForm: FC = () => {
                 rules={[{ required: true, type: 'email', message: '' }]}
                 style={{ marginBottom: '32px' }}
             >
-                <Input addonBefore='e-mail:' />
+                <Input data-test-id='registration-email' addonBefore='e-mail:' />
             </Form.Item>
 
             <Form.Item
@@ -91,7 +90,7 @@ export const RegistrForm: FC = () => {
                 ]}
                 style={{ marginBottom: '54px' }}
             >
-                <Input.Password placeholder='Пароль' />
+                <Input.Password data-test-id='registration-password' placeholder='Пароль' />
             </Form.Item>
 
             <Form.Item
@@ -110,12 +109,16 @@ export const RegistrForm: FC = () => {
                 ]}
                 style={{ marginBottom: '54px' }}
             >
-                <Input.Password placeholder='Повторите пароль' />
+                <Input.Password
+                    data-test-id='registration-confirm-password'
+                    placeholder='Повторите пароль'
+                />
             </Form.Item>
 
             <Form.Item shouldUpdate style={{ marginBottom: '16px' }}>
                 {() => (
                     <Button
+                        data-test-id='registration-submit-button'
                         type='primary'
                         htmlType='submit'
                         block
@@ -123,7 +126,6 @@ export const RegistrForm: FC = () => {
                             !form.isFieldsTouched(true) ||
                             !!form.getFieldsError().filter(({ errors }) => errors.length).length
                         }
-                        data-test-id='registration-submit-button'
                     >
                         Войти
                     </Button>

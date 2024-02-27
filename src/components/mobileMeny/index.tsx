@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { ButtonMobileMenu, ExitButton, LogoWrapper, Menu, MenuList } from './styled';
 import { StyledLink } from '@components/styledLink';

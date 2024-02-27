@@ -89,12 +89,11 @@ export const AuthForm: FC = () => {
                     ]}
                     style={{ marginBottom: '32px' }}
                 >
-                    <Input addonBefore='e-mail:' />
+                    <Input data-test-id='login-email' addonBefore='e-mail:' />
                 </Form.Item>
 
                 <Form.Item
                     name='password'
-                    // help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
                     rules={[
                         {
                             validator: (_, value) => {
@@ -112,7 +111,7 @@ export const AuthForm: FC = () => {
                     ]}
                     style={{ marginBottom: '54px' }}
                 >
-                    <Input.Password placeholder='Пароль' />
+                    <Input.Password data-test-id='login-password' placeholder='Пароль' />
                 </Form.Item>
 
                 <StyledFormBlock>
@@ -121,9 +120,10 @@ export const AuthForm: FC = () => {
                         valuePropName='checked'
                         style={{ marginBottom: '24px' }}
                     >
-                        <Checkbox>Запомнить меня</Checkbox>
+                        <Checkbox data-test-id='login-remember'>Запомнить меня</Checkbox>
                     </Form.Item>
                     <Button
+                        data-test-id='login-forgot-button'
                         onClick={() => !forgotDisabled && check(user.email)}
                         type='link'
                         style={{ padding: '0', border: '0' }}
@@ -134,6 +134,7 @@ export const AuthForm: FC = () => {
 
                 <Form.Item style={{ marginBottom: '16px' }}>
                     <Button
+                        data-test-id='login-submit-button'
                         onSubmit={(e) => e.preventDefault()}
                         type='primary'
                         htmlType='submit'

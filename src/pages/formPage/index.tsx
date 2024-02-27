@@ -6,7 +6,7 @@ import './styles.css';
 import { RegistrForm } from '@components/forms/registration';
 import { CommonCardWrap } from '@pages/comonCardWrap';
 import { StyledCard } from '@components/styledCard/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 import { useLoginMutation, useSignupMutation } from '../../services/auth';
 import { Loader } from '@components/loader/Loader';
@@ -36,7 +36,6 @@ export const FormPage: FC<FormPageProps> = ({ activePage }) => {
     const [signup, { isLoading: isSignuLoading }] = useSignupMutation();
     const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 
-    const location = useLocation();
     const navigate = useNavigate();
 
     const onTabChange = (key: string) => {
