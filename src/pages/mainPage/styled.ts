@@ -11,7 +11,7 @@ export const Main = styled('main')`
 
 export const Text = styled.p<TextStyleProps>`
     color: ${(props) => (props.color ? props.color : 'black')};
-    width: 100%;
+    width: ${(props) => (props.width ? props.width : '100%')};
     font-size: ${(props) => props.fontSize};
     font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 'normal')};
     line-height: ${(props) => (props.lineheight ? props.lineheight : 'normal')};

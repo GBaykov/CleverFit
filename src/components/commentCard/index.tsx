@@ -1,28 +1,33 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Avatar, List } from 'antd';
-import { ItemListSider, ItemListTitle } from './styled';
+import { ItemListSider, ItemListTitle, StyledItemList } from './styled';
 import { Text } from '@pages/mainPage/styled';
 import { CommentType } from './types';
+import avatar from '../../assets/icons/avatar.svg';
+import { secondary45, title85 } from '@constants/styles';
 
-export type CommentCardProps = CommentType;
+export type CommentCardProps = { comment: CommentType };
 
-// export const CommentAvatar = (imageSrc: string) => {
-//     return (
-
-//     );
-// };
-
-export const CommentCard: FC<CommentCardProps> = (comment) => {
+export const CommentCard: FC<CommentCardProps> = ({ comment }) => {
     return (
-        <List.Item key={comment.id}>
+        <StyledItemList
+            key={comment.id}
+            // style={{ padding: 16, justifyContent: 'flex-start', marginBottom: 16, border: 'none' }}
+        >
             <ItemListSider>
-                <Avatar src={comment.imageSrc} />
-                <Text fontSize='16px' lineheight='130%' />
+                <Avatar src={comment.imageSrc ? comment.imageSrc : avatar} />
+                <Text fontSize='16px' lineheight='130%' width='auto' color={title85}>
+                    {comment.fullName?.split(' ')[0]}
+                    <br />
+                    {comment.fullName?.split(' ')[1]}
+                </Text>
             </ItemListSider>
             <div>
                 <ItemListTitle />
-                <Text fontSize='16px' />
+                <Text color={secondary45} fontSize='16px'>
+                    {comment.message}
+                </Text>
             </div>
-        </List.Item>
+        </StyledItemList>
     );
 };

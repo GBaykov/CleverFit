@@ -2,6 +2,7 @@ import { ChangePasswordForm } from '@components/forms/changePassword';
 import { ConfirmEmail } from '@components/forms/confirmEmail';
 import { PATHS } from '@constants/constants';
 import { resultData } from '@constants/resultData';
+import { CommentsPage } from '@pages/comments';
 import { FormPage } from '@pages/formPage';
 import { MainPage } from '@pages/mainPage';
 import { ResultPage } from '@pages/resultPage';
@@ -18,6 +19,7 @@ export const routes = (
         <Route path={PATHS.REGISTRATION} element={<FormPage activePage='registration' />} />
         <Route path={PATHS.CONFIRM_EMAIL} element={<ConfirmEmail />} />
         <Route path={PATHS.CHANGE_PASSWORD} element={<ChangePasswordForm />} />
+        <Route path={PATHS.FEEDBACKS} element={<CommentsPage />} />
         <Route
             path={PATHS.RESULT.ERROR_LOGIN}
             element={<ResultPage resultData={resultData.error_login} />}
