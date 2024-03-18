@@ -1,38 +1,50 @@
 export type IUrlAPI = string;
 
-export interface RequestLogin {
+export type RequestLogin = {
     email: string;
     password: string;
-}
+};
 
-export interface ResponseLogin {
+export type ResponseLogin = {
     accessToken: string;
-}
+};
 
-export interface RequestCheck {
+export type RequestCheck = {
     email: string;
-}
+};
 
-export interface ResponseCheck {
+export type ResponseCheck = {
     email: string;
     message: string;
-}
+};
 
-export interface RequestConfirm {
+export type RequestConfirm = {
     email: string;
     code: string;
-}
+};
 
-export interface ResponseConfirm {
+export type ResponseConfirm = {
     email: string;
     message: string;
-}
+};
 
-export interface RequestChangePass {
+export type RequestChangePass = {
     password: string;
     confirmPassword: string;
-}
+};
 
-export interface ResponseChangePass {
+export type ResponseChangePass = {
     message: string;
-}
+};
+
+export type Feedback = {
+    id: string;
+    fullName: string | null;
+    imageSrc: string | null;
+    message: string | null;
+    rating: number;
+    createdAt: string;
+};
+
+export type FeedbackResponse = Feedback[];
+export type FeedbackRequest = {};

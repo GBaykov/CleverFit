@@ -1,10 +1,11 @@
 import { CommentCard } from '@components/commentCard';
-import { CommentType } from '@components/commentCard/types';
+// import { CommentType } from '@components/commentCard/types';
 import { List, Skeleton } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Feedback } from 'src/services/types';
 
 export const CommentsPage = () => {
-    const commentsList: CommentType[] = [
+    const commentsList: Feedback[] = [
         {
             id: '1',
             fullName: 'Вероника Киверова',

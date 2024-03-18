@@ -9,8 +9,7 @@ import {
     ResponseChangePass,
     RequestChangePass,
 } from './types';
-
-export const URL: string = 'https://marathon-api.clevertec.ru';
+import { URL } from '@constants/constants';
 
 export const headers = {
     accept: 'application/json',

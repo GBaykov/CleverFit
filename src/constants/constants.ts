@@ -1,3 +1,5 @@
+export const URL: string = 'https://marathon-api.clevertec.ru';
+
 export const PATHS = {
     INITIAL: '/',
     MAIN: '/main',

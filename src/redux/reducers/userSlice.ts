@@ -6,12 +6,12 @@ export type ValuesSignupForm = {
     repeatPassword?: string;
 };
 
-interface UserState {
+type UserState = {
     user: {
         email: string;
         password: string;
     };
-}
+};
 
 const initialState: UserState = {
     user: {

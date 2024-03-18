@@ -33,7 +33,7 @@ export interface FormPageProps {
 
 export const FormPage: FC<FormPageProps> = ({ activePage }) => {
     const [activeTab, setActiveTab] = useState<string>(activePage);
-    const [signup, { isLoading: isSignuLoading }] = useSignupMutation();
+    const [signup, { isLoading: isSignUpLoading }] = useSignupMutation();
     const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 
     const navigate = useNavigate();
@@ -53,10 +53,10 @@ export const FormPage: FC<FormPageProps> = ({ activePage }) => {
 
     return (
         <CommonCardWrap>
-            {(isSignuLoading || isLoginLoading) && <Loader />}
+            {(isSignUpLoading || isLoginLoading) && <Loader />}
             <StyledCard
                 defaultActiveTabKey={activeTab}
-                title={<FormLogoWrapper></FormLogoWrapper>}
+                title={<FormLogoWrapper />}
                 tabList={tabList}
                 onTabChange={(key) => {
                     onTabChange(key);

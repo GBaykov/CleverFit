@@ -2,11 +2,12 @@ import { FC } from 'react';
 import { Avatar, List } from 'antd';
 import { ItemListSider, ItemListTitle, StyledItemList } from './styled';
 import { Text } from '@pages/mainPage/styled';
-import { CommentType } from './types';
+// import { CommentType } from './types';
 import avatar from '../../assets/icons/avatar.svg';
 import { secondary45, title85 } from '@constants/styles';
+import { Feedback } from 'src/services/types';
 
-export type CommentCardProps = { comment: CommentType };
+export type CommentCardProps = { comment: Feedback };
 
 export const CommentCard: FC<CommentCardProps> = ({ comment }) => {
     return (

@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { authAPI } from '../services/auth';
 import userSlice from './reducers/userSlice';
+import { feedbacksAPI } from 'src/services/feedbacks';
 
 const { createReduxHistory, routerReducer, routerMiddleware } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -12,6 +13,7 @@ export const store = configureStore({
     reducer: combineReducers({
         router: routerReducer,
         [authAPI.reducerPath]: authAPI.reducer,
+        [feedbacksAPI.reducerPath]: feedbacksAPI.reducer,
         userReducer: userSlice,
     }),
     middleware: (getDefaultMiddleware) =>

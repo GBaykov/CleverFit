@@ -10,4 +10,5 @@ export interface CardInfoProps {
     to: string;
     color?: string;
     fontSize?: string;
+    onClick?: () => void;
 }
