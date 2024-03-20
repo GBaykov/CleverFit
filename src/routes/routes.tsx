@@ -2,7 +2,7 @@ import { ChangePasswordForm } from '@components/forms/changePassword';
 import { ConfirmEmail } from '@components/forms/confirmEmail';
 import { PATHS } from '@constants/constants';
 import { resultData } from '@constants/resultData';
-import { CommentsPage } from '@pages/comments';
+import { CommentsPage } from '@pages/commentsPage';
 import { FormPage } from '@pages/formPage';
 import { MainPage } from '@pages/mainPage';
 import { ResultPage } from '@pages/resultPage';

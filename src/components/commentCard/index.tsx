@@ -1,22 +1,25 @@
 import { FC } from 'react';
-import { Avatar, List } from 'antd';
-import { ItemListSider, ItemListTitle, StyledItemList } from './styled';
+import { Avatar, Rate } from 'antd';
+import { ItemListSider, StyledItemList, ItemListMain, StyledRate, ItemListTop } from './styled';
 import { Text } from '@pages/mainPage/styled';
-// import { CommentType } from './types';
 import avatar from '../../assets/icons/avatar.svg';
-import { secondary45, title85 } from '@constants/styles';
+import { gray6, secondary45, title85 } from '@constants/styles';
 import { Feedback } from 'src/services/types';
 
 export type CommentCardProps = { comment: Feedback };
 
+const dataToFeedback = (date: string) => {
+    return date.split('T')[0].split('-').reverse().join('.');
+};
+
 export const CommentCard: FC<CommentCardProps> = ({ comment }) => {
     return (
-        <StyledItemList
-            key={comment.id}
-            // style={{ padding: 16, justifyContent: 'flex-start', marginBottom: 16, border: 'none' }}
-        >
+        <StyledItemList key={comment.id}>
             <ItemListSider>
-                <Avatar src={comment.imageSrc ? comment.imageSrc : avatar} />
+                <Avatar
+                    style={{ width: '42px', height: '42px' }}
+                    src={comment.imageSrc ? comment.imageSrc : avatar}
+                />
                 <Text fontSize='16px' lineheight='130%' width='auto' color={title85}>
                     {comment.fullName?.split(' ')[0]}
                     <br />
@@ -24,10 +27,17 @@ export const CommentCard: FC<CommentCardProps> = ({ comment }) => {
                 </Text>
             </ItemListSider>
             <div>
-                <ItemListTitle />
-                <Text color={secondary45} fontSize='16px'>
-                    {comment.message}
-                </Text>
+                <ItemListMain>
+                    <ItemListTop>
+                        <StyledRate defaultValue={3} disabled />
+                        <Text fontSize={'12px'} line-height={'130%'} color={gray6} width='auto'>
+                            {dataToFeedback(comment.createdAt)}
+                        </Text>
+                    </ItemListTop>
+                    <Text color={secondary45} fontSize='16px'>
+                        {comment.message}
+                    </Text>
+                </ItemListMain>
             </div>
         </StyledItemList>
     );

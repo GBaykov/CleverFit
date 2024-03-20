@@ -4,7 +4,7 @@ import { List, Skeleton } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Feedback } from 'src/services/types';
 
-export const CommentsPage = () => {
+export const Feedbacks = () => {
     const commentsList: Feedback[] = [
         {
             id: '1',

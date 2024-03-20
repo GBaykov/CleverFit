@@ -3,7 +3,7 @@ import { createBrowserHistory } from 'history';
 import { createReduxHistoryContext } from 'redux-first-history';
 import { authAPI } from '../services/auth';
 import userSlice from './reducers/userSlice';
-import { feedbacksAPI } from 'src/services/feedbacks';
+import { feedbacksAPI } from '../services/feedbacks';
 
 const { createReduxHistory, routerReducer, routerMiddleware } = createReduxHistoryContext({
     history: createBrowserHistory(),
