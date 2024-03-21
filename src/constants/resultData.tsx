@@ -1,25 +1,25 @@
 import { ResultStatusType } from 'antd/lib/result';
 import { PATHS } from './constants';
 
-export interface IResultDataItem {
+export type ResultDataItem = {
     status: ResultStatusType;
     title: string;
     text: string;
     btnText: string;
     btnPath: string;
     dataAtribute: string;
-}
+};
 
-export interface IResultData {
-    error_login: IResultDataItem;
-    success_signup: IResultDataItem;
-    error_user_exist: IResultDataItem;
-    error: IResultDataItem;
-    error_change_password: IResultDataItem;
-    success_change_password: IResultDataItem;
-    error_email_no_exist: IResultDataItem;
-    error_check_email: IResultDataItem;
-}
+export type IResultData = {
+    error_login: ResultDataItem;
+    success_signup: ResultDataItem;
+    error_user_exist: ResultDataItem;
+    error: ResultDataItem;
+    error_change_password: ResultDataItem;
+    success_change_password: ResultDataItem;
+    error_email_no_exist: ResultDataItem;
+    error_check_email: ResultDataItem;
+};
 
 export const resultData: IResultData = {
     error_login: {

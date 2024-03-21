@@ -5,12 +5,12 @@ import { StyledCard } from '@components/styledCard/styled';
 import { CommonCardWrap } from '@pages/comonCardWrap';
 import { Button, Result } from 'antd';
 
-import { IResultDataItem } from '@constants/resultData';
+import { ResultDataItem } from '@constants/resultData';
 import { useNavigate } from 'react-router-dom';
 
-export interface ResultPageProps {
-    resultData: IResultDataItem;
-}
+export type ResultPageProps = {
+    resultData: ResultDataItem;
+};
 
 export const ResultPage: FC<ResultPageProps> = ({ resultData }) => {
     const { status, title, text, btnText, dataAtribute, btnPath } = resultData;

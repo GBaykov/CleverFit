@@ -8,6 +8,8 @@ import { Feedbacks } from '@components/feedbacks';
 import { LayoutWrapper } from '@pages/layout';
 import { Button } from 'antd';
 import { primaryLight6 } from '@constants/styles';
+import { ModalComponent } from '@components/modal';
+import { modalData } from '@constants/modalData';
 
 export const CommentsPage: FC = () => {
     const [isWrapped, setIsWrapped] = useState(true);
@@ -18,7 +20,8 @@ export const CommentsPage: FC = () => {
     return (
         <LayoutWrapper>
             {/* {(isSignUpLoading || isLoginLoading) && <Loader />} */}
-            <Feedbacks isWrapped={isWrapped} />
+            <ModalComponent isModal={true} modalData={modalData.error_get_feedbacks} />
+            {/* <Feedbacks isWrapped={isWrapped} /> */}
             <div style={{ marginTop: '112px' }}>
                 <Button size='large' type='primary'>
                     Написать отзыв
