@@ -1,10 +1,23 @@
 import { CommentCard } from '@components/commentCard';
 // import { CommentType } from '@components/commentCard/types';
 import { List, Skeleton } from 'antd';
+import { FC } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Feedback } from 'src/services/types';
 
-export const Feedbacks = () => {
+const sortData = (data: Feedback[]) => {
+    return data.sort((a, b) => {
+        if (new Date(a.createdAt) < new Date(b.createdAt)) {
+            return 1;
+        }
+        return -1;
+    });
+};
+
+export type FeedbacksProps = {
+    isWrapped: boolean;
+};
+export const Feedbacks: FC<FeedbacksProps> = ({ isWrapped }) => {
     const commentsList: Feedback[] = [
         {
             id: '1',
@@ -60,24 +73,27 @@ export const Feedbacks = () => {
             createdAt: '2024-03-12T08:34:55.309Z',
         },
     ];
+    const dataList = isWrapped ? sortData(commentsList).slice(0, 4) : sortData(commentsList);
+
     return (
         <div
             id='scrollableDiv'
             style={{
                 height: 572,
                 overflow: 'auto',
-                padding: '0 20px',
             }}
         >
             <InfiniteScroll
-                dataLength={commentsList.length}
+                dataLength={dataList.length}
                 next={() => {}}
                 hasMore={true}
                 loader={null}
                 scrollableTarget='scrollableDiv'
+                style={{ padding: 0 }}
             >
                 <List
-                    dataSource={commentsList}
+                    style={{ padding: 0 }}
+                    dataSource={dataList}
                     renderItem={(item) => <CommentCard comment={item} />}
                 />
             </InfiniteScroll>
