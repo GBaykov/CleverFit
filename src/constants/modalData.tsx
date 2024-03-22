@@ -28,6 +28,7 @@ export const modalData: ModalData = {
         text: 'Что-то пошло не так. Попробуйте ещё раз.',
         btnText: 'Написать отзыв',
         secondaryBtnText: 'Закрыть',
+        dataAtribute: 'write-review-not-saved-modal',
     },
     success_post_feedback: {
         status: 'success',
