@@ -14,8 +14,8 @@ export const Footer: React.FC = () => {
         <Footers>
             <div>
                 <StyledLink
-                    onClick={onLinkClick}
-                    to='/'
+                    // onClick={onLinkClick}
+                    to={PATHS.FEEDBACKS}
                     text='Смотреть отзывы'
                     color='rgba(47, 84, 235, 1)'
                     fontSize='16px'

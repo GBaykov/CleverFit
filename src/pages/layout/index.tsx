@@ -5,7 +5,7 @@ import { MenuMobile } from '@components/mobileMeny';
 import { Menu } from '@components/meny';
 import backgroundIMG from '../../assets/img/MainPageLight.png';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 import { ButtonMenu } from '@components/meny/menyButton';
 import { Footer } from '@components/footer';
@@ -13,9 +13,10 @@ import { Header } from '@components/header';
 
 export type LayoutWrapperProps = {
     children: React.ReactNode;
+    isFooter?: boolean;
 };
 
-export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
+export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter = true }) => {
     const [collapsed, setCollapsed] = useState(false);
 
     // const { user } = useAppSelector((state) => state.userReducer);
@@ -28,7 +29,7 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
     return (
         <>
             <MenuMobile collapsed={collapsed} onClick={() => setCollapsed(!collapsed)} />
-            <Layout style={{ maxWidth: '1440px', margin: '0 auto' }}>
+            <Layout style={{ maxWidth: '1440px', margin: '0 auto', minHeight: '100vh' }}>
                 <Menu collapsed={collapsed} setCollapsed={setCollapsed} />
                 <Layout
                     style={{
@@ -41,7 +42,9 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
                             backgroundColor: '#fff',
                             background: `no-repeat center/cover url(${backgroundIMG})`,
                             position: 'relative',
-                            height: 'auto',
+                            height: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
                             padding: 24,
                         }}
                     >
@@ -50,7 +53,7 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children }) => {
                             onClick={() => setCollapsed(!collapsed)}
                         />
                         {children}
-                        <Footer />
+                        {isFooter && <Footer />}
                     </Layout>
                 </Layout>
             </Layout>

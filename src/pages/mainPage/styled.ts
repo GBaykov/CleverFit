@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import background from '../../assets/img/MainPageLight.png';
 import { TextStyleProps } from './types';
+import { Card } from 'antd';
 
 export const Main = styled('main')`
     position: relative;
@@ -23,9 +24,22 @@ export const CardButtonWrapper = styled('div')`
     max-width: 752px;
     display: flex;
     justify-content: space-between;
+    :not(:last-child) {
+        margin-right: 25px;
+    }
     @media screen and (max-width: 600px) {
         display: flex;
         flex-direction: column;
         height: 395px;
     }
+`;
+
+export const MainpageCard = styled(Card)`
+    width: 100%;
+
+    word-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    height: 101px;
+    justify-content: space-around;
 `;

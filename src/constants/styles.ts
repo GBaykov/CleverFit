@@ -6,3 +6,4 @@ export const primaryLight4 = '#85A5FF';
 export const primaryLight5 = '#597EF7';
 export const primaryLight6 = '#2F54EB';
 export const primaryLight7 = '#1D39C4';
+export const primaryLight9 = '#061178';

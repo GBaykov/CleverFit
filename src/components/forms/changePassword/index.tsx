@@ -17,7 +17,14 @@ export const ChangePasswordForm: FC = () => {
 
     return (
         <CommonCardWrap>
-            <StyledCard title={'Восстановление аккаунта'} style={{ height: 'auto' }}>
+            <StyledCard
+                title={'Восстановление аккаунта'}
+                style={{ height: 'auto' }}
+                headStyle={{
+                    minHeight: '30px',
+                    margin: '0 auto',
+                }}
+            >
                 <Form
                     name='auth'
                     initialValues={{ remember: false }}

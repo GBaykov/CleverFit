@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
-import { CardButtonWrapper, Text } from './styled';
+import { CardButtonWrapper, MainpageCard, Text } from './styled';
 import calendarIco from '../../assets/icons/Calendar.svg';
 import { StyledLink } from '@components/styledLink';
 import { CardText } from '../../components/cardText';
@@ -16,9 +16,9 @@ export const MainPage: React.FC = () => {
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
-    }, [navigate, user.email]);
+    // useEffect(() => {
+    //     user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
+    // }, [navigate, user.email]);
 
     return (
         <LayoutWrapper>
@@ -47,15 +47,7 @@ export const MainPage: React.FC = () => {
                 </Text>
             </CardText>
             <CardButtonWrapper>
-                <Card
-                    title='Расписать тренировки'
-                    bordered={false}
-                    style={{
-                        width: '100%',
-                        marginRight: '25px',
-                        wordWrap: 'break-word',
-                    }}
-                >
+                <MainpageCard title='Расписать тренировки' bordered={false}>
                     <StyledLink to='/' text='Тренировки' color='rgba(47, 84, 235, 1)'>
                         <HeartFilled
                             style={{
@@ -64,27 +56,15 @@ export const MainPage: React.FC = () => {
                             }}
                         />
                     </StyledLink>
-                </Card>
+                </MainpageCard>
 
-                <Card
-                    title='Назначить календарь'
-                    bordered={false}
-                    style={{
-                        width: '100%',
-                        marginRight: '25px',
-                        wordWrap: 'break-word',
-                    }}
-                >
+                <MainpageCard title='Назначить календарь' bordered={false}>
                     <StyledLink to='/' text='Календарь' color='rgba(47, 84, 235, 1)'>
                         <img src={calendarIco} style={{ marginRight: '8px' }} />
                     </StyledLink>
-                </Card>
+                </MainpageCard>
 
-                <Card
-                    title='Заполнить профиль'
-                    bordered={false}
-                    style={{ width: '100%', wordWrap: 'break-word' }}
-                >
+                <MainpageCard title='Заполнить профиль' bordered={false}>
                     <StyledLink to='/' text='Профиль' color='rgba(47, 84, 235, 1)'>
                         <IdcardOutlined
                             style={{
@@ -93,7 +73,7 @@ export const MainPage: React.FC = () => {
                             }}
                         />
                     </StyledLink>
-                </Card>
+                </MainpageCard>
             </CardButtonWrapper>
         </LayoutWrapper>
     );

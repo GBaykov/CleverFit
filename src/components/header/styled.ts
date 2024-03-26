@@ -3,11 +3,17 @@ import { Layout } from 'antd';
 import { Link } from '@components/styledLink/styled';
 import { StyledLinkProps } from '@components/styledLink/types';
 
-export const Styledheader = styled(Layout)`
+export type StyledheaderProps = {
+    isFeedbacks: boolean;
+};
+export const Styledheader = styled(Layout)<StyledheaderProps>`
     padding: 16px 24px 16px 24px;
     height: auto;
     background: rgba(240, 245, 255, 1);
     zindex: 0;
+
+    display: ${(props) => (props.isFeedbacks ? 'flex' : '')};
+    flex-direction: ${(props) => (props.isFeedbacks ? 'row' : '')};
 `;
 
 export const LinkMain = styled(Link)<StyledLinkProps>`

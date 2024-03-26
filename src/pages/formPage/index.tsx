@@ -55,6 +55,7 @@ export const FormPage: FC<FormPageProps> = ({ activePage }) => {
         <CommonCardWrap>
             {(isSignUpLoading || isLoginLoading) && <Loader />}
             <StyledCard
+                headStyle={{ marginBottom: '24px', padding: 0 }}
                 defaultActiveTabKey={activeTab}
                 title={<FormLogoWrapper />}
                 tabList={tabList}

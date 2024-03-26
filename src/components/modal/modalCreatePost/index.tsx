@@ -1,9 +1,9 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import 'antd/dist/antd.css';
 
 import { Button, Modal, Form, Rate } from 'antd';
 import { ModalDataItem } from '@constants/modalData';
-import TextArea from 'antd/lib/input/TextArea';
+
 import { StyledRate } from '@components/commentCard/styled';
 import TextareaAutosize from 'react-autosize-textarea';
 
@@ -17,9 +17,12 @@ export type ValuesCreatePostForm = {
     textarea: string;
 };
 
-export const ModalCreatePost: FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(true);
+export type ModalCreatePostProps = {
+    isOpen: boolean;
+    setIsModalOpen: (bol: boolean) => void;
+};
 
+export const ModalCreatePost: FC<ModalCreatePostProps> = ({ isOpen, setIsModalOpen }) => {
     const handleOk = () => {
         setIsModalOpen(false);
     };
@@ -31,9 +34,10 @@ export const ModalCreatePost: FC = () => {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+
     return (
         <Modal
-            open={isModalOpen}
+            open={isOpen}
             onOk={handleOk}
             onCancel={handleCancel}
             title='Ваш отзыв'
