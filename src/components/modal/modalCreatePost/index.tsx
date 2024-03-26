@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import 'antd/dist/antd.css';
 
-import { Button, Modal, Form } from 'antd';
+import { Button, Modal, Form, Rate } from 'antd';
 import { ModalDataItem } from '@constants/modalData';
 import TextArea from 'antd/lib/input/TextArea';
 import { StyledRate } from '@components/commentCard/styled';

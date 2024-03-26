@@ -48,9 +48,13 @@ export const StyledRate = styled(Rate)`
         width: 16px;
         height: 16px;
 
-        path {
-            fill: ${warningCol};
-        }
+        // path {
+        //     fill: ${warningCol};
+        // }
+    }
+
+    .ant-rate {
+        color: ${warningCol};
     }
 
     li:not(:last-child) {

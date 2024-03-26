@@ -7,7 +7,7 @@ import { Loader } from '@components/loader/Loader';
 import { Feedbacks } from '@components/feedbacks';
 import { LayoutWrapper } from '@pages/layout';
 import { Button } from 'antd';
-import { primaryLight6 } from '@constants/styles';
+
 import { ModalComponent } from '@components/modal';
 import { modalData } from '@constants/modalData';
 import { ModalCreatePost } from '@components/modal/modalCreatePost';

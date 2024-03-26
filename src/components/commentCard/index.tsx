@@ -29,7 +29,7 @@ export const CommentCard: FC<CommentCardProps> = ({ comment }) => {
             <div>
                 <ItemListMain>
                     <ItemListTop>
-                        <StyledRate defaultValue={3} disabled />
+                        <StyledRate defaultValue={comment.rating} disabled />
                         <Text fontSize={'12px'} line-height={'130%'} color={gray6} width='auto'>
                             {dataToFeedback(comment.createdAt)}
                         </Text>
