@@ -18,7 +18,6 @@ export const Header: React.FC = () => {
 
     const isFeedbacks = location.pathname === PATHS.FEEDBACKS ? true : false;
 
-    console.log(location);
     return (
         <Styledheader isFeedbacks={isFeedbacks}>
             <LinkMain to='/'>Главная</LinkMain>

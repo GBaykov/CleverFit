@@ -8,7 +8,7 @@ import { useCheckEmailMutation, useLoginMutation } from '../../../services/auth'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ValuesLoginForm } from './types';
-import { setUser } from '@redux/reducers/userSlice';
+import { setToken, setUser } from '@redux/reducers/userSlice';
 import { PATHS } from '@constants/constants';
 import { Loader } from '@components/loader/Loader';
 
@@ -30,6 +30,7 @@ export const AuthForm: FC = () => {
             .then((res) => {
                 values.remember ? localStorage.setItem('token', res.accessToken) : '';
                 dispatch(setUser({ email: values.email, password: values.password }));
+                dispatch(setToken(res.accessToken));
                 navigate(PATHS.MAIN);
             })
             .catch(() => navigate(PATHS.RESULT.ERROR_LOGIN, { state: PATHS.AUTH }));

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import 'antd/dist/antd.css';
 import { HeartFilled, IdcardOutlined } from '@ant-design/icons';
-import { Card } from 'antd';
 import { CardButtonWrapper, MainpageCard, Text } from './styled';
 import calendarIco from '../../assets/icons/Calendar.svg';
 import { StyledLink } from '@components/styledLink';
@@ -16,9 +15,9 @@ export const MainPage: React.FC = () => {
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
-    // }, [navigate, user.email]);
+    useEffect(() => {
+        user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
+    }, [navigate, user.email]);
 
     return (
         <LayoutWrapper>

@@ -17,7 +17,11 @@ export const store = configureStore({
         userReducer: userSlice,
     }),
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(routerMiddleware, authAPI.middleware),
+        getDefaultMiddleware().concat(
+            routerMiddleware,
+            authAPI.middleware,
+            feedbacksAPI.middleware,
+        ),
 });
 
 export const history = createReduxHistory(store);

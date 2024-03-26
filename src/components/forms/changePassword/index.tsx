@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Button, Form, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { passwordRegex } from '../../../regexp';
-import './styles.css';
 import { StyledCard } from '@components/styledCard/styled';
 import { CommonCardWrap } from '@pages/comonCardWrap';
 

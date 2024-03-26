@@ -6,11 +6,12 @@ export type ValuesSignupForm = {
     repeatPassword?: string;
 };
 
-type UserState = {
+export type UserState = {
     user: {
         email: string;
         password: string;
     };
+    token: string;
 };
 
 const initialState: UserState = {
@@ -18,6 +19,7 @@ const initialState: UserState = {
         email: '',
         password: '',
     },
+    token: '',
 };
 
 export const userSlice = createSlice({
@@ -27,9 +29,16 @@ export const userSlice = createSlice({
         setUser: (state, action: PayloadAction<ValuesSignupForm>) => {
             state.user = action.payload;
         },
+        // setToken(state, action:PayloadAction<string>) = > {
+
+        // },
+
+        setToken: (state, action: PayloadAction<string>) => {
+            state.token = action.payload;
+        },
     },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setToken } = userSlice.actions;
 
 export default userSlice.reducer;

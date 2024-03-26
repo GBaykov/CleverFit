@@ -1,6 +1,7 @@
 import { URL } from '@constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Feedback, FeedbackRequest, FeedbackResponse } from './types';
+import { RootState } from '@redux/configure-store';
 
 export const headers = {
     accept: 'application/json',
@@ -9,17 +10,29 @@ export const headers = {
 
 export const feedbacksAPI = createApi({
     reducerPath: 'feedbacksAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: URL }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: URL,
+        prepareHeaders: (headers, { getState }) => {
+            const token =
+                localStorage.getItem('token') || (getState() as RootState).userReducer.token;
+
+            if (token) {
+                headers.set('authorization', `Bearer ${token}`);
+            }
+
+            return headers;
+        },
+    }),
     endpoints: (build) => ({
-        getFeedback: build.query<Feedback, FeedbackRequest>({
-            query: (id) => ({
-                url: `/feedback/${id}`,
+        getFeedbacks: build.query<FeedbackResponse, void>({
+            query: () => ({
+                url: '/feedback',
                 headers: headers,
             }),
         }),
-        getFeedbacks: build.query<FeedbackResponse, FeedbackRequest>({
-            query: () => ({
-                url: '/feedback',
+        getFeedback: build.query<Feedback, FeedbackRequest>({
+            query: (id) => ({
+                url: `/feedback/${id}`,
                 headers: headers,
             }),
         }),
@@ -44,4 +57,4 @@ export const feedbacksAPI = createApi({
     }),
 });
 
-export const { useGetFeedbackQuery, useGetFeedbacksQuery } = feedbacksAPI;
+export const { useGetFeedbacksQuery, useGetFeedbackQuery } = feedbacksAPI;
