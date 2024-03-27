@@ -15,15 +15,13 @@ import { useGetFeedbacksQuery } from '../../services/feedbacks';
 import { Feedback } from 'src/services/types';
 import { PATHS } from '@constants/constants';
 import { StyledBtnsContainer } from './styled';
+import { ModalsVariants } from '@components/modal/enums';
 // import { useGetFeedbacksQuery } from 'src/services/feedbacks';
 
 export const CommentsPage: FC = () => {
     const [isWrapped, setIsWrapped] = useState(true);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState<ModalsVariants>(ModalsVariants.modalClosed);
     const { data: commentsList = [], isFetching, isLoading } = useGetFeedbacksQuery();
-    // const commentsList: any[] = [];
-    const token = useAppSelector((state) => state.userReducer.token);
-    // const {} = useAppSelector((state) => state.feedbacksAPI.mutations);
 
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();
@@ -32,12 +30,9 @@ export const CommentsPage: FC = () => {
         user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
     }, [navigate, user.email]);
 
-    const setmodal = (bol: boolean) => {
-        setIsModalOpen(bol);
+    const setmodal = (modal: ModalsVariants) => {
+        setIsModalOpen(modal);
     };
-
-    console.log('token', token);
-    console.log('data', commentsList);
 
     return (
         <LayoutWrapper isFooter={false}>
@@ -49,7 +44,11 @@ export const CommentsPage: FC = () => {
                         <>
                             <Feedbacks commentsList={commentsList} isWrapped={isWrapped} />
                             <StyledBtnsContainer>
-                                <Button size='large' type='primary' onClick={() => setmodal(true)}>
+                                <Button
+                                    size='large'
+                                    type='primary'
+                                    onClick={() => setmodal(ModalsVariants.createPost)}
+                                >
                                     Написать отзыв
                                 </Button>
                                 <Button

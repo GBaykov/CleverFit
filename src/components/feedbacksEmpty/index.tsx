@@ -2,10 +2,10 @@ import { primaryLight9 } from '@constants/styles';
 import { Button, Card } from 'antd';
 import { FC } from 'react';
 import { StyledEmptyCard } from './styled';
+import { ModalsVariants } from '@components/modal/enums';
 
 export type ModalCreatePostProps = {
-    // isOpen: boolean;
-    setIsModalOpen: (bol: boolean) => void;
+    setIsModalOpen: (modal: ModalsVariants) => void;
 };
 
 export const FedbacksEmty: FC<ModalCreatePostProps> = ({ setIsModalOpen }) => {
@@ -31,7 +31,7 @@ export const FedbacksEmty: FC<ModalCreatePostProps> = ({ setIsModalOpen }) => {
                     правильный выбор.
                 </p>
             </StyledEmptyCard>
-            <Button onClick={() => setIsModalOpen(true)} type='primary'>
+            <Button onClick={() => setIsModalOpen(ModalsVariants.createPost)} type='primary'>
                 Написать отзыв
             </Button>
         </div>

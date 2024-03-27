@@ -8,6 +8,7 @@ import { StyledRate } from '@components/commentCard/styled';
 import TextareaAutosize from 'react-autosize-textarea';
 import { usePostFeedbackMutation } from '../../../services/feedbacks';
 import { Loader } from '@components/loader/Loader';
+import { ModalsVariants } from '../enums';
 
 export type ModalProps = {
     modalData: ModalDataItem;
@@ -20,30 +21,30 @@ export type ValuesCreatePostForm = {
 };
 
 export type ModalCreatePostProps = {
-    isOpen: boolean;
-    setIsModalOpen: (bol: boolean) => void;
+    isOpen: ModalsVariants;
+    setIsModalOpen: (modal: ModalsVariants) => void;
 };
 
 export const ModalCreatePost: FC<ModalCreatePostProps> = ({ isOpen, setIsModalOpen }) => {
     const [postFeedback, { isLoading }] = usePostFeedbackMutation();
     const handleOk = () => {
-        setIsModalOpen(false);
+        setIsModalOpen(ModalsVariants.modalClosed);
     };
 
     const onFinish = (values: ValuesCreatePostForm) => {
         postFeedback({ message: values.message, rating: values.rating });
-        setIsModalOpen(false);
+        setIsModalOpen(ModalsVariants.modalClosed);
         console.log(values);
     };
     const handleCancel = () => {
-        setIsModalOpen(false);
+        setIsModalOpen(ModalsVariants.modalClosed);
     };
 
     return (
         <>
             {isLoading && <Loader />}
             <Modal
-                open={isOpen}
+                open={isOpen === ModalsVariants.createPost}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 title='Ваш отзыв'
