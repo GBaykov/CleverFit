@@ -10,19 +10,18 @@ import {
 import { StyledLink } from '../styledLink';
 import { SettingOutlined } from '@ant-design/icons';
 import { useLocation } from 'react-router-dom';
-import { Text } from '@pages/mainPage/styled';
 import { PATHS } from '@constants/constants';
 
 export const Header: React.FC = () => {
     const location = useLocation();
 
-    const isFeedbacks = location.pathname === PATHS.FEEDBACKS ? true : false;
+    const isFeedbacks = location.pathname === PATHS.FEEDBACKS;
 
     return (
         <Styledheader isFeedbacks={isFeedbacks}>
             <LinkMain to='/'>Главная</LinkMain>
             {isFeedbacks && (
-                <span style={{ fontSize: '14px', height: '18px', lineHeight: '15px' }}>
+                <span style={{ fontSize: '14px', height: '18px', lineHeight: '18px' }}>
                     {' '}
                     <span>{` /  `}</span>Отзывы пользователей
                 </span>

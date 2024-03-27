@@ -2,6 +2,19 @@ import { primaryLight4, primaryLight5, primaryLight6, primaryLight7 } from '@con
 import { Button } from 'antd';
 import styled from 'styled-components';
 
+export const StyledBtnsContainer = styled.div`
+    margin-top: 112px;
+
+    @media (max-width: 600px) {
+        margin-top: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        button {
+            width: 100%;
+        }
+    }
+`;
+
 export const StyledBtn = styled(Button)`
 background-color: ${primaryLight6};
  fontSize: 14px;

@@ -4,8 +4,14 @@ import { FC } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Feedback } from 'src/services/types';
 
+export type FeedbacksProps = {
+    isWrapped: boolean;
+    commentsList: Feedback[];
+};
+
 const sortData = (data: Feedback[]) => {
-    return data.sort((a, b) => {
+    const result = [...data];
+    return result.sort((a, b) => {
         if (new Date(a.createdAt) < new Date(b.createdAt)) {
             return 1;
         }
@@ -13,10 +19,6 @@ const sortData = (data: Feedback[]) => {
     });
 };
 
-export type FeedbacksProps = {
-    isWrapped: boolean;
-    commentsList: Feedback[];
-};
 export const Feedbacks: FC<FeedbacksProps> = ({ isWrapped, commentsList }) => {
     const dataList = isWrapped ? sortData(commentsList).slice(0, 4) : sortData(commentsList);
 
