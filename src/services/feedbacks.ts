@@ -1,6 +1,12 @@
 import { URL } from '@constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Feedback, FeedbackRequest, FeedbackResponse } from './types';
+import {
+    Feedback,
+    FeedbackPostRequest,
+    FeedbackPostResponse,
+    FeedbackRequest,
+    FeedbackResponse,
+} from './types';
 import { RootState } from '@redux/configure-store';
 
 export const headers = {
@@ -23,28 +29,32 @@ export const feedbacksAPI = createApi({
             return headers;
         },
     }),
+    tagTypes: ['Feedbacks'],
     endpoints: (build) => ({
         getFeedbacks: build.query<FeedbackResponse, void>({
             query: () => ({
                 url: '/feedback',
-                headers: headers,
+                headers,
             }),
+            providesTags: ['Feedbacks'],
         }),
         getFeedback: build.query<Feedback, FeedbackRequest>({
             query: (id) => ({
                 url: `/feedback/${id}`,
-                headers: headers,
+                headers,
             }),
+            providesTags: ['Feedbacks'],
         }),
 
-        // checkEmail: build.mutation<ResponseCheck, RequestCheck>({
-        //     query: (email) => ({
-        //         url: '/auth/check-email',
-        //         method: 'POST',
-        //         headers: headers,
-        //         body: email,
-        //     }),
-        // }),
+        postFeedback: build.mutation<FeedbackPostResponse, FeedbackPostRequest>({
+            query: ({ message, rating }) => ({
+                url: '/feedback',
+                method: 'POST',
+                headers,
+                body: { message, rating },
+            }),
+            invalidatesTags: ['Feedbacks'],
+        }),
         // confirmEmail: build.mutation<ResponseConfirm, RequestConfirm>({
         //     query: (body) => ({
         //         url: '/auth/confirm-email',
@@ -57,4 +67,4 @@ export const feedbacksAPI = createApi({
     }),
 });
 
-export const { useGetFeedbacksQuery, useGetFeedbackQuery } = feedbacksAPI;
+export const { useGetFeedbacksQuery, useGetFeedbackQuery, usePostFeedbackMutation } = feedbacksAPI;

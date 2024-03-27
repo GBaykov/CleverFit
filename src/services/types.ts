@@ -48,3 +48,10 @@ export type Feedback = {
 
 export type FeedbackResponse = Feedback[];
 export type FeedbackRequest = {};
+
+export type FeedbackPostRequest = {
+    message: string;
+    rating: number;
+};
+
+export type FeedbackPostResponse = {};
