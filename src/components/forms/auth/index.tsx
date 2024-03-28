@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ValuesLoginForm } from './types';
 import { setToken, setUser } from '@redux/reducers/userSlice';
-import { PATHS } from '@constants/constants';
+import { PATHS, URL } from '@constants/constants';
 import { Loader } from '@components/loader/Loader';
 
 const { useBreakpoint } = Grid;
@@ -144,7 +144,12 @@ export const AuthForm: FC = () => {
                         Вход
                     </Button>
                 </Form.Item>
-                <Button block>
+                <Button
+                    block
+                    onClick={() => {
+                        window.location.href = `${URL + PATHS.LOGINGOOGLE}`;
+                    }}
+                >
                     {!xs && <GooglePlusOutlined />}
                     Войти через Google
                 </Button>

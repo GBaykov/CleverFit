@@ -9,6 +9,8 @@ import exit from '../../assets/icons/Exit.svg';
 import { ButtonMenu } from './menyButton/index';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setToken, setUser } from '@redux/reducers/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '@constants/constants';
 
 export interface MenuProps {
     collapsed: boolean;
@@ -17,15 +19,17 @@ export interface MenuProps {
 
 export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
     const dispatch = useAppDispatch();
-
+    const navigate = useNavigate();
     type key = {
         key: string;
     };
 
     const logOut = () => {
+        console.log('exit');
         localStorage.removeItem('token');
         dispatch(setUser({ email: '', password: '' }));
         dispatch(setToken(''));
+        navigate(PATHS.AUTH);
     };
 
     function onExitClick({ key }: key) {

@@ -6,18 +6,36 @@ import calendarIco from '../../assets/icons/Calendar.svg';
 import { StyledLink } from '@components/styledLink';
 import { CardText } from '../../components/cardText';
 import './styles.css';
-import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 import { LayoutWrapper } from '@pages/layout';
+import { setToken } from '@redux/reducers/userSlice';
+import { push } from 'redux-first-history';
 
 export const MainPage: React.FC = () => {
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();
-    console.log(user, localStorage.getItem('token'));
+    const dispatch = useAppDispatch();
+    const [searchParams] = useSearchParams();
+
+    // useEffect(() => {
+    //     user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
+    // }, [navigate, user.email]);
 
     useEffect(() => {
-        user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
+        const accessToken = searchParams.get('accessToken');
+        if (accessToken) {
+            localStorage.setItem('token', accessToken);
+            dispatch(setToken(accessToken));
+            dispatch(push(PATHS.MAIN));
+        }
+    }, [dispatch, searchParams]);
+
+    useEffect(() => {
+        const accessToken = searchParams.get('accessToken');
+        if (!localStorage.getItem('token') && !accessToken && user.email === '')
+            dispatch(push(PATHS.AUTH));
     }, [navigate, user.email]);
 
     return (

@@ -13,7 +13,7 @@ export const routes = (
     <Routes>
         <Route path={'/test'} element={<MainPage />} />
 
-        <Route path={PATHS.INITIAL} element={<Navigate to={PATHS.AUTH} />} />
+        <Route path={PATHS.INITIAL} element={<MainPage />} />
         <Route path={PATHS.MAIN} element={<MainPage />} />
         <Route path={PATHS.AUTH} element={<FormPage activePage='auth' />} />
         <Route path={PATHS.REGISTRATION} element={<FormPage activePage='registration' />} />
