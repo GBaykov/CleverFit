@@ -8,7 +8,7 @@ import calendarIco from '../../assets/icons/calendar_icon.svg';
 import exit from '../../assets/icons/Exit.svg';
 import { ButtonMenu } from './menyButton/index';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setUser } from '@redux/reducers/userSlice';
+import { setToken, setUser } from '@redux/reducers/userSlice';
 
 export interface MenuProps {
     collapsed: boolean;
@@ -25,6 +25,7 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
     const logOut = () => {
         localStorage.removeItem('token');
         dispatch(setUser({ email: '', password: '' }));
+        dispatch(setToken(''));
     };
 
     function onExitClick({ key }: key) {

@@ -9,17 +9,23 @@ import {
 } from './styled';
 import { StyledLink } from '../styledLink';
 import { SettingOutlined } from '@ant-design/icons';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
+import { push } from 'redux-first-history';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 
 export const Header: React.FC = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    const { user } = useAppSelector((state) => state.userReducer);
 
     const isFeedbacks = location.pathname === PATHS.FEEDBACKS;
 
     return (
         <Styledheader isFeedbacks={isFeedbacks}>
-            <LinkMain to='/'>Главная</LinkMain>
+            <LinkMain to={PATHS.MAIN}>Главная</LinkMain>
             {isFeedbacks && (
                 <span style={{ fontSize: '14px', height: '18px', lineHeight: '18px' }}>
                     {' '}
@@ -33,7 +39,7 @@ export const Header: React.FC = () => {
                         своей мечты!
                     </H1>
                     <SettingsWrapper>
-                        <StyledLink to='/' text='Настройки'>
+                        <StyledLink to={PATHS.MAIN} text='Настройки'>
                             <SettingOutlined style={{ marginRight: '10px' }} />
                         </StyledLink>
                     </SettingsWrapper>

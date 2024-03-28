@@ -19,12 +19,12 @@ export type LayoutWrapperProps = {
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter = true }) => {
     const [collapsed, setCollapsed] = useState(false);
 
-    // const { user } = useAppSelector((state) => state.userReducer);
-    // const navigate = useNavigate();
+    const { user } = useAppSelector((state) => state.userReducer);
+    const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (user.email === '' && !localStorage.getItem('token')) navigate(PATHS.AUTH);
-    // }, [navigate, user.email]);
+    useEffect(() => {
+        if (user.email === '' && !localStorage.getItem('token')) navigate(PATHS.AUTH);
+    }, [navigate, user.email]);
 
     return (
         <>

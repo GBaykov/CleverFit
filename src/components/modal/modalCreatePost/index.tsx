@@ -26,7 +26,7 @@ export type ModalCreatePostProps = {
 };
 
 export const ModalCreatePost: FC<ModalCreatePostProps> = ({ isOpen, setIsModalOpen }) => {
-    const [postFeedback, { isLoading }] = usePostFeedbackMutation();
+    const [postFeedback, { isLoading, isSuccess, error, isError }] = usePostFeedbackMutation();
     const handleOk = () => {
         setIsModalOpen(ModalsVariants.modalClosed);
     };
@@ -34,11 +34,21 @@ export const ModalCreatePost: FC<ModalCreatePostProps> = ({ isOpen, setIsModalOp
     const onFinish = (values: ValuesCreatePostForm) => {
         postFeedback({ message: values.message, rating: values.rating });
         setIsModalOpen(ModalsVariants.modalClosed);
-        console.log(values);
     };
+
     const handleCancel = () => {
         setIsModalOpen(ModalsVariants.modalClosed);
     };
+
+    useEffect(() => {
+        if (!isLoading) {
+            if (isError) {
+                setIsModalOpen(ModalsVariants.error_post_feedbacks);
+            } else if (isSuccess) {
+                setIsModalOpen(ModalsVariants.success_post_feedback);
+            }
+        }
+    }, [isError, isLoading, isSuccess]);
 
     return (
         <>

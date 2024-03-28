@@ -14,6 +14,7 @@ import { LayoutWrapper } from '@pages/layout';
 export const MainPage: React.FC = () => {
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();
+    console.log(user, localStorage.getItem('token'));
 
     useEffect(() => {
         user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
