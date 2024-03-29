@@ -16,6 +16,7 @@ export const Footer: React.FC = () => {
             <Footers>
                 <div>
                     <StyledLink
+                        data-test-id='see-reviews'
                         //  onClick={onLinkClick}
                         to={PATHS.FEEDBACKS}
                         text='Смотреть отзывы'

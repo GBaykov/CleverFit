@@ -70,11 +70,7 @@ export const ModalComponent: FC<ModalProps> = ({ isModal, setIsModalOpen }) => {
                         {btnText}
                     </Button>
                     {secondaryBtnText && (
-                        <Button
-                            onClick={handleCancel}
-                            key={dataAtribute}
-                            data-test-id={dataAtribute}
-                        >
+                        <Button onClick={handleCancel} key={dataAtribute}>
                             {secondaryBtnText}
                         </Button>
                     )}

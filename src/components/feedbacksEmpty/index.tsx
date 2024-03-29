@@ -31,7 +31,11 @@ export const FedbacksEmty: FC<ModalCreatePostProps> = ({ setIsModalOpen }) => {
                     правильный выбор.
                 </p>
             </StyledEmptyCard>
-            <Button onClick={() => setIsModalOpen(ModalsVariants.createPost)} type='primary'>
+            <Button
+                data-test-id='write-review'
+                onClick={() => setIsModalOpen(ModalsVariants.createPost)}
+                type='primary'
+            >
                 Написать отзыв
             </Button>
         </div>

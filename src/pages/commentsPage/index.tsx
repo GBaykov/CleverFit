@@ -75,6 +75,7 @@ export const CommentsPage: FC = () => {
                             <Feedbacks commentsList={commentsList} isWrapped={isWrapped} />
                             <StyledBtnsContainer>
                                 <Button
+                                    data-test-id='write-review'
                                     size='large'
                                     type='primary'
                                     onClick={() => setIsModalOpen(ModalsVariants.createPost)}
@@ -82,6 +83,7 @@ export const CommentsPage: FC = () => {
                                     Написать отзыв
                                 </Button>
                                 <Button
+                                    data-test-id='all-reviews-button'
                                     onClick={() => setIsWrapped(!isWrapped)}
                                     size='large'
                                     type='link'
