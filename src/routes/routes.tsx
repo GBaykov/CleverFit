@@ -2,6 +2,7 @@ import { ChangePasswordForm } from '@components/forms/changePassword';
 import { ConfirmEmail } from '@components/forms/confirmEmail';
 import { PATHS } from '@constants/constants';
 import { resultData } from '@constants/resultData';
+import { CalendarPage } from '@pages/calendarPage';
 import { CommentsPage } from '@pages/commentsPage';
 import { FormPage } from '@pages/formPage';
 import { MainPage } from '@pages/mainPage';
@@ -12,7 +13,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 export const routes = (
     <Routes>
         <Route path={'/test'} element={<MainPage />} />
-
+        <Route path={PATHS.CALENDAR} element={<CalendarPage />} />
         <Route path={PATHS.INITIAL} element={<MainPage />} />
         <Route path={PATHS.MAIN} element={<MainPage />} />
         <Route path={PATHS.AUTH} element={<FormPage activePage='auth' />} />

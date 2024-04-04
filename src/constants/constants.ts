@@ -8,6 +8,7 @@ export const PATHS = {
     CONFIRM_EMAIL: '/auth/confirm-email',
     CHANGE_PASSWORD: '/auth/change-password',
     FEEDBACKS: '/feedbacks',
+    CALENDAR: '/calendar',
     LOGINGOOGLE: '/auth/google',
     RESULT: {
         ERROR_LOGIN: '/result/error-login',

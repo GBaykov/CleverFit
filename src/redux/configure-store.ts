@@ -4,6 +4,7 @@ import { createReduxHistoryContext } from 'redux-first-history';
 import { authAPI } from '../services/auth';
 import userSlice from './reducers/userSlice';
 import { feedbacksAPI } from '../services/feedbacks';
+import { catalogsAPI } from '../services/catalogs';
 
 const { createReduxHistory, routerReducer, routerMiddleware } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -14,6 +15,7 @@ export const store = configureStore({
         router: routerReducer,
         [authAPI.reducerPath]: authAPI.reducer,
         [feedbacksAPI.reducerPath]: feedbacksAPI.reducer,
+        [catalogsAPI.reducerPath]: catalogsAPI.reducer,
         userReducer: userSlice,
     }),
     middleware: (getDefaultMiddleware) =>
