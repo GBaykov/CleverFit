@@ -66,7 +66,7 @@ export const MainPage: React.FC = () => {
             </CardText>
             <CardButtonWrapper>
                 <MainpageCard title='Расписать тренировки' bordered={false}>
-                    <StyledLink to='/' text='Тренировки' color='rgba(47, 84, 235, 1)'>
+                    <StyledLink to='/calendar' text='Тренировки' color='rgba(47, 84, 235, 1)'>
                         <HeartFilled
                             style={{
                                 color: 'rgba(47, 84, 235, 1)',

@@ -61,7 +61,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
 
             <MenuList>
                 <div>
-                    <StyledLink to='/' text='Календарь' fontSize='14px' />
+                    <StyledLink to='/calendar' text='Календарь' fontSize='14px' />
                 </div>
                 <div>
                     <StyledLink to='/' text='Тренировки' fontSize='14px' />

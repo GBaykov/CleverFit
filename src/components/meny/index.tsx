@@ -34,6 +34,9 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
 
     function onExitClick({ key }: key) {
         switch (key) {
+            case '1':
+                navigate('/calendar');
+                break;
             case 'exit':
                 logOut();
         }

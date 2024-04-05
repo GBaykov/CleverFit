@@ -22,9 +22,10 @@ export const Header: React.FC = () => {
     const { user } = useAppSelector((state) => state.userReducer);
 
     const isFeedbacks = location.pathname === PATHS.FEEDBACKS;
+    const isCalendar = location.pathname === PATHS.CALENDAR;
 
     return (
-        <Styledheader isFeedbacks={isFeedbacks}>
+        <Styledheader isFeedbacks={isFeedbacks} isCalendar={isCalendar}>
             <LinkMain to={PATHS.MAIN}>Главная</LinkMain>
             {isFeedbacks && (
                 <span style={{ fontSize: '14px', height: '18px', lineHeight: '18px' }}>
@@ -32,7 +33,13 @@ export const Header: React.FC = () => {
                     <span>{` /  `}</span>Отзывы пользователей
                 </span>
             )}
-            {!isFeedbacks && (
+            {isCalendar && (
+                <span style={{ fontSize: '14px', height: '18px', lineHeight: '18px' }}>
+                    {' '}
+                    <span>{` /  `}</span>Календарь
+                </span>
+            )}
+            {!isFeedbacks && !isCalendar && (
                 <H1Wrapper>
                     <H1>
                         Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться
