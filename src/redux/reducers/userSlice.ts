@@ -29,9 +29,6 @@ export const userSlice = createSlice({
         setUser: (state, action: PayloadAction<ValuesSignupForm>) => {
             state.user = action.payload;
         },
-        // setToken(state, action:PayloadAction<string>) = > {
-
-        // },
 
         setToken: (state, action: PayloadAction<string>) => {
             state.token = action.payload;
