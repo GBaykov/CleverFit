@@ -1,7 +1,18 @@
 import { URL } from '@constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { UserTrainings } from './types';
 import { RootState } from '@redux/configure-store';
+import { ApiEndpoints } from '@constants/api';
+import { setAppLoader } from '@redux/reducers/appSlice';
+import {
+    CardModalBody,
+    resetStateCreating,
+    setDefaultTraining,
+    setStateCardModal,
+    setUserTrainings,
+} from '@redux/reducers/trainingSlice';
+import { Training, UserTraining, UserTrainingTransform } from '@redux/types';
+import { FORMAT_Y_M_D, formatDate } from '@utils/format-date';
+import moment from 'moment';
 
 export const headers = {
     accept: 'application/json',
@@ -25,32 +36,108 @@ export const calendarAPI = createApi({
     }),
     tagTypes: ['Trainigs'],
 
-    endpoints: (build) => ({
-        getUserTrainings: build.query<UserTrainings, void>({
+    endpoints: (builder) => ({
+        getTrainingList: builder.query<string[], void>({
             query: () => ({
-                url: '/training',
-                headers,
+                url: ApiEndpoints.TRAINING_LIST,
+                method: 'GET',
             }),
+
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    dispatch(setAppLoader(true));
+                    const { data } = await queryFulfilled;
+
+                    dispatch(setAppLoader(false));
+                    dispatch(setDefaultTraining(data));
+                } catch {
+                    dispatch(setAppLoader(false));
+                }
+            },
+            transformResponse: (response: Training[]) => response.map(({ name }) => name),
+        }),
+
+        getUserTraining: builder.query<UserTrainingTransform, void>({
+            query: () => ({
+                url: ApiEndpoints.TRAINING,
+                method: 'GET',
+            }),
+
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    dispatch(setAppLoader(true));
+                    const { data } = await queryFulfilled;
+
+                    dispatch(setAppLoader(false));
+                    dispatch(setUserTrainings(data));
+                } catch {
+                    dispatch(setAppLoader(false));
+                }
+            },
+            transformResponse: (response: Array<Omit<UserTraining, 'id'> & { _id: string }>) =>
+                response.reduce((acc: UserTrainingTransform, curr) => {
+                    const key = formatDate(moment(curr.date), FORMAT_Y_M_D);
+
+                    if (acc[key]?.length) {
+                        // eslint-disable-next-line no-underscore-dangle
+                        acc[key].push({ ...curr, id: curr._id });
+                    } else {
+                        // eslint-disable-next-line no-underscore-dangle
+                        acc[key] = [{ ...curr, id: curr._id }];
+                    }
+
+                    return acc;
+                }, {}),
+
             providesTags: ['Trainigs'],
         }),
 
-        postUserTrainig: build.mutation({
-            query: () => ({
-                url: '/training',
+        createTraining: builder.mutation<void, UserTraining>({
+            query: (body) => ({
+                url: ApiEndpoints.TRAINING,
                 method: 'POST',
-                headers,
+
+                body,
             }),
-            invalidatesTags: ['Trainigs'],
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    dispatch(setAppLoader(true));
+                    await queryFulfilled;
+                    dispatch(setStateCardModal(CardModalBody.TRAINING));
+                    dispatch(setAppLoader(false));
+                } catch {
+                    dispatch(resetStateCreating());
+                    dispatch(setAppLoader(false));
+                }
+            },
+
+            invalidatesTags: (_, error) => (error ? [] : ['Trainigs']),
         }),
-        updateUserTrainig: build.mutation({
-            query: (id) => ({
-                url: `/training/${id}`,
+
+        updateTraining: builder.mutation<void, UserTraining>({
+            query: (body) => ({
+                url: `${ApiEndpoints.TRAINING}/${body.id}`,
+                method: 'PUT',
+
+                body: {
+                    name: body.name,
+                    date: body.date,
+                    isImplementation: body.isImplementation,
+                    exercises: body.exercises,
+                },
             }),
-        }),
-        deleteUserTrainig: build.mutation<void, string>({
-            query: (id) => ({
-                url: `/training/${id}`,
-            }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                try {
+                    dispatch(setAppLoader(true));
+                    await queryFulfilled;
+                    dispatch(setStateCardModal(CardModalBody.TRAINING));
+                } catch {
+                    dispatch(resetStateCreating());
+                    dispatch(setAppLoader(false));
+                }
+            },
+
+            invalidatesTags: (_, error) => (error ? [] : ['Trainigs']),
         }),
     }),
 });

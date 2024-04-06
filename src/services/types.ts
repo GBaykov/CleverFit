@@ -56,37 +56,37 @@ export type FeedbackPostRequest = {
 
 export type FeedbackPostResponse = {};
 
-export type Catalog = {
-    name: string;
-    key: string;
-};
+// export type Catalog = {
+//     name: string;
+//     key: string;
+// };
 
-export type CatalogsList = Catalog[];
+// export type CatalogsList = Catalog[];
 
-export type Exercise = {
-    _id: string;
-    name: string;
-    replays: number;
-    weight: number;
-    approaches: number;
-    isImplementation: boolean;
-};
+// export type Exercise = {
+//     _id: string;
+//     name: string;
+//     replays: number;
+//     weight: number;
+//     approaches: number;
+//     isImplementation: boolean;
+// };
 
-export type TrainingParams = {
-    repeat: boolean;
-    period: number;
-    jointTraining: boolean;
-    participants: string[];
-};
+// export type TrainingParams = {
+//     repeat: boolean;
+//     period: number;
+//     jointTraining: boolean;
+//     participants: string[];
+// };
 
-export type Training = {
-    _id: string;
-    name: string;
-    date: string;
-    isImplementation: boolean;
-    userId: string;
-    parameters: TrainingParams;
-    exercises: Exercise[];
-};
+// export type Training = {
+//     _id: string;
+//     name: string;
+//     date: string;
+//     isImplementation: boolean;
+//     userId: string;
+//     parameters: TrainingParams;
+//     exercises: Exercise[];
+// };
 
-export type UserTrainings = Training[];
+// export type UserTrainings = Training[];
