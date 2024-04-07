@@ -141,3 +141,11 @@ export const calendarAPI = createApi({
         }),
     }),
 });
+
+export const {
+    useLazyGetTrainingListQuery,
+    useLazyGetUserTrainingQuery,
+    useGetUserTrainingQuery,
+    useCreateTrainingMutation,
+    useUpdateTrainingMutation,
+} = calendarAPI;
