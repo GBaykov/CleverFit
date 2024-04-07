@@ -1,8 +1,10 @@
 import React from 'react';
 import type { Dayjs } from 'dayjs';
 import type { BadgeProps, CalendarProps } from 'antd';
-import { Badge, Calendar } from 'antd';
+import { Badge, Button, Calendar, Typography } from 'antd';
 import { Moment } from 'moment';
+import { EditOutlined } from '@ant-design/icons';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 export const CalendarApp = () => {
     const onChangeCell = (event: any, date: Moment | string) => {
@@ -18,8 +20,11 @@ export const CalendarApp = () => {
                 onClick={(event) => onChangeCell(event, props)}
                 style={{ width: '100%', height: '100%', overflow: 'hidden' }}
             >
-                <p>формат {props.format()}</p>
-                <p>calendar {props.calendar()}</p>
+                <Button data-test-id={`${DATA_TEST_ID.modalUpdateTrainingEditButton}`} type='link'>
+                    <EditOutlined />
+                </Button>
+                <Badge color='green' text={`формат ${props.format()}`} />
+                <Typography.Text type='secondary'>calendar ${props.calendar()}</Typography.Text>
             </div>
         );
     };
