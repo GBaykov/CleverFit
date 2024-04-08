@@ -17,3 +17,22 @@ export const StyledCalendarModal = styled.div<StyledCalendarModalProp>`
     ${(position) => (position.isLeft && !position.offsetTop ? 'left: 0;' : '')}
     ${(position) => (!position.isLeft && !position.offsetTop ? 'right: 0;' : '')}
 `;
+
+export const StyledButtonWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border-radius: 0 0 8px 8px;
+    margin-top: 24px;
+`;
+
+export const StyledTitleDate = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & > * * {
+        color: var(--secondary-light);
+    }
+`;

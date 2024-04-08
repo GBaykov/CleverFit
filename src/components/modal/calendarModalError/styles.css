@@ -1,0 +1,6 @@
+.notification {
+    min-width: 328px;
+    bottom: -50vh;
+    left: -50%;
+    transform: translate(50%, -50%);
+}

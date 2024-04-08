@@ -1,0 +1,6 @@
+.cell :global(.ant-picker-calendar-date-content) {
+    min-height: 140px;
+}
+.cell .ant-picker-cell-inner .ant-picker-calendar-date .ant-picker-calendar-date-today {
+    background-color: red;
+}

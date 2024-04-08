@@ -24,6 +24,9 @@ export const ModalComponent: FC<ModalProps> = ({ isModal, setIsModalOpen }) => {
         case ModalsVariants.success_post_feedback:
             modalDataDisplayed = modalData.success_post_feedback;
             break;
+        case ModalsVariants.error_calendar_data:
+            modalDataDisplayed = modalData.error_get_feedbacks;
+            break;
         default:
             return;
     }
@@ -46,13 +49,16 @@ export const ModalComponent: FC<ModalProps> = ({ isModal, setIsModalOpen }) => {
             navigate(PATHS.MAIN);
         } else if (isModal === ModalsVariants.success_post_feedback) {
             setIsModalOpen(ModalsVariants.modalClosed);
+        } else if (isModal === ModalsVariants.error_calendar_data) {
+            setIsModalOpen(ModalsVariants.modalClosed);
         }
     };
 
     const isModalOpen =
         isModal === ModalsVariants.error_post_feedbacks ||
         isModal === ModalsVariants.error_get_feedbacks ||
-        isModal === ModalsVariants.success_post_feedback;
+        isModal === ModalsVariants.success_post_feedback ||
+        isModal === ModalsVariants.error_calendar_data;
 
     return (
         <Modal
