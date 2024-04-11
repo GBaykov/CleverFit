@@ -14,3 +14,8 @@ export const StyledTrainingCardTitle = styled.div`
     justify-content: space-between;
     padding: 16px 12px 12px;
 `;
+export const StyledListBages = styled.div`
+    ul {
+        list-style-type: none;
+    }
+`;

@@ -6,7 +6,7 @@ export const StyledExerciseCard = styled(Card)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    > div {
+    & > div {
         padding: 0;
     }
 `;
@@ -25,7 +25,7 @@ export const StyledExerciseWraper = styled.div`
     justify-content: space-between;
     padding: 16px 12px 12px;
     border-bottom: 1px solid #f0f0f0;
-    .ant-select-selection-item.ant-select-selection-item {
+    & :global(.ant-select-selection-item.ant-select-selection-item) {
         text-align: start;
     }
 `;

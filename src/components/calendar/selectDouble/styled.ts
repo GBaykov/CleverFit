@@ -7,9 +7,9 @@ export type StyledSelectProp = {
 export const StyledSelect = styled(Select)<StyledSelectProp>`
     width: 100%;
 
-    .ant-select-selector {
+    & > .ant-select-selector {
         border: none;
         background-color: #ff4d4f;
-        font-size: 400px;
+        font-weight: 400;
     }
 `;

@@ -3,6 +3,7 @@ import { UserTraining } from '@redux/types';
 import { FORMAT_Y_M_D, formatDate } from '@utils/format-date';
 import { Moment } from 'moment';
 import { FC } from 'react';
+import { StyledBadgesBlock } from './styled';
 
 type BadgeBlocksProps = {
     listData: UserTraining[];
@@ -25,8 +26,7 @@ export const BadgeBlocks: FC<BadgeBlocksProps> = ({
 
     return (
         // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus,jsx-a11y/no-static-element-interactions
-        <div
-            style={{ width: '100%', height: '100%', overflow: 'hidden' }}
+        <StyledBadgesBlock
             onDoubleClick={() => onChangeCellHandle(formatDate(date, FORMAT_Y_M_D))}
             onClick={(event) => onStopEvent(event, formatDate(date, FORMAT_Y_M_D))}
         >
@@ -44,6 +44,6 @@ export const BadgeBlocks: FC<BadgeBlocksProps> = ({
                     </li>
                 ))}
             </ul>
-        </div>
+        </StyledBadgesBlock>
     );
 };

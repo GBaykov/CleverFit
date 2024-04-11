@@ -10,6 +10,7 @@ export type StyledCalendarModalProp = {
 export const StyledCalendarModal = styled.div<StyledCalendarModalProp>`
     min-width: 264px;
     min-height: 200px;
+    max-width: 312px;
     position: absolute;
     animation: fade-in 0.3s ease-in;
     z-index: 150;
