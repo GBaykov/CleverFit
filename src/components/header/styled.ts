@@ -12,7 +12,7 @@ export const Styledheader = styled(Layout)<StyledheaderProps>`
     height: auto;
     background: rgba(240, 245, 255, 1);
     zindex: 0;
-
+    justify-content: space-between;
     display: ${(props) => (props.isFeedbacks || props.isCalendar ? 'flex' : '')};
     flex-direction: ${(props) => (props.isFeedbacks || props.isCalendar ? 'row' : '')};
 `;

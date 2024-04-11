@@ -44,7 +44,6 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
                             position: 'relative',
                             height: '100%',
                             display: 'flex',
-                            justifyContent: 'center',
                             padding: 24,
                         }}
                     >

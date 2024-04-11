@@ -26,25 +26,46 @@ export const Header: React.FC = () => {
 
     return (
         <Styledheader isFeedbacks={isFeedbacks} isCalendar={isCalendar}>
-            <LinkMain to={PATHS.MAIN}>Главная</LinkMain>
-            {isFeedbacks && (
-                <span style={{ fontSize: '14px', height: '18px', lineHeight: '18px' }}>
-                    {' '}
-                    <span>{` /  `}</span>Отзывы пользователей
-                </span>
-            )}
-            {isCalendar && (
-                <span style={{ fontSize: '14px', height: '18px', lineHeight: '18px' }}>
-                    {' '}
-                    <span>{` /  `}</span>Календарь
-                </span>
-            )}
-            {!isFeedbacks && !isCalendar && (
-                <H1Wrapper>
+            <div>
+                {' '}
+                <LinkMain to={PATHS.MAIN}>Главная</LinkMain>
+                {isFeedbacks && (
+                    <p
+                        style={{
+                            fontSize: '14px',
+                            height: '18px',
+                            lineHeight: '18px',
+                            display: 'inline',
+                        }}
+                    >
+                        {' '}
+                        <span>{` /  `}</span>Отзывы пользователей
+                    </p>
+                )}
+                {isCalendar && (
+                    <p
+                        style={{
+                            fontSize: '14px',
+                            height: '18px',
+                            lineHeight: '18px',
+                            display: 'inline',
+                        }}
+                    >
+                        {' '}
+                        <span>{` /  `}</span>Календарь
+                    </p>
+                )}{' '}
+            </div>
+
+            <H1Wrapper>
+                {!isFeedbacks && !isCalendar && (
                     <H1>
                         Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться
                         своей мечты!
                     </H1>
+                )}
+
+                <>
                     <SettingsWrapper>
                         <StyledLink to={PATHS.MAIN} text='Настройки'>
                             <SettingOutlined style={{ marginRight: '10px' }} />
@@ -56,8 +77,8 @@ export const Header: React.FC = () => {
                             <SettingOutlined style={{ fontSize: '19px' }} size={16} />
                         </StyledLink>
                     </SettingsMobileWrapper>
-                </H1Wrapper>
-            )}
+                </>
+            </H1Wrapper>
         </Styledheader>
     );
 };
