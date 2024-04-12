@@ -34,12 +34,17 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
 
     function onExitClick({ key }: key) {
         switch (key) {
-            case '1':
-                navigate('/calendar');
+            case PATHS.CALENDAR:
+                navigate(PATHS.CALENDAR);
                 break;
             case 'exit':
                 logOut();
         }
+    }
+
+    function defaultSelectedItem() {
+        let deafultKey = '';
+        return deafultKey === location.pathname ? location.pathname : '';
     }
 
     return (
@@ -52,10 +57,10 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
                 onClick={onExitClick}
                 theme='light'
                 mode='inline'
-                defaultSelectedKeys={['1']}
+                defaultSelectedKeys={[location.pathname]}
                 items={[
                     {
-                        key: '1',
+                        key: PATHS.CALENDAR,
                         icon: <img src={calendarIco} />,
                         label: 'Календарь',
                     },

@@ -6,6 +6,7 @@ import { setToken, setUser } from '@redux/reducers/userSlice';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
 import logoMobIco from '../../assets/icons/logoMobile.svg';
+import { PATHS } from '@constants/constants';
 
 export type MenuMobileProps = {
     collapsed: boolean;
@@ -61,7 +62,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
 
             <MenuList>
                 <div>
-                    <StyledLink to='/calendar' text='Календарь' fontSize='14px' />
+                    <StyledLink to={PATHS.CALENDAR} text='Календарь' fontSize='14px' />
                 </div>
                 <div>
                     <StyledLink to='/' text='Тренировки' fontSize='14px' />
