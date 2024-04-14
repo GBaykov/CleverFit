@@ -10,6 +10,7 @@ export const PATHS = {
     FEEDBACKS: '/feedbacks',
     CALENDAR: '/calendar',
     LOGINGOOGLE: '/auth/google',
+    PROFILE: '/profile',
     RESULT: {
         ERROR_LOGIN: '/result/error-login',
         ERROR_USER_EXIST: '/result/error-user-exist',

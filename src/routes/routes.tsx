@@ -6,6 +6,7 @@ import { CalendarPage } from '@pages/calendarPage';
 import { CommentsPage } from '@pages/commentsPage';
 import { FormPage } from '@pages/formPage';
 import { MainPage } from '@pages/mainPage';
+import { ProfilePage } from '@pages/profilePage';
 import { ResultPage } from '@pages/resultPage';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -13,6 +14,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 export const routes = (
     <Routes>
         <Route path={'/test'} element={<MainPage />} />
+        <Route path={PATHS.PROFILE} element={<ProfilePage />} />
         <Route path={PATHS.CALENDAR} element={<CalendarPage />} />
         <Route path={PATHS.INITIAL} element={<MainPage />} />
         <Route path={PATHS.MAIN} element={<MainPage />} />
