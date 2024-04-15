@@ -56,37 +56,21 @@ export type FeedbackPostRequest = {
 
 export type FeedbackPostResponse = {};
 
-// export type Catalog = {
-//     name: string;
-//     key: string;
-// };
+export type Tariff = {
+    tariffId: string;
+    expired: string;
+};
 
-// export type CatalogsList = Catalog[];
-
-// export type Exercise = {
-//     _id: string;
-//     name: string;
-//     replays: number;
-//     weight: number;
-//     approaches: number;
-//     isImplementation: boolean;
-// };
-
-// export type TrainingParams = {
-//     repeat: boolean;
-//     period: number;
-//     jointTraining: boolean;
-//     participants: string[];
-// };
-
-// export type Training = {
-//     _id: string;
-//     name: string;
-//     date: string;
-//     isImplementation: boolean;
-//     userId: string;
-//     parameters: TrainingParams;
-//     exercises: Exercise[];
-// };
-
-// export type UserTrainings = Training[];
+export type UpdateUserResponce = {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    birthday: string;
+    imgSrc: string;
+    readyForJointTraining: boolean;
+    sendNotification: boolean;
+};
+export type UserInfo = Omit<UpdateUserResponce, 'password'> & {
+    tariff: Tariff;
+};

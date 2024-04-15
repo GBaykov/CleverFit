@@ -10,6 +10,7 @@ import { PATHS } from '@constants/constants';
 import { ButtonMenu } from '@components/meny/menyButton';
 import { Footer } from '@components/footer';
 import { Header } from '@components/header';
+import { useGetUserInfoQuery } from 'src/services/user';
 
 export type LayoutWrapperProps = {
     children: React.ReactNode;
@@ -18,12 +19,13 @@ export type LayoutWrapperProps = {
 
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter = true }) => {
     const [collapsed, setCollapsed] = useState(false);
+    useGetUserInfoQuery();
 
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user.email === '' && !localStorage.getItem('token')) navigate(PATHS.AUTH);
+        user.email === '' && !localStorage.getItem('token') && !user.token && navigate(PATHS.AUTH);
     }, [navigate, user.email]);
 
     return (

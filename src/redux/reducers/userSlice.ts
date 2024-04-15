@@ -1,3 +1,4 @@
+import { ApplicationState } from '@redux/configure-store';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type ValuesSignupForm = {
@@ -37,5 +38,6 @@ export const userSlice = createSlice({
 });
 
 export const { setUser, setToken } = userSlice.actions;
+export const userToken = (state: ApplicationState) => state.user.token;
 
 export default userSlice.reducer;
