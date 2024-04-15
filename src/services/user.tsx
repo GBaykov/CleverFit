@@ -31,6 +31,7 @@ export const userAPI = createApi({
         updateUser: build.mutation<UpdateUserResponce, void>({
             query: () => ({
                 url: ApiEndpoints.USER,
+                method: 'PUT',
             }),
             invalidatesTags: ['UserInfo'],
         }),
