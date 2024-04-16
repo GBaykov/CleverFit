@@ -61,16 +61,17 @@ export type Tariff = {
     expired: string;
 };
 
-export type UpdateUserResponce = {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    birthday: string;
-    imgSrc: string;
-    readyForJointTraining: boolean;
-    sendNotification: boolean;
+export type UserInfo = {
+    email?: string;
+    password?: string;
+    firstName?: string;
+    lastName?: string;
+    birthday?: string;
+    imgSrc?: string;
+    readyForJointTraining?: boolean;
+    sendNotification?: boolean;
 };
-export type UserInfo = Omit<UpdateUserResponce, 'password'> & {
+export type UserInfoRequest = Partial<UserInfo>;
+export type UserResponce = Omit<UserInfo, 'password'> & {
     tariff: Tariff;
 };

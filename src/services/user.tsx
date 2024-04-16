@@ -1,6 +1,6 @@
 import { URL } from '@constants/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { UpdateUserResponce, UserInfo } from './types';
+import { UserInfo, UserResponce } from './types';
 import { ApiEndpoints } from '@constants/api';
 import { RootState } from '@redux/configure-store';
 
@@ -22,20 +22,21 @@ export const userAPI = createApi({
     }),
     tagTypes: ['UserInfo'],
     endpoints: (build) => ({
-        getUserInfo: build.query<UserInfo, void>({
+        getUserInfo: build.query<UserResponce, void>({
             query: () => ({
                 url: ApiEndpoints.USER_INFO,
             }),
             providesTags: ['UserInfo'],
         }),
-        updateUser: build.mutation<UpdateUserResponce, void>({
-            query: () => ({
+        updateUser: build.mutation<UserResponce, UserInfo>({
+            query: (body) => ({
                 url: ApiEndpoints.USER,
                 method: 'PUT',
+                body,
             }),
             invalidatesTags: ['UserInfo'],
         }),
     }),
 });
 
-export const { useGetUserInfoQuery, useUpdateUserMutation } = userAPI;
+export const { useGetUserInfoQuery, useUpdateUserMutation, useLazyGetUserInfoQuery } = userAPI;

@@ -66,7 +66,7 @@ export const MainPage: React.FC = () => {
             </CardText>
             <CardButtonWrapper>
                 <MainpageCard title='Расписать тренировки' bordered={false}>
-                    <StyledLink to='/calendar' text='Тренировки' color='rgba(47, 84, 235, 1)'>
+                    <StyledLink to={PATHS.CALENDAR} text='Тренировки' color='rgba(47, 84, 235, 1)'>
                         <HeartFilled
                             style={{
                                 color: 'rgba(47, 84, 235, 1)',
@@ -83,7 +83,7 @@ export const MainPage: React.FC = () => {
                 </MainpageCard>
 
                 <MainpageCard title='Заполнить профиль' bordered={false}>
-                    <StyledLink to='/' text='Профиль' color='rgba(47, 84, 235, 1)'>
+                    <StyledLink to={PATHS.PROFILE} text='Профиль' color='rgba(47, 84, 235, 1)'>
                         <IdcardOutlined
                             style={{
                                 color: 'rgba(47, 84, 235, 1)',

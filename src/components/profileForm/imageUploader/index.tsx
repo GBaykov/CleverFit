@@ -2,14 +2,13 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { ApiEndpoints } from '@constants/api';
 import { URL } from '@constants/constants';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { userToken } from '@redux/reducers/userSlice';
 import { Form, Upload, UploadFile } from 'antd';
 
-import { FC, useEffect, useMemo, useState } from 'react';
-import { UserInfo } from '../../../services/types';
+import React, { FC, useEffect, useMemo, useState } from 'react';
+
 import { UploadFileStatus } from 'antd/lib/upload/interface';
 import { StatusCode } from '@constants/enums';
-import { useGetUserInfoQuery } from '../../../services/user';
+import { useGetUserInfoQuery, useLazyGetUserInfoQuery } from '../../../services/user';
 
 export type UploadType = {
     file?: UploadFile;
@@ -17,7 +16,8 @@ export type UploadType = {
 };
 
 type ImageUploaderProps = {
-    userInfo?: UserInfo;
+    imgSrc?: string;
+    setCurrentImage: (img: UploadFile) => void;
 };
 // const defaultFile: UploadFile = {
 //     uid: '',
@@ -26,8 +26,10 @@ type ImageUploaderProps = {
 //     url: '',
 // };
 
-export const ImageUploader: FC<ImageUploaderProps> = ({ userInfo }) => {
-    const url = userInfo?.imgSrc as string;
+export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setCurrentImage }) => {
+    // const [getUserInfo, { data: userInfo2 }] = useLazyGetUserInfoQuery();
+    const url = imgSrc as string;
+    // console.log(userInfo2);
 
     const initialImage = useMemo(
         () => ({
@@ -38,6 +40,9 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ userInfo }) => {
         }),
         [url],
     );
+    // useEffect(() => {
+    //     getUserInfo();
+    // }, [userInfo?.imgSrc, initialImage]);
 
     const file = url ? [initialImage] : [];
 
@@ -49,8 +54,10 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ userInfo }) => {
     const tokenLS = localStorage.getItem('token');
 
     const handleChange = ({ fileList }: UploadType) => {
+        console.log(fileList);
         setFileList(fileList);
         const newFile = fileList[0];
+        setCurrentImage(newFile);
         if (newFile) {
             if (newFile.status === 'error') {
                 const errorFile = {
@@ -64,10 +71,8 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ userInfo }) => {
                 setFileList([errorFile]);
             }
             if (newFile.error?.status === StatusCode.CONFLICT) {
-                console.log('BIIIIIG');
             }
         }
-        console.log(newFile);
     };
     const uploadButton = (
         <div>
@@ -77,15 +82,14 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ userInfo }) => {
     );
 
     const uploadHeader = { Authorization: `Bearer ${token || tokenLS}` };
-    console.log(fileList);
 
     useEffect(() => {
-        if (userInfo?.imgSrc) {
+        if (imgSrc) {
             setFileList([initialImage]);
-            useGetUserInfoQuery();
+            // useGetUserInfoQuery();
+            // getUserInfo();
         }
-    }, [userInfo?.imgSrc, initialImage]);
-    console.log(userInfo);
+    }, [imgSrc, initialImage]);
 
     return (
         <Form.Item>

@@ -37,6 +37,9 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
             case PATHS.CALENDAR:
                 navigate(PATHS.CALENDAR);
                 break;
+            case PATHS.PROFILE:
+                navigate(PATHS.PROFILE);
+                break;
             case 'exit':
                 logOut();
         }
@@ -75,7 +78,7 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
                         label: 'Достижения',
                     },
                     {
-                        key: '4',
+                        key: PATHS.PROFILE,
                         icon: <IdcardOutlined style={{ color: 'rgba(6, 17, 120, 1)' }} />,
                         label: 'Профиль',
                     },

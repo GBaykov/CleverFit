@@ -71,7 +71,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
                     <StyledLink to='/' text='Достижения' fontSize='14px' />
                 </div>
                 <div>
-                    <StyledLink to='/' text='Профиль' fontSize='14px' />
+                    <StyledLink to={PATHS.PROFILE} text='Профиль' fontSize='14px' />
                 </div>
             </MenuList>
             <ExitButton onClick={() => onExitClick()}>
