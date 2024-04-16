@@ -14,10 +14,27 @@ type ModalNotificationProps = {
     onClose?: () => void;
     onClickButton: () => void;
     subtitle?: string;
+    modalBtnId?: string;
+    modalTitleId?: string;
+    modalSubTitleId?: string;
+    modalButtonCloseId?: string;
 };
 
 export const ModalNotification: FC<ModalNotificationProps> = memo(
-    ({ open, onClickButton, onClose, title, isCloseIcon, type, subtitle, textButton }) => {
+    ({
+        open,
+        onClickButton,
+        onClose,
+        title,
+        isCloseIcon,
+        type,
+        subtitle,
+        textButton,
+        modalBtnId,
+        modalTitleId,
+        modalSubTitleId,
+        modalButtonCloseId,
+    }) => {
         const [openModal, setOpenModal] = useState(true);
 
         const openNotification = () => {
@@ -26,8 +43,8 @@ export const ModalNotification: FC<ModalNotificationProps> = memo(
                 <Button
                     type='primary'
                     size='middle'
-                    onClick={onClickButton}
-                    data-test-id={DATA_TEST_ID.modalErrorUserTrainingButton}
+                    onClick={onModalCancel}
+                    data-test-id={modalBtnId}
                 >
                     {textButton}
                 </Button>
@@ -35,18 +52,12 @@ export const ModalNotification: FC<ModalNotificationProps> = memo(
 
             notification.open({
                 message: (
-                    <Typography.Title
-                        data-test-id={DATA_TEST_ID.modalErrorUserTrainingTitle}
-                        level={5}
-                    >
+                    <Typography.Title data-test-id={modalTitleId} level={5}>
                         {title}
                     </Typography.Title>
                 ),
                 description: (
-                    <Typography.Text
-                        data-test-id={DATA_TEST_ID.modalErrorUserTrainingSubTitle}
-                        type='secondary'
-                    >
+                    <Typography.Text data-test-id={modalSubTitleId} type='secondary'>
                         {subtitle}
                     </Typography.Text>
                 ),
@@ -54,11 +65,7 @@ export const ModalNotification: FC<ModalNotificationProps> = memo(
                 key,
                 icon: <StyledCloseCircleOutlined type={type} />,
                 duration: 0,
-                closeIcon: isCloseIcon ? (
-                    <CloseOutlined data-test-id={DATA_TEST_ID.modalErrorUserTrainingButtonClose} />
-                ) : (
-                    ''
-                ),
+                closeIcon: isCloseIcon ? <CloseOutlined data-test-id={modalButtonCloseId} /> : '',
                 onClose,
                 className: 'notification',
 
@@ -76,9 +83,15 @@ export const ModalNotification: FC<ModalNotificationProps> = memo(
             setOpenModal(false);
         }, [open, openModal]);
 
+        function onModalCancel() {
+            setOpenModal(false);
+            notification.close('open');
+            onClickButton();
+        }
+
         return (
             <Modal
-                style={{ padding: 0 }}
+                style={{ padding: 0, maxWidth: '300px' }}
                 open={open}
                 maskClosable={true}
                 centered={true}

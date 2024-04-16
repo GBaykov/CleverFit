@@ -4,11 +4,11 @@ import { URL } from '@constants/constants';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Form, Upload, UploadFile } from 'antd';
 
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 import { UploadFileStatus } from 'antd/lib/upload/interface';
-import { StatusCode } from '@constants/enums';
-import { useGetUserInfoQuery, useLazyGetUserInfoQuery } from '../../../services/user';
+import { ModalNotificationType, StatusCode } from '@constants/enums';
+import { UserResponce } from '../../../services/types';
 
 export type UploadType = {
     file?: UploadFile;
@@ -16,20 +16,22 @@ export type UploadType = {
 };
 
 type ImageUploaderProps = {
-    imgSrc?: string;
+    // imgSrc?: string;
+    userInfo?: UserResponce;
     setCurrentImage: (img: UploadFile) => void;
+    setModal: (open: boolean) => void;
+    setModalType: (type: ModalNotificationType) => void;
 };
-// const defaultFile: UploadFile = {
-//     uid: '',
-//     name: 'image.png',
-//     status: 'done',
-//     url: '',
-// };
 
-export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setCurrentImage }) => {
-    // const [getUserInfo, { data: userInfo2 }] = useLazyGetUserInfoQuery();
-    const url = imgSrc as string;
-    // console.log(userInfo2);
+export const ImageUploader: FC<ImageUploaderProps> = ({
+    userInfo,
+    setCurrentImage,
+    setModal,
+    setModalType,
+}) => {
+    const url = userInfo?.imgSrc as string;
+    console.log('userInfo?.imgSrc', userInfo?.imgSrc);
+    console.log('url', url);
 
     const initialImage = useMemo(
         () => ({
@@ -40,21 +42,25 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setCurrentImage 
         }),
         [url],
     );
-    // useEffect(() => {
-    //     getUserInfo();
-    // }, [userInfo?.imgSrc, initialImage]);
 
     const file = url ? [initialImage] : [];
-
+    const [initialFile, setInitialFile] = useState(initialImage);
     const [isPhotoLoading, setIsPhotoLoading] = useState(false);
     const [fileList, setFileList] = useState<UploadFile[]>(file);
+    console.log();
+
+    useEffect(() => {
+        setInitialFile(initialImage);
+        if (userInfo?.imgSrc && !fileList.length) {
+            setFileList([initialImage]);
+        }
+    }, [userInfo?.imgSrc]);
 
     const token = useAppSelector((state) => state.userReducer.token);
 
     const tokenLS = localStorage.getItem('token');
 
     const handleChange = ({ fileList }: UploadType) => {
-        console.log(fileList);
         setFileList(fileList);
         const newFile = fileList[0];
         setCurrentImage(newFile);
@@ -69,8 +75,12 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setCurrentImage 
                 };
 
                 setFileList([errorFile]);
+                setModal(true);
+                setModalType(ModalNotificationType.ERROR);
             }
             if (newFile.error?.status === StatusCode.CONFLICT) {
+                setModal(true);
+                setModalType(ModalNotificationType.BIG_FILE);
             }
         }
     };
@@ -83,13 +93,17 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setCurrentImage 
 
     const uploadHeader = { Authorization: `Bearer ${token || tokenLS}` };
 
-    useEffect(() => {
-        if (imgSrc) {
-            setFileList([initialImage]);
-            // useGetUserInfoQuery();
-            // getUserInfo();
-        }
-    }, [imgSrc, initialImage]);
+    // useEffect(() => {
+    //     if (userInfo?.imgSrc) {
+    //         const file = {
+    //             ...fileList[0],
+    //             url: userInfo?.imgSrc,
+    //         };
+
+    //         setFileList([file]);
+    //     }
+    // }, [userInfo, initialImage]);
+    console.log(fileList);
 
     return (
         <Form.Item>
@@ -100,13 +114,11 @@ export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setCurrentImage 
                 listType='picture-card'
                 fileList={fileList}
                 accept='image/*'
-                // className='avatar-uploader'
-                // showUploadList={false}
                 onChange={handleChange}
                 withCredentials={true}
                 progress={{ strokeWidth: 4, showInfo: false, size: 'default' }}
             >
-                {fileList.length >= 1 ? null : uploadButton}
+                {fileList.length < 1 && uploadButton}
             </Upload>
         </Form.Item>
     );

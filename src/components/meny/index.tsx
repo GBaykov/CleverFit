@@ -25,7 +25,6 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
     };
 
     const logOut = () => {
-        console.log('exit');
         localStorage.removeItem('token');
         dispatch(setUser({ email: '', password: '' }));
         dispatch(setToken(''));

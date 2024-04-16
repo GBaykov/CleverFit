@@ -29,6 +29,7 @@ import { ExercisesForm } from '../exerciseForm';
 import { EditOutlined, MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import { Nullable } from 'src/commonTypes';
 import { ModalNotification } from '@components/modal/calendarModalError';
+import { DATA_TEST_ID } from '@constants/data-test-id';
 
 export const findUserTraining = (
     userTraining: UserTrainingTransform,
@@ -291,6 +292,10 @@ export const CardModal: FC<CardModalWrapper> = ({
                 title='При сохранении данных произошла ошибка'
                 subtitle='Придётся попробовать ещё раз'
                 open={openModalError}
+                modalBtnId={DATA_TEST_ID.modalErrorUserTrainingButton}
+                modalTitleId={DATA_TEST_ID.modalErrorUserTrainingTitle}
+                modalSubTitleId={DATA_TEST_ID.modalErrorUserTrainingSubTitle}
+                modalButtonCloseId={DATA_TEST_ID.modalErrorUserTrainingButtonClose}
             />
         </StyledCalendarModal>
     );

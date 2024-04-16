@@ -8,3 +8,8 @@ export enum StatusCode {
     CONFLICT = 409,
     INTERNAL_SERVER_ERROR = 500,
 }
+
+export enum ModalNotificationType {
+    ERROR = 'error',
+    BIG_FILE = 'big-file',
+}

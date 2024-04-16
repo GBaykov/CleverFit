@@ -20,7 +20,6 @@ export type LayoutWrapperProps = {
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter = true }) => {
     const [collapsed, setCollapsed] = useState(false);
     const { data: userInfo } = useGetUserInfoQuery();
-    console.log(userInfo);
 
     const { user } = useAppSelector((state) => state.userReducer);
     const navigate = useNavigate();

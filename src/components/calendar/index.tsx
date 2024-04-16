@@ -173,6 +173,10 @@ export const CalendarApp = () => {
                 subtitle='Попробуйте ещё раз.'
                 open={openModal}
                 onClose={onCloseModal}
+                modalBtnId={DATA_TEST_ID.modalErrorUserTrainingButton}
+                modalTitleId={DATA_TEST_ID.modalErrorUserTrainingTitle}
+                modalSubTitleId={DATA_TEST_ID.modalErrorUserTrainingSubTitle}
+                modalButtonCloseId={DATA_TEST_ID.modalErrorUserTrainingButtonClose}
             />
         </div>
     );
