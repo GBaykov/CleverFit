@@ -4,38 +4,41 @@ import { FC, useState } from 'react';
 import { ImageUploader } from './imageUploader';
 import { useGetUserInfoQuery, useUpdateUserMutation } from '../../services/user';
 import { Nullable } from '../../commonTypes';
-import { UserInfo } from '../../services/types';
+import { UserResponce } from '../../services/types';
 import { ModalNotification } from '@components/modal/calendarModalError';
 import { ModalNotificationType } from '@constants/enums';
-const IMG_BASE_URL = 'https://training-api.clevertec.ru';
+import { IMG_BASE_URL } from '@constants/constants';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { userInfo } from '@redux/reducers/userSlice';
 
 export const ProfileForm: FC = () => {
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
     const [modalType, setModalType] = useState(ModalNotificationType.ERROR);
-    const { data: userInfo } = useGetUserInfoQuery();
-    console.log(userInfo);
+    // const { data: userInfo } = useGetUserInfoQuery();
+    const profileInfo = useAppSelector(userInfo);
+    console.log(profileInfo);
     const [updateUser] = useUpdateUserMutation();
     const [currenfImage, setCurrentImage] = useState<Nullable<UploadFile>>(null);
     function setImage(img: UploadFile) {
         setCurrentImage(img);
     }
-    let userToSet: UserInfo = {
-        email: 'user@example.com',
-        password: 'Shp1H23UmZI2CzX9t3zr6hjE9hKmM7xe1wvGKMixxeHVIWtzK6h24',
-        firstName: 'string',
-        lastName: 'string',
-        birthday: '2024-04-16T10:06:46.647Z',
-        imgSrc: 'string',
-        readyForJointTraining: true,
-        sendNotification: true,
-    };
+    // let userToSet: UserResponce = {
+    //     email: 'user@example.com',
+    //     // password: 'Shp1H23UmZI2CzX9t3zr6hjE9hKmM7xe1wvGKMixxeHVIWtzK6h24',
+    //     firstName: 'string',
+    //     lastName: 'string',
+    //     birthday: '2024-04-16T10:06:46.647Z',
+    //     imgSrc: 'string',
+    //     readyForJointTraining: true,
+    //     sendNotification: true,
+    // };
 
     const onFormSubmit = () => {
         console.log(currenfImage);
         const imgSrc = currenfImage?.response.url
             ? `${IMG_BASE_URL}${currenfImage?.response.url}`
             : '';
-        userToSet = { ...userToSet, ...userInfo, imgSrc };
+        const userToSet = { ...profileInfo, imgSrc };
         updateUser(userToSet);
     };
 
@@ -54,7 +57,7 @@ export const ProfileForm: FC = () => {
             <Form style={{ width: '100%', maxWidth: '480px' }}>
                 {' '}
                 <ImageUploader
-                    userInfo={userInfo}
+                    userInfo={profileInfo}
                     setCurrentImage={setImage}
                     setModal={setIsModal}
                     setModalType={setType}

@@ -13,14 +13,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 import { push } from 'redux-first-history';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { baseUser } from '@redux/reducers/userSlice';
 
 export const Header: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const { user } = useAppSelector((state) => state.userReducer);
-
+    // const { user } = useAppSelector((state) => state.userReducer);
+    // const user = useAppSelector(baseUser);
     const isFeedbacks = location.pathname === PATHS.FEEDBACKS;
     const isCalendar = location.pathname === PATHS.CALENDAR;
 

@@ -8,7 +8,7 @@ import { useCheckEmailMutation, useLoginMutation } from '../../../services/auth'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { ValuesLoginForm } from './types';
-import { setToken, setUser } from '@redux/reducers/userSlice';
+import { baseUser, setToken, setUser } from '@redux/reducers/userSlice';
 import { PATHS, URL } from '@constants/constants';
 import { Loader } from '@components/loader/Loader';
 
@@ -21,7 +21,8 @@ export const AuthForm: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { user } = useAppSelector((state) => state.userReducer);
+    // const { user } = useAppSelector((state) => state.userReducer);
+    const user = useAppSelector(baseUser);
     const { xs } = useBreakpoint();
 
     const onFinish = (values: ValuesLoginForm) => {

@@ -22,8 +22,10 @@ const rootReducer = combineReducers({
     [userAPI.reducerPath]: userAPI.reducer,
     [trainingSlice.name]: trainingReducer,
     [appSlice.name]: appReducer,
-    userReducer: userReducer,
     appReducer: appSlice,
+    // userReducer: userReducer,
+    [userSlice.name]: userReducer,
+    userReducer: userSlice,
 });
 
 export const store = configureStore({

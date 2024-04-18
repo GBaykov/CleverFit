@@ -9,6 +9,7 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { UploadFileStatus } from 'antd/lib/upload/interface';
 import { ModalNotificationType, StatusCode } from '@constants/enums';
 import { UserResponce } from '../../../services/types';
+import { userToken } from '@redux/reducers/userSlice';
 
 export type UploadType = {
     file?: UploadFile;
@@ -29,9 +30,10 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
     setModal,
     setModalType,
 }) => {
+    // const { width } = useWindowResize();
+    //const isDesktop = width > 360;
+
     const url = userInfo?.imgSrc as string;
-    console.log('userInfo?.imgSrc', userInfo?.imgSrc);
-    console.log('url', url);
 
     const initialImage = useMemo(
         () => ({
@@ -44,27 +46,31 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
     );
 
     const file = url ? [initialImage] : [];
-    const [initialFile, setInitialFile] = useState(initialImage);
+
     const [isPhotoLoading, setIsPhotoLoading] = useState(false);
-    const [fileList, setFileList] = useState<UploadFile[]>(file);
-    console.log();
+    const [newFileList, setNewFileList] = useState<UploadFile[]>(file);
+    const showPreview = !!newFileList[0];
 
     useEffect(() => {
-        setInitialFile(initialImage);
-        if (userInfo?.imgSrc && !fileList.length) {
-            setFileList([initialImage]);
+        if (userInfo?.imgSrc) {
+            setNewFileList([initialImage]);
         }
-    }, [userInfo?.imgSrc]);
+    }, [userInfo?.imgSrc, initialImage]);
 
-    const token = useAppSelector((state) => state.userReducer.token);
+    useEffect(() => {
+        if (userInfo?.imgSrc) {
+            setNewFileList([{ ...initialImage, url: userInfo?.imgSrc }]);
+        }
+    }, []);
 
+    const token = useAppSelector(userToken);
     const tokenLS = localStorage.getItem('token');
 
     const handleChange = ({ fileList }: UploadType) => {
-        setFileList(fileList);
+        setNewFileList(fileList);
         const newFile = fileList[0];
-        setCurrentImage(newFile);
         if (newFile) {
+            setCurrentImage(newFile);
             if (newFile.status === 'error') {
                 const errorFile = {
                     ...initialImage,
@@ -74,7 +80,7 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
                     status: 'error' as UploadFileStatus,
                 };
 
-                setFileList([errorFile]);
+                setNewFileList([errorFile]);
                 setModal(true);
                 setModalType(ModalNotificationType.ERROR);
             }
@@ -93,18 +99,6 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
 
     const uploadHeader = { Authorization: `Bearer ${token || tokenLS}` };
 
-    // useEffect(() => {
-    //     if (userInfo?.imgSrc) {
-    //         const file = {
-    //             ...fileList[0],
-    //             url: userInfo?.imgSrc,
-    //         };
-
-    //         setFileList([file]);
-    //     }
-    // }, [userInfo, initialImage]);
-    console.log(fileList);
-
     return (
         <Form.Item>
             <Upload
@@ -112,13 +106,14 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
                 headers={uploadHeader}
                 maxCount={1}
                 listType='picture-card'
-                fileList={fileList}
+                fileList={newFileList}
+                defaultFileList={newFileList}
                 accept='image/*'
                 onChange={handleChange}
                 withCredentials={true}
                 progress={{ strokeWidth: 4, showInfo: false, size: 'default' }}
             >
-                {fileList.length < 1 && uploadButton}
+                {!showPreview && uploadButton}
             </Upload>
         </Form.Item>
     );

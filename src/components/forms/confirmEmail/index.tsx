@@ -10,13 +10,15 @@ import { PATHS } from '@constants/constants';
 import { Loader } from '@components/loader/Loader';
 import VerificationInput from 'react-verification-input';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { baseUser } from '@redux/reducers/userSlice';
 
 const { Title, Text } = Typography;
 
 export const ConfirmEmail: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user } = useAppSelector((state) => state.userReducer);
+    // const { user } = useAppSelector((state) => state.userReducer);
+    const user = useAppSelector(baseUser);
     const [confirmEmail, { isLoading, isError }] = useConfirmEmailMutation();
     const [borderStyle, setBorderStyle] = useState<string>('character');
     const [value, setValue] = useState<string>('');

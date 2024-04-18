@@ -6,7 +6,7 @@ import { GooglePlusOutlined } from '@ant-design/icons';
 import { useSignupMutation } from '../../../services/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ValuesSignupForm } from '@redux/reducers/userSlice';
+import { ValuesSignupForm, baseUser } from '@redux/reducers/userSlice';
 import { PATHS } from '@constants/constants';
 import { setUser } from '@redux/reducers/userSlice';
 
@@ -20,7 +20,8 @@ export const RegistrForm: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { user } = useAppSelector((state) => state.userReducer);
+    //const { user } = useAppSelector((state) => state.userReducer);
+    const user = useAppSelector(baseUser);
 
     const onFinish = useCallback(
         (values: ValuesSignupForm) => {

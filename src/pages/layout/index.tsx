@@ -11,6 +11,7 @@ import { ButtonMenu } from '@components/meny/menyButton';
 import { Footer } from '@components/footer';
 import { Header } from '@components/header';
 import { useGetUserInfoQuery } from '../../services/user';
+import { baseUser, userToken } from '@redux/reducers/userSlice';
 
 export type LayoutWrapperProps = {
     children: React.ReactNode;
@@ -19,13 +20,15 @@ export type LayoutWrapperProps = {
 
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter = true }) => {
     const [collapsed, setCollapsed] = useState(false);
-    const { data: userInfo } = useGetUserInfoQuery();
+    const { data } = useGetUserInfoQuery();
 
-    const { user } = useAppSelector((state) => state.userReducer);
+    // const { user } = useAppSelector((state) => state.userReducer);
+    const user = useAppSelector(baseUser);
+    const token = useAppSelector(userToken);
     const navigate = useNavigate();
 
     useEffect(() => {
-        user.email === '' && !localStorage.getItem('token') && !user.token && navigate(PATHS.AUTH);
+        user.email === '' && !localStorage.getItem('token') && !token && navigate(PATHS.AUTH);
     }, [navigate, user.email]);
 
     return (

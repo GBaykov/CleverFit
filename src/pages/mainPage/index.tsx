@@ -10,11 +10,11 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 import { LayoutWrapper } from '@pages/layout';
-import { setToken } from '@redux/reducers/userSlice';
+import { baseUser, setToken } from '@redux/reducers/userSlice';
 import { push } from 'redux-first-history';
 
 export const MainPage: React.FC = () => {
-    const { user } = useAppSelector((state) => state.userReducer);
+    const user = useAppSelector(baseUser);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();

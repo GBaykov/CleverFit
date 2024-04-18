@@ -73,5 +73,5 @@ export type UserInfo = {
 };
 export type UserInfoRequest = Partial<UserInfo>;
 export type UserResponce = Omit<UserInfo, 'password'> & {
-    tariff: Tariff;
+    tariff?: Tariff;
 };
