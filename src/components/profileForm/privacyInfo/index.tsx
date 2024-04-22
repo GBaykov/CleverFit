@@ -3,23 +3,6 @@ import { passwordRegex } from '../../../regexp';
 import { FC } from 'react';
 
 export const PrivacyInfo: FC = () => {
-    // const { xs } = useBreakpoint();
-    // const [form] = Form.useForm();
-    // const [, forceUpdate] = useState({});
-    // const [signup] = useSignupMutation();
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const dispatch = useAppDispatch();
-    // //const { user } = useAppSelector((state) => state.userReducer);
-    // const user = useAppSelector(baseUser);
-
-    // useEffect(() => {
-    //     forceUpdate({});
-    //     if (location.state === PATHS.RESULT.ERROR) {
-    //         onFinish(user);
-    //     }
-    // }, [location.state, onFinish, user]);
-
     return (
         <fieldset>
             <legend style={{ margin: 0 }}>
@@ -64,10 +47,12 @@ export const PrivacyInfo: FC = () => {
                     name='confirm'
                     dependencies={['password']}
                     rules={[
-                        // { required: true, message: '' },
                         ({ getFieldValue }) => ({
                             validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
+                                if (
+                                    (!value && !getFieldValue('password')) ||
+                                    getFieldValue('password') === value
+                                ) {
                                     return Promise.resolve();
                                 }
                                 return Promise.reject(new Error('Пароли не совпадают'));

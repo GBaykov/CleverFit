@@ -12,6 +12,8 @@ import { Footer } from '@components/footer';
 import { Header } from '@components/header';
 import { useGetUserInfoQuery } from '../../services/user';
 import { baseUser, userToken } from '@redux/reducers/userSlice';
+import { AppAlert } from '@components/appAlert';
+import { appAlert } from '@redux/reducers/appSlice';
 
 export type LayoutWrapperProps = {
     children: React.ReactNode;
@@ -26,6 +28,7 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
     const user = useAppSelector(baseUser);
     const token = useAppSelector(userToken);
     const navigate = useNavigate();
+    const alert = useAppSelector(appAlert);
 
     useEffect(() => {
         user.email === '' && !localStorage.getItem('token') && !token && navigate(PATHS.AUTH);
@@ -61,6 +64,7 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
                     </Layout>
                 </Layout>
             </Layout>
+            <AppAlert message={alert.message} type={alert.type} dataTestId='alert' />
         </>
     );
 };

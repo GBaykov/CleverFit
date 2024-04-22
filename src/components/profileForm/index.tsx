@@ -1,21 +1,16 @@
-import { Alert, Button, Form, UploadFile } from 'antd';
-
+import { Button, Form, UploadFile } from 'antd';
 import { FC, useCallback, useState } from 'react';
-
 import { Nullable } from '../../commonTypes';
-
 import { ModalNotification } from '@components/modal/calendarModalError';
 import { ModalNotificationType } from '@constants/enums';
 import { IMG_BASE_URL } from '@constants/constants';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { ValuesSignupForm, userInfo } from '@redux/reducers/userSlice';
-
+import { userInfo } from '@redux/reducers/userSlice';
 import { ProfileInfo } from './profileInfo';
 import { useUpdateUserMutation } from '../../services/user';
 import { PrivacyInfo } from './privacyInfo';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { UserInfo, UserResponce } from '../../services/types';
-import { FORMAT_D_M_Y_POINT, formatDate } from '@utils/format-date';
+import { UserInfo } from '../../services/types';
 import { UploadType } from './imageUploader';
 
 export type ValuesProfileForm = {
@@ -32,39 +27,20 @@ export const ProfileForm: FC = () => {
     const [form] = Form.useForm();
     const [isModalErrorOpen, setIsModalErrorOpen] = useState(false);
     const [modalType, setModalType] = useState(ModalNotificationType.ERROR);
-    // const { data: userInfo } = useGetUserInfoQuery();
+
     const profileInfo = useAppSelector(userInfo);
-    const location = useLocation();
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
+
     const [updateUser] = useUpdateUserMutation();
     const [currenfImage, setCurrentImage] = useState<Nullable<UploadFile>>(null);
     function setImage(img: UploadFile) {
         setCurrentImage(img);
     }
-    // let userToSet: UserResponce = {
-    //     email: 'user@example.com',
-    //     // password: 'Shp1H23UmZI2CzX9t3zr6hjE9hKmM7xe1wvGKMixxeHVIWtzK6h24',
-    //     firstName: 'string',
-    //     lastName: 'string',
-    //     birthday: '2024-04-16T10:06:46.647Z',
-    //     imgSrc: 'string',
-    //     readyForJointTraining: true,
-    //     sendNotification: true,
-    // };
+    console.log(form.isFieldsTouched());
 
-    const onFormSubmit = () => {
-        console.log(currenfImage);
-        const imgSrc = currenfImage?.response.url
-            ? `${IMG_BASE_URL}${currenfImage?.response.url}`
-            : '';
-        const userToSet = { ...profileInfo, imgSrc };
-        updateUser(userToSet);
-    };
+    console.log(form.getFieldsError());
 
     const onFinish = useCallback(
         (values: ValuesProfileForm) => {
-            // updateUser(userToSet);
             let newUserInfo: UserInfo = { ...profileInfo };
             if (values.birthday) {
                 newUserInfo.birthday = values.birthday;
@@ -79,7 +55,6 @@ export const ProfileForm: FC = () => {
                 newUserInfo.password = values.password;
             }
             if (values.imgSrc) {
-                // newUserInfo.imgSrc = values.imgSrc;
                 const imgSrc = values.imgSrc;
                 if (typeof imgSrc === 'string' && imgSrc !== '') {
                     newUserInfo.imgSrc = imgSrc;
@@ -90,20 +65,17 @@ export const ProfileForm: FC = () => {
                         (imgSrc as UploadType).file?.response?.url
                     }`;
                 }
-
-                // const imgSrc = values.imgSrc?.response.url
-                //     ? `${IMG_BASE_URL}${currenfImage?.response.url}`
-                //     : '';
             }
             newUserInfo.email = values.email;
-            console.log(newUserInfo);
             updateUser(newUserInfo);
         },
         [profileInfo],
     );
 
     const onFinishFailed = (errorInfo: any) => {
-        console.log('Failed:', errorInfo);
+        setIsModal(true);
+        setType(ModalNotificationType.ERROR);
+        console.log(errorInfo);
     };
 
     const onClickButtonError = () => {
@@ -116,15 +88,6 @@ export const ProfileForm: FC = () => {
         setModalType(type);
     };
 
-    //     <Form
-    //     form={form}
-    //     name='auth'
-    //     initialValues={{ remember: false }}
-    //     onFinish={onFinish}
-    //     onFinishFailed={onFinishFailed}
-    //     autoComplete='off'
-    // >
-
     return (
         <>
             <Form
@@ -134,12 +97,6 @@ export const ProfileForm: FC = () => {
                 onFinishFailed={onFinishFailed}
                 name='profileInfo'
             >
-                {/* <ImageUploader
-                                userInfo={profileInfo}
-                                setCurrentImage={setImage}
-                                setModal={setIsModal}
-                                setModalType={setType}
-                            /> */}
                 <ProfileInfo
                     setCurrentImage={setImage}
                     setModal={setIsModal}
@@ -153,10 +110,10 @@ export const ProfileForm: FC = () => {
                             type='primary'
                             htmlType='submit'
                             block
-                            // disabled={
-                            //     !form.isFieldsTouched(true) ||
-                            //     !!form.getFieldsError().filter(({ errors }) => errors.length).length
-                            // }
+                            disabled={
+                                !form.isFieldsTouched()
+                                // !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                            }
                         >
                             Сохранить изменения
                         </Button>

@@ -74,7 +74,7 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
         setNewFileList(fileList);
         const newFile = fileList[0];
         if (newFile) {
-            setCurrentImage(newFile);
+            // setCurrentImage(newFile);
             if (newFile.status === 'error') {
                 const errorFile = {
                     ...initialImage,
