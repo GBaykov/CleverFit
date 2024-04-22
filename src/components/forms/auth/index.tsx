@@ -21,7 +21,6 @@ export const AuthForm: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    // const { user } = useAppSelector((state) => state.userReducer);
     const user = useAppSelector(baseUser);
     const { xs } = useBreakpoint();
 

@@ -7,9 +7,10 @@ import { Form, Upload, UploadFile } from 'antd';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 import { UploadFileStatus } from 'antd/lib/upload/interface';
-import { ModalNotificationType, StatusCode } from '@constants/enums';
+import { ModalNotificationType, ProfileInfoFormName, StatusCode } from '@constants/enums';
 import { UserResponce } from '../../../services/types';
 import { userToken } from '@redux/reducers/userSlice';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 export type UploadType = {
     file?: UploadFile;
@@ -17,23 +18,26 @@ export type UploadType = {
 };
 
 type ImageUploaderProps = {
-    // imgSrc?: string;
-    userInfo?: UserResponce;
+    imgSrc?: string;
+    // userInfo?: UserResponce;
     setCurrentImage: (img: UploadFile) => void;
     setModal: (open: boolean) => void;
     setModalType: (type: ModalNotificationType) => void;
+    // name: ProfileInfoFormName;
 };
 
 export const ImageUploader: FC<ImageUploaderProps> = ({
-    userInfo,
+    imgSrc,
     setCurrentImage,
     setModal,
     setModalType,
+    // name,
 }) => {
-    // const { width } = useWindowResize();
-    //const isDesktop = width > 360;
+    const size = useWindowSize();
+    const isDesktop = Number(size.width) && Number(size.width) > 360;
+    const listType = isDesktop ? 'picture-card' : 'picture';
 
-    const url = userInfo?.imgSrc as string;
+    const url = imgSrc as string;
 
     const initialImage = useMemo(
         () => ({
@@ -52,14 +56,14 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
     const showPreview = !!newFileList[0];
 
     useEffect(() => {
-        if (userInfo?.imgSrc) {
+        if (imgSrc) {
             setNewFileList([initialImage]);
         }
-    }, [userInfo?.imgSrc, initialImage]);
+    }, [imgSrc, initialImage]);
 
     useEffect(() => {
-        if (userInfo?.imgSrc) {
-            setNewFileList([{ ...initialImage, url: userInfo?.imgSrc }]);
+        if (imgSrc) {
+            setNewFileList([{ ...initialImage, url: imgSrc }]);
         }
     }, []);
 
@@ -100,12 +104,12 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
     const uploadHeader = { Authorization: `Bearer ${token || tokenLS}` };
 
     return (
-        <Form.Item>
+        <Form.Item name='imgSrc'>
             <Upload
                 action={`${URL}${ApiEndpoints.UPLOAD_IMAGE}`}
                 headers={uploadHeader}
                 maxCount={1}
-                listType='picture-card'
+                listType={listType}
                 fileList={newFileList}
                 defaultFileList={newFileList}
                 accept='image/*'

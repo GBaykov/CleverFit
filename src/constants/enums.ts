@@ -13,3 +13,15 @@ export enum ModalNotificationType {
     ERROR = 'error',
     BIG_FILE = 'big-file',
 }
+
+export enum ProfileInfoFormName {
+    FIRST_NAME = 'firstName',
+    LAST_NAME = 'lastName',
+    BIRTHDAY = 'birthday',
+    IMAGE = 'imgSrc',
+}
+export enum AuthFormName {
+    EMAIL = 'email',
+    PASSWORD = 'password',
+    REPEAT_PASSWORD = 'repeatPassword',
+}
