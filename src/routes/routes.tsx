@@ -8,8 +8,9 @@ import { FormPage } from '@pages/formPage';
 import { MainPage } from '@pages/mainPage';
 import { ProfilePage } from '@pages/profilePage';
 import { ResultPage } from '@pages/resultPage';
+import { SettingsPage } from '@pages/settingsPage';
 
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 export const routes = (
     <Routes>
@@ -23,6 +24,7 @@ export const routes = (
         <Route path={PATHS.CONFIRM_EMAIL} element={<ConfirmEmail />} />
         <Route path={PATHS.CHANGE_PASSWORD} element={<ChangePasswordForm />} />
         <Route path={PATHS.FEEDBACKS} element={<CommentsPage />} />
+        <Route path={PATHS.SETTINGS} element={<SettingsPage />} />
         <Route
             path={PATHS.RESULT.ERROR_LOGIN}
             element={<ResultPage resultData={resultData.error_login} />}

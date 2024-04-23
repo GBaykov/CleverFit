@@ -111,8 +111,8 @@ export const ProfileForm: FC = () => {
                             htmlType='submit'
                             block
                             disabled={
-                                !form.isFieldsTouched()
-                                // !!form.getFieldsError().filter(({ errors }) => errors.length).length
+                                !form.isFieldsTouched() ||
+                                !!form.getFieldsError().filter(({ errors }) => errors.length).length
                             }
                         >
                             Сохранить изменения

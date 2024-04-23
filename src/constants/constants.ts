@@ -12,6 +12,7 @@ export const PATHS = {
     CALENDAR: '/calendar',
     LOGINGOOGLE: '/auth/google',
     PROFILE: '/profile',
+    SETTINGS: '/settings',
     RESULT: {
         ERROR_LOGIN: '/result/error-login',
         ERROR_USER_EXIST: '/result/error-user-exist',

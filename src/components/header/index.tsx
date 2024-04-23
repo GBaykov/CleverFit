@@ -74,7 +74,7 @@ export const Header: React.FC = () => {
                     </SettingsWrapper>
 
                     <SettingsMobileWrapper>
-                        <StyledLink to='/' text=''>
+                        <StyledLink to={PATHS.SETTINGS} text=''>
                             <SettingOutlined style={{ fontSize: '19px' }} size={16} />
                         </StyledLink>
                     </SettingsMobileWrapper>
