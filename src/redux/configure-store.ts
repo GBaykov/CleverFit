@@ -9,6 +9,7 @@ import appReducer, { AppState, appSlice } from './reducers/appSlice';
 import trainingReducer, { InitialStateTraining, trainingSlice } from './reducers/trainingSlice';
 import { calendarAPI } from '../services/trainings';
 import { userAPI } from '../services/user';
+import { tariffAPI } from '../services/tariffs';
 
 const { createReduxHistory, routerReducer, routerMiddleware } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
     [feedbacksAPI.reducerPath]: feedbacksAPI.reducer,
     [calendarAPI.reducerPath]: calendarAPI.reducer,
     [userAPI.reducerPath]: userAPI.reducer,
+    [tariffAPI.reducerPath]: tariffAPI.reducer,
     [trainingSlice.name]: trainingReducer,
     [appSlice.name]: appReducer,
     appReducer: appSlice,
@@ -37,6 +39,7 @@ export const store = configureStore({
             feedbacksAPI.middleware,
             calendarAPI.middleware,
             userAPI.middleware,
+            tariffAPI.middleware,
         ),
 });
 

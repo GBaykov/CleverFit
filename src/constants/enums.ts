@@ -25,8 +25,3 @@ export enum AuthFormName {
     PASSWORD = 'password',
     REPEAT_PASSWORD = 'repeatPassword',
 }
-
-export enum Tariffs {
-    PRO = 'pro',
-    FREE = 'free',
-}

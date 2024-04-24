@@ -33,7 +33,6 @@ export const userAPI = createApi({
                 try {
                     dispatch(setAppLoader(true));
                     const { data } = await queryFulfilled;
-
                     dispatch(setAppLoader(false));
                     dispatch(setProfileInfo(data));
                 } catch {

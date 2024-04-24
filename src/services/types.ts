@@ -68,10 +68,24 @@ export type UserInfo = {
     lastName?: string;
     birthday?: string;
     imgSrc?: string;
-    readyForJointTraining?: boolean;
-    sendNotification?: boolean;
+    readyForJointTraining: boolean;
+    sendNotification: boolean;
 };
 export type UserInfoRequest = Partial<UserInfo>;
 export type UserResponce = Omit<UserInfo, 'password'> & {
     tariff?: Tariff;
 };
+
+export type TariffListItem = {
+    _id: string;
+    name: string;
+    periods: [
+        {
+            text: string;
+            cost: number;
+            days: number;
+        },
+    ];
+};
+
+export type TariffList = TariffListItem[];

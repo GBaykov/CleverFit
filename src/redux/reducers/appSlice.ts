@@ -1,6 +1,7 @@
 import { ApplicationState } from '@redux/configure-store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AlertProps } from 'antd';
+import { TariffList } from '../../services/types';
 
 // export type AppState = typeof initialState;
 
@@ -9,9 +10,11 @@ export type AppState = {
     isLoading: boolean;
     openLeftMenu: boolean;
     alert: AlertProps;
+    tariffList: TariffList;
+    isDarkTheme: boolean;
 };
 
-export const initialState = {
+export const initialState: AppState = {
     isError: false,
     isLoading: false,
     openLeftMenu: false,
@@ -19,6 +22,8 @@ export const initialState = {
         // type: undefined,
         // message: '',
     },
+    tariffList: [],
+    isDarkTheme: false,
 };
 
 export const appSlice = createSlice({
@@ -37,6 +42,12 @@ export const appSlice = createSlice({
         setAppAlert(state, { payload }: PayloadAction<AlertProps>) {
             state.alert = { ...payload };
         },
+        setTariffList(state, { payload }: PayloadAction<TariffList>) {
+            state.tariffList = payload;
+        },
+        setIsDarkTheme(state) {
+            state.isDarkTheme = !state.isDarkTheme;
+        },
     },
 });
 
@@ -44,8 +55,17 @@ export const appSelector = (state: ApplicationState) => state.app;
 
 export const errorSelector = (state: ApplicationState) => state.app.isError;
 export const appAlert = (state: ApplicationState) => state.app.alert;
+export const appTariffs = (state: ApplicationState) => state.app.tariffList;
+export const isDark = (state: ApplicationState) => state.app.isDarkTheme;
 
 export const leftMenuSelector = (state: ApplicationState) => state.app.openLeftMenu;
-export const { setAppLoader, setAppIsError, setStateLeftMenu, setAppAlert } = appSlice.actions;
+export const {
+    setAppLoader,
+    setAppIsError,
+    setStateLeftMenu,
+    setAppAlert,
+    setTariffList,
+    setIsDarkTheme,
+} = appSlice.actions;
 
 export default appSlice.reducer;

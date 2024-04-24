@@ -68,7 +68,7 @@ export const Header: React.FC = () => {
 
                 <>
                     <SettingsWrapper>
-                        <StyledLink to={PATHS.MAIN} text='Настройки'>
+                        <StyledLink to={PATHS.SETTINGS} text='Настройки'>
                             <SettingOutlined style={{ marginRight: '10px' }} />
                         </StyledLink>
                     </SettingsWrapper>
