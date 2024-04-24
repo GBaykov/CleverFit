@@ -45,8 +45,8 @@ export const appSlice = createSlice({
         setTariffList(state, { payload }: PayloadAction<TariffList>) {
             state.tariffList = payload;
         },
-        setIsDarkTheme(state) {
-            state.isDarkTheme = !state.isDarkTheme;
+        setIsDarkTheme(state, { payload }: PayloadAction<boolean>) {
+            state.isDarkTheme = payload;
         },
     },
 });
