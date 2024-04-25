@@ -4,6 +4,7 @@ import freeAcc from '../../../assets/img/freeAcc.png';
 import proAcc from '../../../assets/img/proAcc.png';
 import { CheckOutlined } from '@ant-design/icons';
 import { Tariffs } from '../../../commonTypes';
+import { StyledSettingsCard } from './styled';
 
 export type SettingCardProps = {
     userTariff: Tariffs;
@@ -13,9 +14,9 @@ export type SettingCardProps = {
 
 export const SettingCard: FC<SettingCardProps> = ({ userTariff, cardTariffType, expired }) => {
     return (
-        <Card
-            style={{ maxWidth: 240 }}
-            title={userTariff === 'pro' ? 'PRO tariff' : 'FREE tariff'}
+        <StyledSettingsCard
+            // style={{ maxWidth: 240 }}
+            title={cardTariffType === 'pro' ? 'PRO tariff' : 'FREE tariff'}
             extra={<Button type='link'>Подробнее</Button>}
             actions={
                 cardTariffType === 'free'
@@ -36,7 +37,7 @@ export const SettingCard: FC<SettingCardProps> = ({ userTariff, cardTariffType, 
                       ]
             }
         >
-            <img src={userTariff === 'pro' ? proAcc : freeAcc} />
-        </Card>
+            <img style={{ width: '100%' }} src={cardTariffType === 'pro' ? proAcc : freeAcc} />
+        </StyledSettingsCard>
     );
 };

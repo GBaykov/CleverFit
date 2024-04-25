@@ -34,7 +34,7 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
     // name,
 }) => {
     const size = useWindowSize();
-    const isDesktop = Number(size.width) && Number(size.width) > 360;
+    const isDesktop = Number(size.width) && Number(size.width) > 440;
     const listType = isDesktop ? 'picture-card' : 'picture';
 
     const url = imgSrc as string;

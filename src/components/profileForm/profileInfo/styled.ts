@@ -2,20 +2,18 @@ import { DatePicker } from 'antd';
 import styled from 'styled-components';
 
 export const PersonalInfo = styled.div`
-    // display: flex;
-    // width: 100%;
+    display: flex;
+    gap: 24px;
+    width: 100%;
     // flex-direction: row;
     // div {
     //     display: flex;
     //     gap: 16px;
     // }
 
-    @media (max-width: 360px) {
+    @media (max-width: 440px) {
         flex-direction: column-reverse;
     }
-
-    display: flex;
-    // gap: 24px;
 `;
 
 export const UserInfoFields = styled.div`

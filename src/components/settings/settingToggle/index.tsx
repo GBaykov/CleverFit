@@ -51,9 +51,11 @@ export const SettingsToggle: FC<SettingsToggleProps> = ({ text, checked, onToggl
 
     return (
         <StyledSettingToggle>
-            <Typography.Text>
-                {text}
-                <ExclamationCircleOutlined />
+            <Typography.Text strong>
+                {text}{' '}
+                <span>
+                    <ExclamationCircleOutlined />
+                </span>
             </Typography.Text>
             <Switch onChange={(e) => onToggleChange(e)} checked={checked} />
         </StyledSettingToggle>

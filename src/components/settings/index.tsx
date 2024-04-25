@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { SettingsCards, StyledSettings } from './styled';
+import { SettingsCards, SettingsToggleList, StyledSettings } from './styled';
 import { Typography } from 'antd';
 import { SettingCard } from './settingCard';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -33,7 +33,9 @@ export const Settings: FC = () => {
 
     return (
         <StyledSettings>
-            <Typography.Text title='Мой тариф' />
+            <Typography.Title level={4} title='Мой тариф'>
+                Мой тариф
+            </Typography.Title>
             <SettingsCards>
                 <SettingCard
                     expired={profileUser.tariff?.expired}
@@ -46,7 +48,7 @@ export const Settings: FC = () => {
                     cardTariffType='pro'
                 />
             </SettingsCards>
-            <div>
+            <SettingsToggleList>
                 <SettingsToggle
                     text='Открыт для совместных тренировок'
                     type='readyForJointTraining'
@@ -66,7 +68,7 @@ export const Settings: FC = () => {
                     checked={isDarkTheme}
                     onToggleChange={onIsDarkChange}
                 />
-            </div>
+            </SettingsToggleList>
         </StyledSettings>
     );
 };

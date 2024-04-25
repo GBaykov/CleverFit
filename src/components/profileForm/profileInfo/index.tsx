@@ -29,7 +29,7 @@ export const ProfileInfo = (props: ProfileInfoProps) => {
 
     return (
         <fieldset>
-            <legend style={{ margin: 0 }}>
+            <legend style={{ margin: 0, border: 0 }}>
                 <Typography.Title style={{ marginBottom: '24px' }} level={5}>
                     Личная информация
                 </Typography.Title>

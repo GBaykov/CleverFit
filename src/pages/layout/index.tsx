@@ -14,6 +14,7 @@ import { useGetUserInfoQuery } from '../../services/user';
 import { baseUser, userToken } from '@redux/reducers/userSlice';
 import { AppAlert } from '@components/appAlert';
 import { appAlert } from '@redux/reducers/appSlice';
+import { StyledMainLayout } from './styled';
 
 export type LayoutWrapperProps = {
     children: React.ReactNode;
@@ -45,15 +46,15 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
                     }}
                 >
                     <Header />
-                    <Layout
-                        style={{
-                            backgroundColor: '#fff',
-                            background: `no-repeat center/cover url(${backgroundIMG})`,
-                            position: 'relative',
-                            height: '100%',
-                            display: 'flex',
-                            padding: 24,
-                        }}
+                    <StyledMainLayout
+                    // style={{
+                    //     backgroundColor: '#fff',
+                    //     background: `no-repeat center/cover url(${backgroundIMG})`,
+                    //     position: 'relative',
+                    //     height: '100%',
+                    //     display: 'flex',
+                    //     padding: 24,
+                    // }}
                     >
                         <ButtonMenu
                             collapsed={collapsed}
@@ -61,7 +62,7 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
                         />
                         {children}
                         {isFooter && <Footer />}
-                    </Layout>
+                    </StyledMainLayout>
                 </Layout>
             </Layout>
             <AppAlert message={alert.message} type={alert.type} dataTestId='alert' />

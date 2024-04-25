@@ -5,9 +5,10 @@ type StyledPagesCard = {
 };
 
 export const StyledPagesCard = styled.div<StyledPagesCard>`
-    width: 100%;
+    // width: 100%;
+    // max-width: 1328px;
     height: 100%;
     background-color: white;
     padding: 24px;
-    padding-right: ${({ rightPadding }) => (rightPadding ? rightPadding : '24x')};
+    padding-right: ${({ rightPadding }) => (rightPadding ? rightPadding : '24px')};
 `;
