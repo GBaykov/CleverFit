@@ -4,8 +4,9 @@ import { Link } from '@components/styledLink/styled';
 import { StyledLinkProps } from '@components/styledLink/types';
 
 export type StyledheaderProps = {
-    isFeedbacks: boolean;
-    isCalendar: boolean;
+    // isFeedbacks: boolean;
+    // isCalendar: boolean;
+    isMain: boolean;
 };
 export const Styledheader = styled(Layout)<StyledheaderProps>`
     padding: 16px 24px 16px 24px;
@@ -13,8 +14,8 @@ export const Styledheader = styled(Layout)<StyledheaderProps>`
     background: rgba(240, 245, 255, 1);
     zindex: 0;
     justify-content: space-between;
-    display: ${(props) => (props.isFeedbacks || props.isCalendar ? 'flex' : '')};
-    flex-direction: ${(props) => (props.isFeedbacks || props.isCalendar ? 'row' : '')};
+    display: ${(props) => (props.isMain ? '' : 'flex')};
+    flex-direction: ${(props) => (props.isMain ? '' : 'row')};
 `;
 
 export const LinkMain = styled(Link)<StyledLinkProps>`

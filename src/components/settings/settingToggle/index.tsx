@@ -1,21 +1,29 @@
 import { FC } from 'react';
 import { StyledSettingToggle } from './styled';
-import { Switch, Typography } from 'antd';
+import { Switch, Tooltip, Typography } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useUpdateUserMutation } from '../../../services/user';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { baseUser, userInfo } from '@redux/reducers/userSlice';
-import { UserInfo } from '../../../services/types';
-import { isDark, setIsDarkTheme } from '@redux/reducers/appSlice';
+import { isDark } from '@redux/reducers/appSlice';
+import { Tariffs } from '../../../commonTypes';
 
 type SettingsToggleProps = {
     text: string;
+    tooltipText: string;
     checked: boolean;
     onToggleChange: (e: boolean) => void;
     type?: 'readyForJointTraining' | 'sendNotification' | 'isDarkTheme';
+    userTariff?: Tariffs;
 };
 
-export const SettingsToggle: FC<SettingsToggleProps> = ({ text, checked, onToggleChange }) => {
+export const SettingsToggle: FC<SettingsToggleProps> = ({
+    text,
+    checked,
+    onToggleChange,
+    userTariff,
+    tooltipText,
+}) => {
     const [updateUser, { data }] = useUpdateUserMutation();
     const { password } = useAppSelector(baseUser);
     const profileUser = useAppSelector(userInfo);
@@ -53,11 +61,15 @@ export const SettingsToggle: FC<SettingsToggleProps> = ({ text, checked, onToggl
         <StyledSettingToggle>
             <Typography.Text strong>
                 {text}{' '}
-                <span>
+                <Tooltip placement='bottomLeft' title={tooltipText}>
                     <ExclamationCircleOutlined />
-                </span>
+                </Tooltip>
             </Typography.Text>
-            <Switch onChange={(e) => onToggleChange(e)} checked={checked} />
+            <Switch
+                disabled={userTariff === 'free'}
+                onChange={(e) => onToggleChange(e)}
+                checked={checked}
+            />
         </StyledSettingToggle>
     );
 };

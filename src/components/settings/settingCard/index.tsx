@@ -26,15 +26,15 @@ export const SettingCard: FC<SettingCardProps> = ({ userTariff, cardTariffType, 
                               <CheckOutlined />
                           </p>,
                       ]
-                    : !expired
-                    ? [<Button type='primary'>Активировать</Button>]
-                    : [
+                    : expired
+                    ? [
                           <p>
                               активен до
                               <br />
                               <span>expired</span>
                           </p>,
                       ]
+                    : [<Button type='primary'>Активировать</Button>]
             }
         >
             <img style={{ width: '100%' }} src={cardTariffType === 'pro' ? proAcc : freeAcc} />

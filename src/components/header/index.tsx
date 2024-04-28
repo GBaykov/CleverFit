@@ -24,9 +24,10 @@ export const Header: React.FC = () => {
     // const user = useAppSelector(baseUser);
     const isFeedbacks = location.pathname === PATHS.FEEDBACKS;
     const isCalendar = location.pathname === PATHS.CALENDAR;
+    const isMain = location.pathname === PATHS.MAIN;
 
     return (
-        <Styledheader isFeedbacks={isFeedbacks} isCalendar={isCalendar}>
+        <Styledheader isMain={isMain}>
             <div>
                 {' '}
                 <LinkMain to={PATHS.MAIN}>Главная</LinkMain>
@@ -59,7 +60,7 @@ export const Header: React.FC = () => {
             </div>
 
             <H1Wrapper>
-                {!isFeedbacks && !isCalendar && (
+                {isMain && (
                     <H1>
                         Приветствуем тебя в CleverFit — приложении, которое поможет тебе добиться
                         своей мечты!

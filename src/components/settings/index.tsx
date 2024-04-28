@@ -50,6 +50,7 @@ export const Settings: FC = () => {
             </SettingsCards>
             <SettingsToggleList>
                 <SettingsToggle
+                    tooltipText='включеная функция  позволит участвовать  в совместных тренировках'
                     text='Открыт для совместных тренировок'
                     type='readyForJointTraining'
                     onToggleChange={onReadyForJointTraining}
@@ -60,6 +61,7 @@ export const Settings: FC = () => {
                     type='sendNotification'
                     onToggleChange={onSendNotificationg}
                     checked={profileUser.sendNotification}
+                    tooltipText='включеная функция  позволит получать  уведомления об активностях'
                 />
 
                 <SettingsToggle
@@ -67,6 +69,8 @@ export const Settings: FC = () => {
                     type='isDarkTheme'
                     checked={isDarkTheme}
                     onToggleChange={onIsDarkChange}
+                    userTariff={userTariff}
+                    tooltipText='темная тема  доступна для  PRO tarif'
                 />
             </SettingsToggleList>
         </StyledSettings>
