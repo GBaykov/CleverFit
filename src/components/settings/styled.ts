@@ -19,4 +19,18 @@ export const SettingsToggleList = styled.div`
     display: flex;
     flex-direction: column;
     gap: 18px;
+    margin-bottom: 96px;
+    @media (max-width: 820px) {
+        margin-bottom: 20px;
+    }
+`;
+
+export const SettingsCommentsBlock = styled.div`
+    display: flex;
+    gap: 23px;
+    max-width: 331px;
+    @media (max-width: 820px) {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
 `;

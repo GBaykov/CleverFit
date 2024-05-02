@@ -10,14 +10,24 @@ export type SettingCardProps = {
     userTariff: Tariffs;
     cardTariffType: Tariffs;
     expired?: string;
+    setIsDrawerOpen: (b: boolean) => void;
 };
 
-export const SettingCard: FC<SettingCardProps> = ({ userTariff, cardTariffType, expired }) => {
+export const SettingCard: FC<SettingCardProps> = ({
+    userTariff,
+    cardTariffType,
+    expired,
+    setIsDrawerOpen,
+}) => {
     return (
         <StyledSettingsCard
             // style={{ maxWidth: 240 }}
             title={cardTariffType === 'pro' ? 'PRO tariff' : 'FREE tariff'}
-            extra={<Button type='link'>Подробнее</Button>}
+            extra={
+                <Button type='link' onClick={() => setIsDrawerOpen(true)}>
+                    Подробнее
+                </Button>
+            }
             actions={
                 cardTariffType === 'free'
                     ? [
