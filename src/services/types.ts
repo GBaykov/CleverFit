@@ -89,3 +89,12 @@ export type TariffListItem = {
 };
 
 export type TariffList = TariffListItem[];
+export type TariffData = {
+    tariffId: string;
+    days: 0;
+};
+
+export type UpdateTariffRequest = {
+    days: number;
+    tariffId: string;
+};

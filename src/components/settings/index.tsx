@@ -48,7 +48,6 @@ export const Settings: FC = () => {
                 </Typography.Title>
                 <SettingsCards>
                     <SettingCard
-                        expired={profileUser.tariff?.expired}
                         userTariff={userTariff}
                         cardTariffType='free'
                         setIsDrawerOpen={setIsDrawerOpen}
@@ -99,7 +98,8 @@ export const Settings: FC = () => {
                 </SettingsCommentsBlock>
             </StyledSettings>
             <SettingsDrawer
-                isBuyDisabled={true}
+                expired={profileUser.tariff?.expired}
+                userTariff={userTariff}
                 isDrawerOpen={isDrawerOpen}
                 setIsDrawerOpen={setIsDrawerOpen}
             />

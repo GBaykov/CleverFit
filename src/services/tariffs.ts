@@ -1,7 +1,7 @@
 import { URL } from '@constants/constants';
 import { RootState } from '@redux/configure-store';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TariffList } from './types';
+import { TariffData, TariffList, UpdateTariffRequest } from './types';
 import { ApiEndpoints } from '@constants/api';
 import { setAppLoader, setTariffList } from '@redux/reducers/appSlice';
 
@@ -21,7 +21,7 @@ export const tariffAPI = createApi({
             return headers;
         },
     }),
-    tagTypes: ['TariffList'],
+    tagTypes: ['TariffList', 'UserInfo'],
     endpoints: (build) => ({
         getTariffList: build.query<TariffList, void>({
             query: () => ({
@@ -40,7 +40,18 @@ export const tariffAPI = createApi({
             },
             providesTags: ['TariffList'],
         }),
+        updateTariff: build.mutation<TariffData, UpdateTariffRequest>({
+            query: (body) => ({
+                url: ApiEndpoints.TARIFF,
+                method: 'POST',
+                body,
+                credentials: 'include',
+            }),
+
+            invalidatesTags: (_, error) => (error ? [] : ['UserInfo']),
+        }),
     }),
 });
 
-export const { useGetTariffListQuery } = tariffAPI;
+export const { useGetTariffListQuery, useLazyGetTariffListQuery, useUpdateTariffMutation } =
+    tariffAPI;
