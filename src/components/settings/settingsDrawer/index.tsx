@@ -9,6 +9,7 @@ import {
     RadioWrapper,
     StyledCheckCircleFilled,
     StyledCloseCircleOutlined,
+    StyledDrawer,
     TariffLabel,
     TariffPossibilities,
     TariffTitle,
@@ -20,6 +21,8 @@ import { appTariffs } from '@redux/reducers/appSlice';
 import { useForm } from 'antd/lib/form/Form';
 import { useLazyGetTariffListQuery, useUpdateTariffMutation } from '../../../services/tariffs';
 import { FieldData } from 'rc-field-form/lib/interface';
+import { ModalsVariants } from '@components/modal/enums';
+import { ModalComponent } from '@components/modal';
 
 export type SettingsDrawerProps = {
     isDrawerOpen: boolean;
@@ -41,8 +44,9 @@ export const SettingsDrawer: FC<SettingsDrawerProps> = ({
     const [isTouched, setIsTouched] = useState(false);
     const tariffs = useAppSelector(appTariffs);
     const [getTariffs] = useLazyGetTariffListQuery();
-    const [updateTariff] = useUpdateTariffMutation();
+    const [updateTariff, { isSuccess, isError }] = useUpdateTariffMutation();
     const [currentDays, setCurrentDays] = useState<number | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(ModalsVariants.modalClosed);
 
     const onClose = () => {
         setIsDrawerOpen(false);
@@ -57,8 +61,19 @@ export const SettingsDrawer: FC<SettingsDrawerProps> = ({
     const handleOnFinish = () => {
         const tariffId = tariffs[0]._id;
         const days = currentDays;
+        console.log(days);
         if (days) {
-            updateTariff({ days, tariffId });
+            updateTariff({ days, tariffId })
+                .unwrap()
+                .then(() => {
+                    setIsDrawerOpen(false);
+                    setIsModalOpen(ModalsVariants.payment);
+                })
+
+                .catch(() => {
+                    setIsModalOpen(ModalsVariants.error_get_feedbacks);
+                    console.group(isError, 'isError');
+                });
         }
     };
 
@@ -80,58 +95,61 @@ export const SettingsDrawer: FC<SettingsDrawerProps> = ({
     ));
 
     return (
-        <Drawer
-            title='Сравнить тарифы'
-            placement='right'
-            footer={
-                <Button type='primary' disabled={!isTouched} onClick={handleOnFinish}>
-                    Выбрать и оплатить
-                </Button>
-            }
-            onClose={onClose}
-            open={isDrawerOpen}
-        >
-            {userTariff === 'pro' && (
-                <div>
-                    <Typography.Title level={5}>
-                        Ваш PRO tariff активен до {expired}
-                    </Typography.Title>
-                </div>
-            )}
-            <Badges>
-                <TariffTitle>FREE</TariffTitle>
-                <TariffTitle style={{ color: primaryLight7 }}>
-                    PRO {userTariff === 'pro' && <CheckCircleOutlined />}
-                </TariffTitle>
-            </Badges>
-            <TariffPossibilities>
-                {tariffPossibilities.map(({ title, free }) => (
-                    <Possibility>
-                        <PossibilityTitle>{title}</PossibilityTitle>
-                        {free ? <StyledCheckCircleFilled /> : <StyledCloseCircleOutlined />}
-                        <CheckCircleFilled style={{ padding: '0 20px 0 50px' }} />
-                    </Possibility>
-                ))}
-            </TariffPossibilities>
-            {userTariff !== 'pro' && tariffs && (
-                <Form
-                    form={form}
-                    id='cost-form'
-                    style={{ paddingTop: 12 }}
-                    onFinish={handleOnFinish}
-                    onFieldsChange={(data) => handleOnFieldChange(data)}
-                    data-test-id='tariff-cost'
-                >
-                    <Typography.Title level={5} style={{ fontWeight: 700, marginTop: 24 }}>
-                        Стоимость тарифа
-                    </Typography.Title>
-                    <Form.Item name='days'>
-                        <Radio.Group style={{ display: 'flex', flexDirection: 'column' }}>
-                            {tariffList}
-                        </Radio.Group>
-                    </Form.Item>
-                </Form>
-            )}
-        </Drawer>
+        <>
+            <ModalComponent isModal={isModalOpen} setIsModalOpen={setIsModalOpen} />
+            <StyledDrawer
+                title='Сравнить тарифы'
+                placement='right'
+                footer={
+                    <Button type='primary' disabled={!isTouched} onClick={handleOnFinish}>
+                        Выбрать и оплатить
+                    </Button>
+                }
+                onClose={onClose}
+                open={isDrawerOpen}
+            >
+                {userTariff === 'pro' && (
+                    <div>
+                        <Typography.Title level={5}>
+                            Ваш PRO tariff активен до {expired}
+                        </Typography.Title>
+                    </div>
+                )}
+                <Badges>
+                    <TariffTitle>FREE</TariffTitle>
+                    <TariffTitle style={{ color: primaryLight7 }}>
+                        PRO {userTariff === 'pro' && <CheckCircleOutlined />}
+                    </TariffTitle>
+                </Badges>
+                <TariffPossibilities>
+                    {tariffPossibilities.map(({ title, free }) => (
+                        <Possibility key={title}>
+                            <PossibilityTitle>{title}</PossibilityTitle>
+                            {free ? <StyledCheckCircleFilled /> : <StyledCloseCircleOutlined />}
+                            <CheckCircleFilled style={{ padding: '0 20px 0 50px' }} />
+                        </Possibility>
+                    ))}
+                </TariffPossibilities>
+                {userTariff !== 'pro' && tariffs && (
+                    <Form
+                        form={form}
+                        id='cost-form'
+                        style={{ paddingTop: 12 }}
+                        onFinish={handleOnFinish}
+                        onFieldsChange={(data) => handleOnFieldChange(data)}
+                        data-test-id='tariff-cost'
+                    >
+                        <Typography.Title level={5} style={{ fontWeight: 700, marginTop: 24 }}>
+                            Стоимость тарифа
+                        </Typography.Title>
+                        <Form.Item name='days'>
+                            <Radio.Group style={{ display: 'flex', flexDirection: 'column' }}>
+                                {tariffList}
+                            </Radio.Group>
+                        </Form.Item>
+                    </Form>
+                )}
+            </StyledDrawer>
+        </>
     );
 };

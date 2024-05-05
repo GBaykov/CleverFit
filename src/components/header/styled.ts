@@ -37,7 +37,7 @@ export const H1 = styled('h1')`
     font-size: 38px;
     @media screen and (max-width: 834px) {
         font-weight: 500;
-        font-size: 24px;
+        font-size: 18px;
     }
 `;
 

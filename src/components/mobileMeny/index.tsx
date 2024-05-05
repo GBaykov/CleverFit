@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { ButtonMobileMenu, ExitButton, LogoWrapper, Menu, MenuList } from './styled';
 import { StyledLink } from '@components/styledLink';
-import { setToken, setUser } from '@redux/reducers/userSlice';
+import { setDefault, setToken, setUser } from '@redux/reducers/userSlice';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
 import logoMobIco from '../../assets/icons/logoMobile.svg';
@@ -20,6 +20,7 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
         localStorage.removeItem('token');
         dispatch(setUser({ email: '', password: '' }));
         dispatch(setToken(''));
+        dispatch(setDefault());
     };
 
     function onExitClick() {

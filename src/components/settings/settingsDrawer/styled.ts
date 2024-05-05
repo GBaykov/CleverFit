@@ -1,6 +1,13 @@
 import { CheckCircleFilled, CloseCircleOutlined } from '@ant-design/icons';
-import { Radio } from 'antd';
+import { Drawer, Radio } from 'antd';
 import styled from 'styled-components';
+
+export const StyledDrawer = styled(Drawer)`
+    .ant-drawer-content-wrapper {
+        width: 100% !important;
+        max-width: 378px;
+    }
+`;
 
 export const Badges = styled.div`
     padding-top: 24px;

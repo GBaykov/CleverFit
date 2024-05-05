@@ -59,6 +59,9 @@ export const userSlice = createSlice({
         setUserUploadFileList: (state, action: PayloadAction<UploadFile[]>) => {
             state.FileList = action.payload;
         },
+        setDefault: (state) => {
+            state = initialState;
+        },
     },
 });
 
@@ -66,7 +69,8 @@ export const baseUser = (state: ApplicationState) => state.user.user;
 
 export const userInfo = (state: ApplicationState) => state.user.profileInfo;
 
-export const { setUser, setProfileInfo, setToken, setUserUploadFileList } = userSlice.actions;
+export const { setUser, setProfileInfo, setToken, setUserUploadFileList, setDefault } =
+    userSlice.actions;
 export const userToken = (state: ApplicationState) => state.user.token;
 
 export default userSlice.reducer;

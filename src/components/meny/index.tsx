@@ -8,7 +8,7 @@ import calendarIco from '../../assets/icons/calendar_icon.svg';
 import exit from '../../assets/icons/Exit.svg';
 import { ButtonMenu } from './menyButton/index';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setToken, setUser } from '@redux/reducers/userSlice';
+import { setDefault, setToken, setUser } from '@redux/reducers/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 
@@ -28,6 +28,7 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
         localStorage.removeItem('token');
         dispatch(setUser({ email: '', password: '' }));
         dispatch(setToken(''));
+        dispatch(setDefault());
         navigate(PATHS.AUTH);
     };
 

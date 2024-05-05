@@ -7,12 +7,14 @@ export type ModalDataItem = {
     btnText: string;
     secondaryBtnText?: string;
     dataAtribute?: string;
+    subTitle?: string;
 };
 
 export type ModalData = {
     error_get_feedbacks: ModalDataItem;
     error_post_feedbacks: ModalDataItem;
     success_post_feedback: ModalDataItem;
+    payment: ModalDataItem;
 };
 
 export const modalData: ModalData = {
@@ -34,5 +36,10 @@ export const modalData: ModalData = {
         status: 'success',
         title: 'Отзыв успешно опубликован',
         btnText: 'Отлично',
+    },
+    payment: {
+        status: 'info',
+        btnText: '',
+        title: 'Чек для оплаты у вас на почте',
     },
 };

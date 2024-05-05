@@ -4,5 +4,6 @@ export enum ModalsVariants {
     error_calendar_data = 'error_calendar_data',
     error_post_feedbacks = 'error_post_feedbacks',
     success_post_feedback = 'success_post_feedback',
+    payment = 'payment',
     modalClosed = 'modal_closed',
 }
