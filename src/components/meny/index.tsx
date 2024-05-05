@@ -1,4 +1,4 @@
-import { HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
+import { CommentOutlined, HeartFilled, IdcardOutlined, TrophyFilled } from '@ant-design/icons';
 import { FC } from 'react';
 import { LogoWrapper, StyledMeny, StyledSider } from './styled';
 
@@ -39,6 +39,9 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
                 break;
             case PATHS.PROFILE:
                 navigate(PATHS.PROFILE);
+                break;
+            case PATHS.FEEDBACKS:
+                navigate(PATHS.FEEDBACKS);
                 break;
             case 'exit':
                 logOut();
@@ -81,6 +84,11 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
                         key: PATHS.PROFILE,
                         icon: <IdcardOutlined style={{ color: 'rgba(6, 17, 120, 1)' }} />,
                         label: 'Профиль',
+                    },
+                    {
+                        key: PATHS.FEEDBACKS,
+                        icon: <CommentOutlined style={{ color: 'rgba(6, 17, 120, 1)' }} />,
+                        label: 'Отзывы',
                     },
                     {
                         key: 'exit',

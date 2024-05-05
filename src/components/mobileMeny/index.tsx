@@ -65,11 +65,15 @@ export const MenuMobile: FC<MenuMobileProps> = ({ collapsed, onClick }) => {
                 <div>
                     <StyledLink to={PATHS.CALENDAR} text='Календарь' fontSize='14px' />
                 </div>
+                {/* TO DO: доделать Тренировки и  Достижения*/}
                 <div>
                     <StyledLink to='/' text='Тренировки' fontSize='14px' />
                 </div>
                 <div>
                     <StyledLink to='/' text='Достижения' fontSize='14px' />
+                </div>
+                <div>
+                    <StyledLink to={PATHS.FEEDBACKS} text='Отзывы' fontSize='14px' />
                 </div>
                 <div>
                     <StyledLink to={PATHS.PROFILE} text='Профиль' fontSize='14px' />

@@ -23,6 +23,7 @@ import { useLazyGetTariffListQuery, useUpdateTariffMutation } from '../../../ser
 import { FieldData } from 'rc-field-form/lib/interface';
 import { ModalsVariants } from '@components/modal/enums';
 import { ModalComponent } from '@components/modal';
+import { FORMAT_D_M, formatDate } from '@utils/format-date';
 
 export type SettingsDrawerProps = {
     isDrawerOpen: boolean;
@@ -108,10 +109,10 @@ export const SettingsDrawer: FC<SettingsDrawerProps> = ({
                 onClose={onClose}
                 open={isDrawerOpen}
             >
-                {userTariff === 'pro' && (
+                {userTariff === 'pro' && expired && (
                     <div>
                         <Typography.Title level={5}>
-                            Ваш PRO tariff активен до {expired}
+                            Ваш PRO tariff активен до {formatDate(expired, FORMAT_D_M)}
                         </Typography.Title>
                     </div>
                 )}
