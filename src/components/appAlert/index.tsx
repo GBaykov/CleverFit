@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { setAppAlert } from '@redux/reducers/appSlice';
 import { FC } from 'react';
 import { AlertWrapper, StyledAlert } from './styled';

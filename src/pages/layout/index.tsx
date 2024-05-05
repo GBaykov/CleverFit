@@ -3,7 +3,6 @@ import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import { MenuMobile } from '@components/mobileMeny';
 import { Menu } from '@components/meny';
-import backgroundIMG from '../../assets/img/MainPageLight.png';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
@@ -13,8 +12,10 @@ import { Header } from '@components/header';
 import { useGetUserInfoQuery } from '../../services/user';
 import { baseUser, userToken } from '@redux/reducers/userSlice';
 import { AppAlert } from '@components/appAlert';
-import { appAlert } from '@redux/reducers/appSlice';
-import { StyledMainLayout } from './styled';
+import { appAlert, isDark } from '@redux/reducers/appSlice';
+import { StyledMainLayoutDark, StyledMainLayoutLight } from './styled';
+import backgroundIMG from '../../assets/img/MainPageLight.png';
+import backgroundIMGDark from '../../assets/img/MainPageDark.png';
 
 export type LayoutWrapperProps = {
     children: React.ReactNode;
@@ -24,8 +25,12 @@ export type LayoutWrapperProps = {
 export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter = true }) => {
     const [collapsed, setCollapsed] = useState(false);
     const { data } = useGetUserInfoQuery();
+    const isDarkTheme = useAppSelector(isDark);
+    // const [isDarkimage, setsDarkImage] = useState(backgroundIMG);
+    console.log(isDarkTheme);
+    const backgroundImage = isDarkTheme ? backgroundIMGDark : backgroundIMG;
+    console.log(backgroundImage);
 
-    // const { user } = useAppSelector((state) => state.userReducer);
     const user = useAppSelector(baseUser);
     const token = useAppSelector(userToken);
     const navigate = useNavigate();
@@ -46,23 +51,27 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
                     }}
                 >
                     <Header />
-                    <StyledMainLayout
-                    // style={{
-                    //     backgroundColor: '#fff',
-                    //     background: `no-repeat center/cover url(${backgroundIMG})`,
-                    //     position: 'relative',
-                    //     height: '100%',
-                    //     display: 'flex',
-                    //     padding: 24,
-                    // }}
-                    >
-                        <ButtonMenu
-                            collapsed={collapsed}
-                            onClick={() => setCollapsed(!collapsed)}
-                        />
-                        {children}
-                        {isFooter && <Footer />}
-                    </StyledMainLayout>
+                    {isDarkTheme && (
+                        <StyledMainLayoutDark>
+                            <ButtonMenu
+                                collapsed={collapsed}
+                                onClick={() => setCollapsed(!collapsed)}
+                            />
+                            {children}
+                            {isFooter && <Footer />}
+                        </StyledMainLayoutDark>
+                    )}
+
+                    {!isDarkTheme && (
+                        <StyledMainLayoutLight>
+                            <ButtonMenu
+                                collapsed={collapsed}
+                                onClick={() => setCollapsed(!collapsed)}
+                            />
+                            {children}
+                            {isFooter && <Footer />}
+                        </StyledMainLayoutLight>
+                    )}
                 </Layout>
             </Layout>
             <AppAlert message={alert.message} type={alert.type} dataTestId='alert' />
