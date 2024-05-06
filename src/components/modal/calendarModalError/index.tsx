@@ -1,5 +1,5 @@
-import { CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
-import { DATA_TEST_ID } from '@constants/data-test-id';
+import { CloseOutlined } from '@ant-design/icons';
+
 import { Button, Modal, Typography, notification } from 'antd';
 import { FC, memo, useEffect, useState } from 'react';
 import { StyledCloseCircleOutlined } from './styled';

@@ -1,5 +1,4 @@
 import { DATA_TEST_ID } from '@constants/data-test-id';
-import { Select } from 'antd';
 import { FC } from 'react';
 import { StyledSelect } from './styled';
 

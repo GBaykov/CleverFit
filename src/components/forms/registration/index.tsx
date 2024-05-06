@@ -20,7 +20,6 @@ export const RegistrForm: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    //const { user } = useAppSelector((state) => state.userReducer);
     const user = useAppSelector(baseUser);
 
     const onFinish = useCallback(

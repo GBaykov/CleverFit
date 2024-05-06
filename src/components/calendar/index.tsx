@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import type { Dayjs } from 'dayjs';
-import type { BadgeProps, CalendarProps } from 'antd';
-import { Badge, Button, Calendar, Typography } from 'antd';
+import { FC, useEffect, useState } from 'react';
+
+import { Calendar } from 'antd';
 import moment, { Moment } from 'moment';
-import { EditOutlined } from '@ant-design/icons';
+
 import { DATA_TEST_ID } from '@constants/data-test-id';
 import { Portal } from '@components/portal';
 import { CardModal } from './calendarCardModal';
@@ -28,11 +27,9 @@ import { BadgeBlocks } from './badgeBlocks';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { StyledCellMobile } from './styled';
 import './styles.css';
-import { ModalsVariants } from '@components/modal/enums';
-import { ModalComponent } from '@components/modal';
 import { ModalNotification } from '@components/modal/calendarModalError';
 
-export const CalendarApp = () => {
+export const CalendarApp: FC = () => {
     const size = useWindowSize();
     const [parent, setParent] = useState<HTMLElement | undefined>(undefined);
     const [offsetTop, setOffsetTop] = useState(0);
@@ -43,8 +40,6 @@ export const CalendarApp = () => {
     const training = useAppSelector(userTraining);
     const { defaultTrainings, isBlock, cardModalState } = useAppSelector(trainingsSelector);
     const dispatch = useAppDispatch();
-    const [isModalOpen, setIsModalOpen] = useState<ModalsVariants>(ModalsVariants.modalClosed);
-
     const [getList, { isError: isErrorRequest }] = useLazyGetTrainingListQuery();
 
     useGetUserTrainingQuery();

@@ -4,7 +4,7 @@ import { RouterState, createReduxHistoryContext } from 'redux-first-history';
 import { authAPI } from '../services/auth';
 import userReducer, { UserState, userSlice } from './reducers/userSlice';
 import { feedbacksAPI } from '../services/feedbacks';
-// import userSlice from './reducers/userSlice';
+
 import appReducer, { AppState, appSlice } from './reducers/appSlice';
 import trainingReducer, { InitialStateTraining, trainingSlice } from './reducers/trainingSlice';
 import { calendarAPI } from '../services/trainings';
@@ -25,7 +25,6 @@ const rootReducer = combineReducers({
     [trainingSlice.name]: trainingReducer,
     [appSlice.name]: appReducer,
     appReducer: appSlice,
-    // userReducer: userReducer,
     [userSlice.name]: userReducer,
     userReducer: userSlice,
 });

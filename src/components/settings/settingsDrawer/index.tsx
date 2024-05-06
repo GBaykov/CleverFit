@@ -1,7 +1,7 @@
-import { Button, Drawer, Form, Radio, Typography } from 'antd';
+import { Button, Form, Radio, Typography } from 'antd';
 import { FC, useEffect, useState } from 'react';
 import { Tariffs } from '../../../commonTypes';
-import { CheckCircleFilled, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { CheckCircleFilled, CheckCircleOutlined } from '@ant-design/icons';
 import {
     Badges,
     Possibility,
@@ -45,7 +45,7 @@ export const SettingsDrawer: FC<SettingsDrawerProps> = ({
     const [isTouched, setIsTouched] = useState(false);
     const tariffs = useAppSelector(appTariffs);
     const [getTariffs] = useLazyGetTariffListQuery();
-    const [updateTariff, { isSuccess, isError }] = useUpdateTariffMutation();
+    const [updateTariff, { isError }] = useUpdateTariffMutation();
     const [currentDays, setCurrentDays] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(ModalsVariants.modalClosed);
 

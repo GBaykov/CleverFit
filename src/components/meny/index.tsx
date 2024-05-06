@@ -48,11 +48,6 @@ export const Menu: FC<MenuProps> = ({ collapsed, setCollapsed }) => {
         }
     }
 
-    function defaultSelectedItem() {
-        let deafultKey = '';
-        return deafultKey === location.pathname ? location.pathname : '';
-    }
-
     return (
         <StyledSider trigger={null} collapsible collapsed={collapsed} width={'208px'}>
             <LogoWrapper>

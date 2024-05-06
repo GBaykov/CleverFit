@@ -17,7 +17,6 @@ const { Title, Text } = Typography;
 export const ConfirmEmail: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // const { user } = useAppSelector((state) => state.userReducer);
     const user = useAppSelector(baseUser);
     const [confirmEmail, { isLoading, isError }] = useConfirmEmailMutation();
     const [borderStyle, setBorderStyle] = useState<string>('character');

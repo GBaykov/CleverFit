@@ -6,7 +6,7 @@ import { FC, useEffect, useState } from 'react';
 import { EmptyElement } from '@components/empty';
 import { isOldDate } from '@utils/format-date';
 import { BadgeChanged } from '@components/badgeChanged';
-import { Button, Card } from 'antd';
+import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { SelectDouble } from '../selectDouble';
 import { DATA_TEST_ID } from '@constants/data-test-id';

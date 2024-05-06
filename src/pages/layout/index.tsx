@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { MenuMobile } from '@components/mobileMeny';
 import { Menu } from '@components/meny';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/constants';
 import { ButtonMenu } from '@components/meny/menyButton';
 import { Footer } from '@components/footer';
@@ -26,7 +26,6 @@ export const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ children, isFooter
     const [collapsed, setCollapsed] = useState(false);
     const { data } = useGetUserInfoQuery();
     const isDarkTheme = useAppSelector(isDark);
-    // const [isDarkimage, setsDarkImage] = useState(backgroundIMG);
     console.log(isDarkTheme);
     const backgroundImage = isDarkTheme ? backgroundIMGDark : backgroundIMG;
     console.log(backgroundImage);

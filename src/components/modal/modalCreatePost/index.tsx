@@ -1,7 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 import 'antd/dist/antd.css';
 
-import { Button, Modal, Form, Rate } from 'antd';
+import { Button, Modal, Form } from 'antd';
 import { ModalDataItem } from '@constants/modalData';
 
 import { StyledRate } from '@components/commentCard/styled';
@@ -26,7 +26,7 @@ export type ModalCreatePostProps = {
 };
 
 export const ModalCreatePost: FC<ModalCreatePostProps> = ({ isOpen, setIsModalOpen }) => {
-    const [postFeedback, { isLoading, isSuccess, error, isError }] = usePostFeedbackMutation();
+    const [postFeedback, { isLoading, isSuccess, isError }] = usePostFeedbackMutation();
     const handleOk = () => {
         setIsModalOpen(ModalsVariants.modalClosed);
     };

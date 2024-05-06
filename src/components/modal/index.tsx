@@ -44,10 +44,6 @@ export const ModalComponent: FC<ModalProps> = ({ isModal, setIsModalOpen }) => {
 
     const subTitle = ` Мы отправили инструкцию для оплаты вам на e-mail ${email}. После подтверждения оплаты войдите в приложение заново. Не пришло письмо? Проверьте папку Спам.`;
 
-    const handleOk = () => {
-        setIsModalOpen(ModalsVariants.modalClosed);
-    };
-
     const logOut = () => {
         localStorage.removeItem('token');
         dispatch(setUser({ email: '', password: '' }));

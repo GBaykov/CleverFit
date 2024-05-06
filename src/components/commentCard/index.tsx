@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Avatar, Rate } from 'antd';
+import { Avatar } from 'antd';
 import { ItemListSider, StyledItemList, ItemListMain, StyledRate, ItemListTop } from './styled';
 import { Text } from '@pages/mainPage/styled';
 import avatar from '../../assets/icons/avatar.svg';

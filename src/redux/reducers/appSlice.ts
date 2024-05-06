@@ -3,8 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AlertProps } from 'antd';
 import { TariffList } from '../../services/types';
 
-// export type AppState = typeof initialState;
-
 export type AppState = {
     isError: boolean;
     isLoading: boolean;
@@ -18,10 +16,7 @@ export const initialState: AppState = {
     isError: false,
     isLoading: false,
     openLeftMenu: false,
-    alert: {
-        // type: undefined,
-        // message: '',
-    },
+    alert: {},
     tariffList: [],
     isDarkTheme: false,
 };

@@ -8,7 +8,7 @@ import { Button } from 'antd';
 
 import { ModalCreatePost } from '@components/modal/modalCreatePost';
 import { FedbacksEmty } from '@components/feedbacksEmpty';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { useGetFeedbacksQuery } from '../../services/feedbacks';
 
 import { PATHS } from '@constants/constants';
@@ -17,7 +17,6 @@ import { ModalsVariants } from '@components/modal/enums';
 import { ModalComponent } from '@components/modal';
 import { setToken } from '@redux/reducers/userSlice';
 import { push } from 'redux-first-history';
-import { useNavigate } from 'react-router-dom';
 
 export type ErrorRequestType = {
     data: {

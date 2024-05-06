@@ -5,11 +5,6 @@ export const PersonalInfo = styled.div`
     display: flex;
     gap: 24px;
     width: 100%;
-    // flex-direction: row;
-    // div {
-    //     display: flex;
-    //     gap: 16px;
-    // }
 
     @media (max-width: 440px) {
         flex-direction: column-reverse;

@@ -1,4 +1,4 @@
-import { ApplicationState, RootState } from '@redux/configure-store';
+import { ApplicationState } from '@redux/configure-store';
 import { Exercises, UserTraining, UserTrainingTransform } from '@redux/types';
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';

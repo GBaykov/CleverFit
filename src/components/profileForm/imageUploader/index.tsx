@@ -7,8 +7,8 @@ import { Form, Upload, UploadFile } from 'antd';
 import { FC, useEffect, useMemo, useState } from 'react';
 
 import { UploadFileStatus } from 'antd/lib/upload/interface';
-import { ModalNotificationType, ProfileInfoFormName, StatusCode } from '@constants/enums';
-import { UserResponce } from '../../../services/types';
+import { ModalNotificationType, StatusCode } from '@constants/enums';
+
 import { userToken } from '@redux/reducers/userSlice';
 import { useWindowSize } from '@uidotdev/usehooks';
 
@@ -19,20 +19,12 @@ export type UploadType = {
 
 type ImageUploaderProps = {
     imgSrc?: string;
-    // userInfo?: UserResponce;
     setCurrentImage: (img: UploadFile) => void;
     setModal: (open: boolean) => void;
     setModalType: (type: ModalNotificationType) => void;
-    // name: ProfileInfoFormName;
 };
 
-export const ImageUploader: FC<ImageUploaderProps> = ({
-    imgSrc,
-    setCurrentImage,
-    setModal,
-    setModalType,
-    // name,
-}) => {
+export const ImageUploader: FC<ImageUploaderProps> = ({ imgSrc, setModal, setModalType }) => {
     const size = useWindowSize();
     const isDesktop = Number(size.width) && Number(size.width) > 440;
     const listType = isDesktop ? 'picture-card' : 'picture';
@@ -74,7 +66,6 @@ export const ImageUploader: FC<ImageUploaderProps> = ({
         setNewFileList(fileList);
         const newFile = fileList[0];
         if (newFile) {
-            // setCurrentImage(newFile);
             if (newFile.status === 'error') {
                 const errorFile = {
                     ...initialImage,

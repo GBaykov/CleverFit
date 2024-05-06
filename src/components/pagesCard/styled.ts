@@ -5,8 +5,6 @@ type StyledPagesCard = {
 };
 
 export const StyledPagesCard = styled.div<StyledPagesCard>`
-    // width: 100%;
-    // max-width: 1328px;
     height: 100%;
     background-color: white;
     padding: 24px;

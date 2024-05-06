@@ -19,10 +19,6 @@ export const MainPage: React.FC = () => {
     const dispatch = useAppDispatch();
     const [searchParams] = useSearchParams();
 
-    // useEffect(() => {
-    //     user.email === '' && !localStorage.getItem('token') && navigate(PATHS.AUTH);
-    // }, [navigate, user.email]);
-
     useEffect(() => {
         const accessToken = searchParams.get('accessToken');
         if (accessToken) {

@@ -1,5 +1,4 @@
 import { CloseCircleOutlined } from '@ant-design/icons';
-import { notification } from 'antd';
 import styled from 'styled-components';
 
 type IconProp = {

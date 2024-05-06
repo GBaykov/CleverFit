@@ -1,5 +1,5 @@
 import { CalendarTwoTone } from '@ant-design/icons';
-import { DatePicker, Form, Input, Typography, UploadFile } from 'antd';
+import { Form, Input, Typography, UploadFile } from 'antd';
 import { PersonalInfo, StyledDatePicker, UserInfoFields } from './styled';
 import { ModalNotificationType, ProfileInfoFormName } from '@constants/enums';
 import { ImageUploader } from '../imageUploader';

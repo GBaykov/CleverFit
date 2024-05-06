@@ -1,5 +1,4 @@
-import Empty from 'antd/es/empty/empty';
-
+import { Empty } from 'antd';
 import styles from './empty-element.module.css';
 
 export const EmptyElement = () => (

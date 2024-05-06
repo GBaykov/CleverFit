@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from 'antd';
+import { Button } from 'antd';
 import { FC } from 'react';
 import freeAcc from '../../../assets/img/freeAcc.png';
 import proAcc from '../../../assets/img/proAcc.png';
@@ -15,16 +15,10 @@ export type SettingCardProps = {
     setIsDrawerOpen: (b: boolean) => void;
 };
 
-export const SettingCard: FC<SettingCardProps> = ({
-    userTariff,
-    cardTariffType,
-    expired,
-    setIsDrawerOpen,
-}) => {
+export const SettingCard: FC<SettingCardProps> = ({ cardTariffType, expired, setIsDrawerOpen }) => {
     const proCardImg = expired ? proAccActive : proAcc;
     return (
         <StyledSettingsCard
-            // style={{ maxWidth: 240 }}
             title={cardTariffType === 'pro' ? 'PRO tariff' : 'FREE tariff'}
             extra={
                 <Button type='link' onClick={() => setIsDrawerOpen(true)}>

@@ -4,12 +4,11 @@ import { Nullable } from '../../commonTypes';
 import { ModalNotification } from '@components/modal/calendarModalError';
 import { ModalNotificationType } from '@constants/enums';
 import { IMG_BASE_URL } from '@constants/constants';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { userInfo } from '@redux/reducers/userSlice';
 import { ProfileInfo } from './profileInfo';
 import { useUpdateUserMutation } from '../../services/user';
 import { PrivacyInfo } from './privacyInfo';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { UserInfo } from '../../services/types';
 import { UploadType } from './imageUploader';
 

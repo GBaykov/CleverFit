@@ -1,5 +1,5 @@
 import { primaryLight9 } from '@constants/styles';
-import { Button, Card } from 'antd';
+import { Button } from 'antd';
 import { FC } from 'react';
 import { StyledEmptyCard } from './styled';
 import { ModalsVariants } from '@components/modal/enums';
